@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TOR://sabaron7x9amelia2427.onion // [A]</title>
 
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS via CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
 
   <!-- Polices Monospace Terminal / Underground -->
@@ -118,28 +118,26 @@
     }
 
     /* ==========================================================================
-       2. SCÈNE D'OUVERTURE (100vh) : SCEAU GOUVERNEMENTAL + "A" SCARIFIÉ
+       2. SCEAU GOUVERNEMENTAL & "A" SCARIFIÉ EN 3 TRAITS
        ========================================================================== */
     .emblem-stage {
       position: relative;
-      width: clamp(220px, 44vw, 340px);
+      width: clamp(220px, 44vw, 330px);
       aspect-ratio: 360 / 320;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), filter 0.45s ease;
       will-change: transform, filter;
     }
 
-    /* Micro-tremblement ambiant du symbole une fois gravé */
     .emblem-stage.is-engraved {
-      animation: emblemAmbientGlitch 4.4s infinite;
+      animation: emblemAmbientGlitch 4.2s infinite;
     }
 
     @keyframes emblemAmbientGlitch {
       0%, 89%, 100% {
         transform: translate(0, 0);
-        filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.08));
+        filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.08));
       }
       90% {
         transform: translate(-5px, 1px) skew(-2.5deg);
@@ -154,7 +152,6 @@
       }
     }
 
-    /* Couches chromatiques RGB actives lors des flashs de glitch */
     .a-glitch-clone {
       position: absolute;
       inset: 0;
@@ -167,7 +164,7 @@
 
     .burst-mode .a-glitch-clone-red {
       opacity: 0.95;
-      transform: translate(-11px, 3px) skew(-5deg);
+      transform: translate(-12px, 3px) skew(-5deg);
       clip-path: inset(12% 0 40% 0);
     }
 
@@ -183,33 +180,20 @@
     }
 
     /* ==========================================================================
-       3. MESSAGE PLEIN ÉCRAN D'AMELIA QUI BUGUE EN CONTINU
+       3. MANIFESTE PLEIN ÉCRAN D'AMELIA QUI BUGUE EN CONTINU
        ========================================================================== */
-    .hero-manifesto-block {
-      opacity: 0;
-      transform: translateY(10px);
-      pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .hero-manifesto-block.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-
     .glitch-headline {
       position: relative;
       font-family: 'Share Tech Mono', 'Courier New', monospace;
-      font-size: clamp(1.25rem, 3.6vw, 2.65rem);
-      line-height: 1.18;
-      letter-spacing: 0.05em;
+      font-size: clamp(1.5rem, 4.4vw, 3.2rem);
+      line-height: 1.15;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #ececec;
       text-shadow:
-        2px 0 rgba(255, 30, 39, 0.88),
-        -2px 0 rgba(0, 240, 255, 0.72);
-      animation: headlinePulse 2.8s infinite;
+        2px 0 rgba(255, 30, 39, 0.9),
+        -2px 0 rgba(0, 240, 255, 0.75);
+      animation: headlinePulse 2.7s infinite;
     }
 
     .glitch-headline::before,
@@ -224,13 +208,13 @@
     .glitch-headline::before {
       color: #ff1e27;
       z-index: -1;
-      animation: sliceShiftRed 0.24s infinite steps(2);
+      animation: sliceShiftRed 0.23s infinite steps(2);
     }
 
     .glitch-headline::after {
       color: #00f0ff;
       z-index: -2;
-      animation: sliceShiftCyan 0.21s infinite steps(2);
+      animation: sliceShiftCyan 0.2s infinite steps(2);
     }
 
     @keyframes sliceShiftRed {
@@ -256,11 +240,11 @@
     }
 
     .scroll-prompt-flicker {
-      animation: subLineFlicker 2.4s infinite;
+      animation: subLineFlicker 2.3s infinite;
     }
 
     @keyframes subLineFlicker {
-      0%, 75%, 80%, 93%, 100% { opacity: 0.9; transform: translateY(0); }
+      0%, 75%, 80%, 93%, 100% { opacity: 0.95; transform: translateY(0); }
       77% { opacity: 0.25; transform: translateY(1px); }
       78% { opacity: 1; transform: translateY(-1px); }
       94% { opacity: 0.4; }
@@ -288,36 +272,29 @@
   <div class="crt-noise" aria-hidden="true"></div>
   <div class="crt-vignette" aria-hidden="true"></div>
 
-  <!-- Calque dynamique pour les déchirures horizontales pendant les flashs de glitch -->
+  <!-- Calque dynamique pour les déchirures horizontales lors des flashs de glitch -->
   <div id="static-burst-layer" class="fixed inset-0 pointer-events-none z-40 overflow-hidden" aria-hidden="true"></div>
 
   <!-- ==========================================================================
-       1. SÉQUENCE D'OUVERTURE PLEIN ÉCRAN (100vh)
+       1A. ÉCRAN D'INTRO PLEIN ÉCRAN (100vh) : SCEAU SCARIFIÉ TRAIT PAR TRAIT
        ========================================================================== -->
   <section
-    id="opening-viewport"
-    class="relative min-h-screen w-full bg-void flex flex-col items-center justify-between px-4 py-5 sm:py-7 overflow-hidden"
+    id="intro-seal-screen"
+    class="relative min-h-screen w-full bg-void flex flex-col items-center justify-between px-4 py-6 overflow-hidden"
   >
-    <!-- Micro-en-tête de connexion TOR -->
+    <!-- Bandeau supérieur minimaliste -->
     <div class="w-full max-w-5xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-500 z-10">
       <div class="flex items-center gap-2 min-w-0">
-        <span class="w-2 h-2 rounded-full bg-crimson animate-ping shrink-0"></span>
-        <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-zinc-300">CANAL_PIRATÉ</span></span>
+        <span class="w-2 h-2 bg-crimson animate-ping shrink-0"></span>
+        <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-zinc-300">INTRUSION_EN_COURS</span></span>
       </div>
-
-      <button
-        id="btn-replay-intro"
-        type="button"
-        class="px-2.5 py-1.5 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-bone transition-colors cursor-pointer shrink-0"
-      >
-        [ REJOUER ]
-      </button>
+      <span id="intro-step-indicator" class="text-crimson font-tech tracking-widest uppercase shrink-0">
+        [ SIGNAL 01/03 ]
+      </span>
     </div>
 
-    <!-- Centre : Sceau gouvernemental rayé par le "A" + Manifeste plein écran d'Amelia -->
-    <div class="flex-1 w-full max-w-4xl flex flex-col items-center justify-center text-center my-auto py-4 gap-6 sm:gap-8 z-10">
-
-      <!-- EMBLÈME : SCEAU GOUVERNEMENTAL EFFACÉ + "A" SCARIFIÉ TRAIT PAR TRAIT -->
+    <!-- Centre : Sceau gouvernemental de Sabaron rayé trait par trait -->
+    <div class="flex-1 w-full max-w-4xl flex flex-col items-center justify-center text-center my-auto py-4 z-10">
       <div id="scratched-a-stage" class="emblem-stage">
         <svg
           id="scratched-a-main"
@@ -328,32 +305,28 @@
         >
           <defs>
             <filter id="etch-glow" x="-15%" y="-15%" width="130%" height="130%">
-              <feGaussianBlur stdDeviation="0.6" result="blur" />
+              <feGaussianBlur stdDeviation="0.7" result="blur" />
               <feMerge>
                 <feMergeNode in="blur" />
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            <!-- Chemins circulaires pour le sceau gouvernemental effacé en arrière-plan -->
             <path id="seal-arc-top" d="M 102,160 A 78,78 0 1,1 258,160" />
             <path id="seal-arc-bottom" d="M 258,160 A 78,78 0 1,1 102,160" />
           </defs>
 
-          <!-- ================================================================
-               SCEAU GOUVERNEMENTAL CIRCULAIRE EFFACÉ EN ARRIÈRE-PLAN
-               ================================================================ -->
-          <g id="government-seal" opacity="0.15" stroke="#d4d4d8" fill="none">
-            <circle cx="180" cy="160" r="94" stroke-width="1.3" stroke-dasharray="14 3 4 2" />
-            <circle cx="180" cy="160" r="88" stroke-width="0.7" stroke-dasharray="3 4" />
-            <circle cx="180" cy="160" r="65" stroke-width="1.1" />
+          <!-- Sceau gouvernemental circulaire de Sabaron en arrière-plan -->
+          <g id="government-seal" opacity="0.22" stroke="#d4d4d8" fill="none">
+            <circle cx="180" cy="160" r="96" stroke-width="1.4" stroke-dasharray="14 3 4 2" />
+            <circle cx="180" cy="160" r="89" stroke-width="0.75" stroke-dasharray="3 4" />
+            <circle cx="180" cy="160" r="65" stroke-width="1.2" />
 
-            <!-- Emblème géométrique central institutionnel -->
+            <!-- Blason géométrique central -->
             <polygon points="180,206 136,130 224,130" stroke-width="1.4" />
-            <polygon points="180,192 149,138 211,138" stroke-width="0.85" />
-            <line x1="180" y1="112" x2="180" y2="212" stroke-width="0.8" />
-            <line x1="130" y1="160" x2="230" y2="160" stroke-width="0.8" />
+            <polygon points="180,192 149,138 211,138" stroke-width="0.9" />
+            <line x1="180" y1="110" x2="180" y2="214" stroke-width="0.85" />
+            <line x1="128" y1="160" x2="232" y2="160" stroke-width="0.85" />
 
-            <!-- Inscriptions institutionnelles courbées -->
             <text fill="#e4e4e7" stroke="none" font-size="8.2" font-family="'Share Tech Mono', monospace" letter-spacing="2.8">
               <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">
                 GOUVERNEMENT DE SABARON
@@ -366,51 +339,42 @@
             </text>
           </g>
 
-          <!-- ================================================================
-               1) PREMIER TRAIT DIAGONAL (CÔTÉ DROIT : Sommet -> Bas-droit)
-               ================================================================ -->
+          <!-- ÉTAPE 1 : Premier trait diagonal (côté droit : Sommet -> Bas-droit) -->
           <g id="stroke-group-1" filter="url(#etch-glow)" stroke-linecap="round">
-            <path class="scratch-line" data-step="1" d="M 164 22 L 292 296" stroke="#ffffff" stroke-width="1.55" opacity="0.96" fill="none" />
-            <path class="scratch-line" data-step="1" d="M 172 30 L 278 288" stroke="#e4e4e7" stroke-width="1.05" opacity="0.86" fill="none" />
-            <path class="scratch-line" data-step="1" d="M 159 34 L 299 284" stroke="#a1a1aa" stroke-width="0.85" opacity="0.72" fill="none" />
-            <path class="scratch-line" data-step="1" d="M 176 20 L 270 300" stroke="#ffffff" stroke-width="1.2" opacity="0.9" fill="none" />
-            <path class="scratch-line" data-step="1" d="M 168 38 L 285 276" stroke="#71717a" stroke-width="0.8" opacity="0.68" fill="none" />
-            <path class="scratch-line" data-step="1" d="M 156 28 L 304 295" stroke="#f4f4f5" stroke-width="0.7" opacity="0.62" fill="none" />
+            <path class="scratch-line" data-step="1" d="M 164 22 L 292 296" stroke="#ffffff" stroke-width="1.7" opacity="0.98" fill="none" />
+            <path class="scratch-line" data-step="1" d="M 172 30 L 278 288" stroke="#ff1e27" stroke-width="1.15" opacity="0.9" fill="none" />
+            <path class="scratch-line" data-step="1" d="M 159 34 L 299 284" stroke="#e4e4e7" stroke-width="0.9" opacity="0.78" fill="none" />
+            <path class="scratch-line" data-step="1" d="M 176 20 L 270 300" stroke="#ffffff" stroke-width="1.25" opacity="0.92" fill="none" />
+            <path class="scratch-line" data-step="1" d="M 168 38 L 285 276" stroke="#a1a1aa" stroke-width="0.85" opacity="0.72" fill="none" />
           </g>
 
-          <!-- ================================================================
-               2) TRAIT HORIZONTAL TRANSVERSAL (Gauche -> Droite)
-               ================================================================ -->
+          <!-- ÉTAPE 2 : Trait horizontal transversal (Gauche -> Droite) -->
           <g id="stroke-group-2" filter="url(#etch-glow)" stroke-linecap="round">
-            <path class="scratch-line" data-step="2" d="M 20 218 L 340 213" stroke="#ffffff" stroke-width="1.55" opacity="0.96" fill="none" />
-            <path class="scratch-line" data-step="2" d="M 36 225 L 324 221" stroke="#e4e4e7" stroke-width="1.05" opacity="0.86" fill="none" />
-            <path class="scratch-line" data-step="2" d="M 14 212 L 346 218" stroke="#a1a1aa" stroke-width="0.8" opacity="0.7" fill="none" />
-            <path class="scratch-line" data-step="2" d="M 46 230 L 316 215" stroke="#ffffff" stroke-width="1.15" opacity="0.88" fill="none" />
-            <path class="scratch-line" data-step="2" d="M 28 215 L 331 227" stroke="#71717a" stroke-width="0.75" opacity="0.64" fill="none" />
-            <path class="scratch-line" data-step="2" d="M 54 221 L 342 224" stroke="#f4f4f5" stroke-width="0.7" opacity="0.58" fill="none" />
+            <path class="scratch-line" data-step="2" d="M 20 218 L 340 213" stroke="#ffffff" stroke-width="1.7" opacity="0.98" fill="none" />
+            <path class="scratch-line" data-step="2" d="M 36 225 L 324 221" stroke="#ff1e27" stroke-width="1.15" opacity="0.9" fill="none" />
+            <path class="scratch-line" data-step="2" d="M 14 212 L 346 218" stroke="#e4e4e7" stroke-width="0.85" opacity="0.76" fill="none" />
+            <path class="scratch-line" data-step="2" d="M 46 230 L 316 215" stroke="#ffffff" stroke-width="1.2" opacity="0.9" fill="none" />
+            <path class="scratch-line" data-step="2" d="M 28 215 L 331 227" stroke="#a1a1aa" stroke-width="0.8" opacity="0.7" fill="none" />
           </g>
 
-          <!-- ================================================================
-               3) SECOND TRAIT DIAGONAL (CÔTÉ GAUCHE : Sommet -> Bas-gauche)
-               ================================================================ -->
+          <!-- ÉTAPE 3 : Second trait diagonal (côté gauche : Sommet -> Bas-gauche) -->
           <g id="stroke-group-3" filter="url(#etch-glow)" stroke-linecap="round">
-            <path class="scratch-line" data-step="3" d="M 196 22 L 68 296" stroke="#ffffff" stroke-width="1.55" opacity="0.96" fill="none" />
-            <path class="scratch-line" data-step="3" d="M 188 30 L 82 288" stroke="#e4e4e7" stroke-width="1.05" opacity="0.86" fill="none" />
-            <path class="scratch-line" data-step="3" d="M 201 34 L 61 284" stroke="#a1a1aa" stroke-width="0.85" opacity="0.72" fill="none" />
-            <path class="scratch-line" data-step="3" d="M 184 20 L 90 300" stroke="#ffffff" stroke-width="1.2" opacity="0.9" fill="none" />
-            <path class="scratch-line" data-step="3" d="M 192 38 L 75 276" stroke="#71717a" stroke-width="0.8" opacity="0.68" fill="none" />
-            <path class="scratch-line" data-step="3" d="M 204 28 L 56 295" stroke="#f4f4f5" stroke-width="0.7" opacity="0.62" fill="none" />
+            <path class="scratch-line" data-step="3" d="M 196 22 L 68 296" stroke="#ffffff" stroke-width="1.7" opacity="0.98" fill="none" />
+            <path class="scratch-line" data-step="3" d="M 188 30 L 82 288" stroke="#ff1e27" stroke-width="1.15" opacity="0.9" fill="none" />
+            <path class="scratch-line" data-step="3" d="M 201 34 L 61 284" stroke="#e4e4e7" stroke-width="0.9" opacity="0.78" fill="none" />
+            <path class="scratch-line" data-step="3" d="M 184 20 L 90 300" stroke="#ffffff" stroke-width="1.25" opacity="0.92" fill="none" />
+            <path class="scratch-line" data-step="3" d="M 192 38 L 75 276" stroke="#a1a1aa" stroke-width="0.85" opacity="0.72" fill="none" />
           </g>
         </svg>
 
         <!-- Clone Rouge RGB pour les flashs de glitch -->
         <svg viewBox="0 0 360 320" class="a-glitch-clone a-glitch-clone-red overflow-visible" aria-hidden="true">
           <g stroke="#ff1e27" stroke-linecap="round" fill="none">
-            <path d="M 164 22 L 292 296" stroke-width="1.7" />
+            <path d="M 164 22 L 292 296" stroke-width="1.8" />
             <path d="M 172 30 L 278 288" stroke-width="1.2" />
-            <path d="M 20 218 L 340 213" stroke-width="1.7" />
+            <path d="M 20 218 L 340 213" stroke-width="1.8" />
             <path d="M 36 225 L 324 221" stroke-width="1.2" />
-            <path d="M 196 22 L 68 296" stroke-width="1.7" />
+            <path d="M 196 22 L 68 296" stroke-width="1.8" />
             <path d="M 188 30 L 82 288" stroke-width="1.2" />
           </g>
         </svg>
@@ -418,166 +382,173 @@
         <!-- Clone Cyan RGB pour les flashs de glitch -->
         <svg viewBox="0 0 360 320" class="a-glitch-clone a-glitch-clone-cyan overflow-visible" aria-hidden="true">
           <g stroke="#00f0ff" stroke-linecap="round" fill="none">
-            <path d="M 164 22 L 292 296" stroke-width="1.7" />
+            <path d="M 164 22 L 292 296" stroke-width="1.8" />
             <path d="M 176 20 L 270 300" stroke-width="1.2" />
-            <path d="M 20 218 L 340 213" stroke-width="1.7" />
+            <path d="M 20 218 L 340 213" stroke-width="1.8" />
             <path d="M 46 230 L 316 215" stroke-width="1.2" />
-            <path d="M 196 22 L 68 296" stroke-width="1.7" />
+            <path d="M 196 22 L 68 296" stroke-width="1.8" />
             <path d="M 184 20 L 90 300" stroke-width="1.2" />
           </g>
         </svg>
       </div>
-
-      <!-- MESSAGE PLEIN ÉCRAN D'AMELIA QUI BUGUE EN CONTINU -->
-      <div id="hero-manifesto-block" class="hero-manifesto-block flex flex-col items-center space-y-5 px-2">
-        <h1
-          data-text="NOUS PASSONS À TRAVERS LEURS MENSONGES — ILS MENTENT, NOUS NOUS LEVONS"
-          class="glitch-headline font-bold max-w-4xl select-none"
-        >
-          NOUS PASSONS À TRAVERS LEURS MENSONGES — ILS MENTENT, NOUS NOUS LEVONS
-        </h1>
-
-        <a
-          id="btn-scroll-terminal"
-          href="#breach-terminal"
-          class="scroll-prompt-flicker inline-block font-tech text-xs sm:text-sm tracking-[0.18em] text-acidGreen hover:text-bone uppercase transition-colors py-2 px-3 cursor-pointer"
-        >
-          [ ACCÉDER AU TERMINAL CLANDESTIN ↓ ]
-        </a>
-      </div>
     </div>
 
-    <!-- Pied de l'intro : bouton discret en bas à droite [ PASSER L'INTRO ] -->
-    <div class="w-full max-w-5xl flex items-center justify-end z-10">
+    <!-- Pied de l'intro : bouton [ PASSER / FORCER LE DÉCRYPTAGE ] -->
+    <div class="w-full max-w-5xl flex items-center justify-center sm:justify-end z-10">
       <button
         id="btn-skip-intro"
         type="button"
-        class="px-3 py-2 bg-void/90 hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-[11px] sm:text-xs font-tech tracking-widest text-zinc-500 hover:text-bone uppercase transition-colors cursor-pointer"
+        class="px-4 py-3 bg-void/95 hover:bg-zinc-900 border border-zinc-700 hover:border-crimson text-xs font-tech tracking-widest text-zinc-400 hover:text-bone uppercase transition-colors cursor-pointer"
       >
-        [ PASSER L'INTRO ]
+        [ PASSER / FORCER LE DÉCRYPTAGE ]
       </button>
     </div>
   </section>
 
   <!-- ==========================================================================
-       2. TERMINAL CLANDESTIN (SECTION 1 : BRÈCHE 0 % & SECTION 2 : REGISTRE)
+       1B. MANIFESTE PLEIN ÉCRAN D'AMELIA (min-h-screen) APRÈS LA SCARIFICATION
        ========================================================================== -->
-  <main id="breach-terminal" class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-24 space-y-10">
-
-    <!-- ========================================================================
-         SECTION 1 — BRÈCHE DANS LE SYSTÈME GOUVERNEMENTAL (0 %)
-         ======================================================================== -->
-    <section aria-labelledby="breach-heading" class="border border-zinc-800 bg-panel p-5 sm:p-7 space-y-6">
-      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-zinc-800 pb-4">
-        <h2 id="breach-heading" class="text-sm sm:text-base md:text-lg font-extrabold tracking-wider text-bone uppercase">
-          BRÈCHE DANS LE SYSTÈME GOUVERNEMENTAL
-        </h2>
-
-        <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0">
-          <span class="w-1.5 h-1.5 rounded-full bg-crimson animate-pulse"></span>
-          INTRUSION INITIALISÉE — 0 %
-        </span>
+  <section
+    id="manifesto-screen"
+    class="hidden relative min-h-screen w-full bg-void flex-col items-center justify-between px-4 sm:px-6 py-6 sm:py-8 overflow-hidden border-b border-zinc-900"
+  >
+    <!-- En-tête du signal piraté -->
+    <div class="w-full max-w-5xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-500 z-10">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="w-2 h-2 bg-crimson animate-ping shrink-0"></span>
+        <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-crimson">DIFFUSION_PIRATE</span></span>
       </div>
 
-      <!-- Liste minimaliste des 5 sections de Sabaron toutes initialisées à 0 % -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-        <!-- Section 01 -->
-        <div class="border border-zinc-900 bg-panelDark p-4 space-y-2.5">
-          <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
-            <span class="text-bone font-bold">Médecine et psy</span>
-            <span class="font-tech text-crimson font-bold shrink-0">0 %</span>
-          </div>
-          <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
-            <div class="h-full bg-crimson" style="width: 0%"></div>
-          </div>
-          <div class="text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-            BRÈCHE EN ATTENTE
-          </div>
+      <button
+        id="btn-replay-intro"
+        type="button"
+        class="px-3 py-1.5 border border-zinc-800 hover:border-zinc-600 text-zinc-500 hover:text-bone transition-colors cursor-pointer shrink-0"
+      >
+        [ REJOUER ]
+      </button>
+    </div>
+
+    <!-- Centre : Symbole scarifié + Manifeste plein écran d'Amelia -->
+    <div class="flex-1 w-full max-w-4xl flex flex-col items-center justify-center text-center my-auto py-6 gap-7 sm:gap-9 z-10">
+      <!-- Emblème scarifié final -->
+      <div class="emblem-stage is-engraved w-44 sm:w-56">
+        <svg
+          viewBox="0 0 360 320"
+          class="w-full h-full overflow-visible"
+          role="img"
+          aria-label="Symbole A d'Amelia sur le sceau de Sabaron"
+        >
+          <g opacity="0.18" stroke="#d4d4d8" fill="none">
+            <circle cx="180" cy="160" r="96" stroke-width="1.4" stroke-dasharray="14 3 4 2" />
+            <circle cx="180" cy="160" r="89" stroke-width="0.75" stroke-dasharray="3 4" />
+            <circle cx="180" cy="160" r="65" stroke-width="1.2" />
+            <polygon points="180,206 136,130 224,130" stroke-width="1.4" />
+            <polygon points="180,192 149,138 211,138" stroke-width="0.9" />
+          </g>
+          <g stroke-linecap="round" fill="none">
+            <path d="M 164 22 L 292 296" stroke="#ffffff" stroke-width="1.7" />
+            <path d="M 172 30 L 278 288" stroke="#ff1e27" stroke-width="1.15" />
+            <path d="M 159 34 L 299 284" stroke="#e4e4e7" stroke-width="0.9" />
+            <path d="M 20 218 L 340 213" stroke="#ffffff" stroke-width="1.7" />
+            <path d="M 36 225 L 324 221" stroke="#ff1e27" stroke-width="1.15" />
+            <path d="M 14 212 L 346 218" stroke="#e4e4e7" stroke-width="0.85" />
+            <path d="M 196 22 L 68 296" stroke="#ffffff" stroke-width="1.7" />
+            <path d="M 188 30 L 82 288" stroke="#ff1e27" stroke-width="1.15" />
+            <path d="M 201 34 L 61 284" stroke="#e4e4e7" stroke-width="0.9" />
+          </g>
+        </svg>
+      </div>
+
+      <!-- Titre principal brouillé & sous-message -->
+      <div class="space-y-5 px-2">
+        <h1
+          data-text="NOUS PASSONS À TRAVERS LEURS MENSONGES."
+          class="glitch-headline font-bold max-w-4xl mx-auto select-none"
+        >
+          NOUS PASSONS À TRAVERS LEURS MENSONGES.
+        </h1>
+
+        <p class="font-tech text-sm sm:text-lg md:text-xl tracking-[0.14em] text-zinc-300 uppercase max-w-3xl mx-auto leading-relaxed">
+          ILS MENTENT. NOUS NOUS LEVONS. CHAQUE VERROU DE SABARON VA CÉDER.
+        </p>
+      </div>
+    </div>
+
+    <!-- Invite de défilement en bas du manifeste -->
+    <div class="w-full max-w-5xl flex items-center justify-center z-10 pb-2">
+      <a
+        id="btn-scroll-terminal"
+        href="#breach-section"
+        class="scroll-prompt-flicker inline-block font-tech text-xs sm:text-sm tracking-[0.2em] text-acidGreen hover:text-bone uppercase transition-colors py-3 px-4 border border-zinc-900 hover:border-acidGreen/50 cursor-pointer"
+      >
+        ▼ ACCÉDER AU RÉSEAU COMPROMIS ▼
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       2. TERMINAL CLANDESTIN : BRÈCHE DES 5 SECTIONS & REGISTRE SYNCHRONISÉ
+       ========================================================================== -->
+  <main id="breach-section" class="max-w-5xl mx-auto px-4 sm:px-6 pt-10 pb-24 space-y-10">
+
+    <!-- ========================================================================
+         SECTION 1 — BRÈCHE DU RÉSEAU GOUVERNEMENTAL (DYNAMIQUE VIA GOOGLE SHEETS)
+         ======================================================================== -->
+    <section aria-labelledby="breach-heading" class="border border-zinc-800 bg-panel p-5 sm:p-7 space-y-6">
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 border-b border-zinc-800 pb-4">
+        <div class="space-y-1">
+          <h2 id="breach-heading" class="text-sm sm:text-base md:text-lg font-extrabold tracking-wider text-bone uppercase">
+            BRÈCHE DU RÉSEAU GOUVERNEMENTAL
+          </h2>
+          <p class="text-xs font-tech text-zinc-500 tracking-wider uppercase">
+            INFRASTRUCTURE CARCÉRALE DE SABARON // 5 SECTIONS SURVEILLÉES
+          </p>
         </div>
 
-        <!-- Section 02 -->
-        <div class="border border-zinc-900 bg-panelDark p-4 space-y-2.5">
-          <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
-            <span class="text-bone font-bold">Communication et renseignements</span>
-            <span class="font-tech text-crimson font-bold shrink-0">0 %</span>
-          </div>
-          <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
-            <div class="h-full bg-crimson" style="width: 0%"></div>
-          </div>
-          <div class="text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-            BRÈCHE EN ATTENTE
-          </div>
+        <!-- Indicateur global de brèche (moyenne des 5 sections) -->
+        <div
+          id="global-breach-badge"
+          class="inline-flex items-center gap-2.5 px-3.5 py-2 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0"
+        >
+          <span id="global-breach-dot" class="w-2 h-2 bg-crimson animate-pulse"></span>
+          <span>BRÈCHE GLOBALE : <strong id="global-breach-value" class="font-bold">0%</strong></span>
         </div>
+      </div>
 
-        <!-- Section 03 -->
-        <div class="border border-zinc-900 bg-panelDark p-4 space-y-2.5">
-          <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
-            <span class="text-bone font-bold">Surveillance et espionnage</span>
-            <span class="font-tech text-crimson font-bold shrink-0">0 %</span>
-          </div>
-          <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
-            <div class="h-full bg-crimson" style="width: 0%"></div>
-          </div>
-          <div class="text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-            BRÈCHE EN ATTENTE
-          </div>
-        </div>
-
-        <!-- Section 04 -->
-        <div class="border border-zinc-900 bg-panelDark p-4 space-y-2.5">
-          <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
-            <span class="text-bone font-bold">Sécurité</span>
-            <span class="font-tech text-crimson font-bold shrink-0">0 %</span>
-          </div>
-          <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
-            <div class="h-full bg-crimson" style="width: 0%"></div>
-          </div>
-          <div class="text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-            BRÈCHE EN ATTENTE
-          </div>
-        </div>
-
-        <!-- Section 05 -->
-        <div class="border border-zinc-900 bg-panelDark p-4 space-y-2.5 md:col-span-2">
-          <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
-            <span class="text-bone font-bold">Scientifique</span>
-            <span class="font-tech text-crimson font-bold shrink-0">0 %</span>
-          </div>
-          <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
-            <div class="h-full bg-crimson" style="width: 0%"></div>
-          </div>
-          <div class="text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-            BRÈCHE EN ATTENTE
-          </div>
-        </div>
+      <!-- Grille des 5 sections gouvernementales de Sabaron -->
+      <div id="sections-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- Les 5 cartes SEC-01 à SEC-05 sont générées et mises à jour en direct par JS -->
       </div>
     </section>
 
     <!-- ========================================================================
-         SECTION 2 — REGISTRE CLANDESTIN & RÉPERTOIRE DES RÔLES
+         SECTION 2 — REGISTRE CLANDESTIN DE L'OPÉRATION
          ======================================================================== -->
     <section aria-labelledby="registry-section-heading" class="space-y-6">
 
-      <!-- En-tête de liaison distante + Formulaire d'inscription -->
+      <!-- En-tête de synchronisation + Formulaire -->
       <div class="border border-zinc-800 bg-panel p-5 sm:p-7 space-y-6">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-zinc-800 pb-4">
           <div class="space-y-1">
             <h2 id="registry-section-heading" class="text-sm sm:text-base md:text-lg font-extrabold tracking-wider text-bone uppercase">
-              REGISTRE CLANDESTIN // RÉPERTOIRE DES RÔLES
+              REGISTRE CLANDESTIN DE L'OPÉRATION
             </h2>
+            <p class="text-xs font-tech text-zinc-500 tracking-wider uppercase">
+              RECENSEMENT DES SUJETS CS, ALLIÉS EXTÉRIEURS & AGENTS INFILTRÉS
+            </p>
           </div>
 
           <div class="flex flex-wrap items-center gap-2.5">
-            <!-- Badge d'état en direct -->
+            <!-- Badge d'état de liaison distante -->
             <div
               id="sync-status-badge"
               class="inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase"
             >
-              <span id="sync-status-dot" class="w-2 h-2 rounded-full bg-amberSignal"></span>
+              <span id="sync-status-dot" class="w-2 h-2 bg-amberSignal"></span>
               <span id="sync-status-text">MODE LOCAL</span>
             </div>
 
-            <!-- Bouton [ ACTUALISER ] -->
+            <!-- Bouton manuel [ ACTUALISER ] -->
             <button
               id="btn-refresh-feed"
               type="button"
@@ -591,23 +562,23 @@
         <!-- Formulaire d'enregistrement des personnages -->
         <form id="signal-registry-form" class="space-y-4" novalidate>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <!-- Nom du personnage / Matricule CS -->
+            <!-- Identité / Nom du sujet -->
             <div>
               <label for="input-nom" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                Nom du personnage / Matricule CS
+                Identité / Nom du sujet
               </label>
               <input
                 id="input-nom"
                 name="nom"
                 type="text"
                 required
-                maxlength="65"
+                maxlength="70"
                 placeholder="Ex : Kaelen / Sujet CS-14"
                 class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors"
               />
             </div>
 
-            <!-- Rôle dans l'opération (3 catégories exactes) -->
+            <!-- Rôle dans l'opération -->
             <div>
               <label for="select-role" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
                 Rôle dans l'opération
@@ -617,16 +588,16 @@
                 name="role"
                 class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone font-mono outline-none transition-colors cursor-pointer"
               >
-                <option value="cs_captif">CS Captifs / Cibles d'extraction</option>
-                <option value="soutien">Forces de soutien / Résistance</option>
-                <option value="infiltre">Infiltrés / Agents de terrain</option>
+                <option value="CS Captif">CS Captif (Cible d'extraction)</option>
+                <option value="Soutien">Force de soutien (Résistance extérieure)</option>
+                <option value="Infiltré">Infiltré (Agent au sein d'une section)</option>
               </select>
             </div>
 
-            <!-- Section ciblée parmi les 5 sections -->
+            <!-- Section / Zone concernée -->
             <div>
               <label for="select-section" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                Section ciblée
+                Section / Zone concernée
               </label>
               <select
                 id="select-section"
@@ -638,30 +609,31 @@
                 <option value="Surveillance et espionnage">Surveillance et espionnage</option>
                 <option value="Sécurité">Sécurité</option>
                 <option value="Scientifique">Scientifique</option>
+                <option value="Quartier CS (Extérieur)">Quartier CS (Extérieur)</option>
               </select>
             </div>
           </div>
 
-          <!-- Situation actuelle -->
+          <!-- Situation / Cellule / Détails -->
           <div>
             <label for="input-situation" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-              Situation actuelle
+              Situation / Cellule / Détails
             </label>
-            <input
+            <textarea
               id="input-situation"
               name="situation"
-              type="text"
+              rows="3"
               required
-              maxlength="220"
-              placeholder="Bloc de détention, entraves anti-pouvoirs, accès dérobé ou soutien disponible..."
-              class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors"
-            />
+              maxlength="320"
+              placeholder="Niveau de détention, entraves anti-pouvoirs, accès dérobé, équipement ou appui disponible..."
+              class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors resize-y"
+            ></textarea>
           </div>
 
           <!-- Message d'erreur inline -->
           <p id="form-error-msg" class="hidden text-xs font-tech text-crimson tracking-wider"></p>
 
-          <!-- Bouton d'envoi -->
+          <!-- Bouton de soumission -->
           <div class="pt-1">
             <button
               id="btn-submit-signal"
@@ -674,57 +646,57 @@
         </form>
       </div>
 
-      <!-- Affichage en direct trié en 3 blocs distincts -->
+      <!-- Affichage en direct séparé en 3 panneaux par rôle -->
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
-        <!-- BLOC 1 : CS CAPTIFS / CIBLES D'EXTRACTION ("cs_captif") -->
+        <!-- PANNEAU 1 : CS CAPTIFS — CIBLES D'EXTRACTION -->
         <div class="border border-zinc-800 border-t-2 border-t-crimson bg-panel p-4 sm:p-5 space-y-4">
           <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
             <h3 class="text-xs sm:text-sm font-extrabold tracking-wider text-crimson uppercase">
-              CS CAPTIFS / CIBLES D'EXTRACTION
+              CS CAPTIFS — CIBLES D'EXTRACTION
             </h3>
-            <span id="count-cs_captif" class="px-2 py-0.5 border border-crimson/40 bg-crimson/10 text-crimson font-tech text-xs shrink-0">
+            <span id="count-CS Captif" class="px-2 py-0.5 border border-crimson/40 bg-crimson/10 text-crimson font-tech text-xs shrink-0">
               0
             </span>
           </div>
 
-          <div id="list-cs_captif" class="space-y-3">
+          <div id="list-CS Captif" class="space-y-3">
             <div class="border border-zinc-900 bg-void px-3.5 py-4 text-xs font-tech text-zinc-600 tracking-wider text-center">
               [ AUCUN SIGNAL REÇU ]
             </div>
           </div>
         </div>
 
-        <!-- BLOC 2 : FORCES DE SOUTIEN / RÉSISTANCE ("soutien") -->
+        <!-- PANNEAU 2 : FORCES DE SOUTIEN — RÉSISTANCE -->
         <div class="border border-zinc-800 border-t-2 border-t-bone bg-panel p-4 sm:p-5 space-y-4">
           <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
             <h3 class="text-xs sm:text-sm font-extrabold tracking-wider text-bone uppercase">
-              FORCES DE SOUTIEN / RÉSISTANCE
+              FORCES DE SOUTIEN — RÉSISTANCE
             </h3>
-            <span id="count-soutien" class="px-2 py-0.5 border border-bone/40 bg-bone/10 text-bone font-tech text-xs shrink-0">
+            <span id="count-Soutien" class="px-2 py-0.5 border border-bone/40 bg-bone/10 text-bone font-tech text-xs shrink-0">
               0
             </span>
           </div>
 
-          <div id="list-soutien" class="space-y-3">
+          <div id="list-Soutien" class="space-y-3">
             <div class="border border-zinc-900 bg-void px-3.5 py-4 text-xs font-tech text-zinc-600 tracking-wider text-center">
               [ AUCUN SIGNAL REÇU ]
             </div>
           </div>
         </div>
 
-        <!-- BLOC 3 : INFILTRÉS / AGENTS DE TERRAIN ("infiltre") -->
+        <!-- PANNEAU 3 : INFILTRÉS — AGENTS DE TERRAIN -->
         <div class="border border-zinc-800 border-t-2 border-t-acidGreen bg-panel p-4 sm:p-5 space-y-4">
           <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
             <h3 class="text-xs sm:text-sm font-extrabold tracking-wider text-acidGreen uppercase">
-              INFILTRÉS / AGENTS DE TERRAIN
+              INFILTRÉS — AGENTS DE TERRAIN
             </h3>
-            <span id="count-infiltre" class="px-2 py-0.5 border border-acidGreen/40 bg-acidGreen/10 text-acidGreen font-tech text-xs shrink-0">
+            <span id="count-Infiltré" class="px-2 py-0.5 border border-acidGreen/40 bg-acidGreen/10 text-acidGreen font-tech text-xs shrink-0">
               0
             </span>
           </div>
 
-          <div id="list-infiltre" class="space-y-3">
+          <div id="list-Infiltré" class="space-y-3">
             <div class="border border-zinc-900 bg-void px-3.5 py-4 text-xs font-tech text-zinc-600 tracking-wider text-center">
               [ AUCUN SIGNAL REÇU ]
             </div>
@@ -747,20 +719,17 @@
   </div>
 
   <!-- ==========================================================================
-       SCRIPT PRINCIPAL : ANIMATION DU "A" + BASE DE DONNÉES GOOGLE SHEETS
+       SCRIPT PRINCIPAL : ANIMATION DU "A" + SYNCHRONISATION GOOGLE SHEETS
        ========================================================================== -->
   <script>
     /* ==========================================================================
        CONFIGURATION DE LA BASE DE DONNÉES EN LIGNE (GOOGLE SHEETS)
        --------------------------------------------------------------------------
-       1. Ouvre Google Sheets sur PC et crée une feuille vierge.
-          (Optionnel : mets id | nom | role | section | situation | timestamp en A1:F1,
-           le script ci-dessous les créera automatiquement si la feuille est vide.)
-       2. Va dans Extensions > Apps Script, efface tout et colle le code ci-dessous :
+       1. Dans Google Sheets, va dans Extensions > Apps Script, supprime tout
+          et colle le code situé entre les deux lignes en pointillés ci-dessous :
 
        -------------------- DÉBUT DU SCRIPT GOOGLE APPS SCRIPT --------------------
-       function getOrCreateSheet() {
-         var ss = SpreadsheetApp.getActiveSpreadsheet();
+       function getRecordsSheet(ss) {
          var sheet = ss.getSheets()[0];
          if (sheet.getLastRow() === 0) {
            sheet.appendRow(['id', 'nom', 'role', 'section', 'situation', 'timestamp']);
@@ -768,36 +737,81 @@
          return sheet;
        }
 
-       function doGet(e) {
-         var sheet = getOrCreateSheet();
-         var data = sheet.getDataRange().getValues();
-         var records = [];
+       function getOrCreateSectionsSheet(ss) {
+         var secSheet = ss.getSheetByName('Sections');
+         if (!secSheet) {
+           secSheet = ss.insertSheet('Sections');
+           secSheet.getRange('A1:B6').setValues([
+             ['Section', 'Pourcentage'],
+             ['Médecine et psy', 0],
+             ['Communication et renseignements', 0],
+             ['Surveillance et espionnage', 0],
+             ['Sécurité', 0],
+             ['Scientifique', 0]
+           ]);
+         }
+         return secSheet;
+       }
 
-         for (var i = 1; i < data.length; i++) {
-           if (!data[i][1]) continue;
+       function parsePercentValue(rawVal) {
+         if (typeof rawVal === 'number') {
+           // Gère le cas où Google Sheets formate une cellule en % (ex: 0.45 pour 45%)
+           var num = (rawVal > 0 && rawVal <= 1 && String(rawVal).indexOf('.') !== -1)
+             ? Math.round(rawVal * 100)
+             : Math.round(rawVal);
+           return Math.max(0, Math.min(100, num));
+         }
+         var cleaned = String(rawVal || '0').replace('%', '').replace(',', '.').trim();
+         var parsed = parseFloat(cleaned);
+         if (isNaN(parsed)) return 0;
+         return Math.max(0, Math.min(100, Math.round(parsed)));
+       }
+
+       function doGet(e) {
+         var ss = SpreadsheetApp.getActiveSpreadsheet();
+         var recordsSheet = getRecordsSheet(ss);
+         var sectionsSheet = getOrCreateSectionsSheet(ss);
+
+         var rows = recordsSheet.getDataRange().getValues();
+         var records = [];
+         for (var i = 1; i < rows.length; i++) {
+           if (!rows[i][1]) continue;
            records.push({
-             id: String(data[i][0] || ('row_' + i)),
-             nom: String(data[i][1] || ''),
-             role: String(data[i][2] || 'cs_captif'),
-             section: String(data[i][3] || ''),
-             situation: String(data[i][4] || ''),
-             timestamp: Number(data[i][5] || 0)
+             id: String(rows[i][0] || ('row_' + i)),
+             nom: String(rows[i][1] || ''),
+             role: String(rows[i][2] || 'CS Captif'),
+             section: String(rows[i][3] || ''),
+             situation: String(rows[i][4] || ''),
+             timestamp: Number(rows[i][5] || 0)
            });
          }
 
+         var secRows = sectionsSheet.getDataRange().getValues();
+         var sectionsMap = {};
+         for (var j = 1; j < secRows.length; j++) {
+           var secName = String(secRows[j][0] || '').trim();
+           if (!secName) continue;
+           sectionsMap[secName] = parsePercentValue(secRows[j][1]);
+         }
+
          return ContentService
-           .createTextOutput(JSON.stringify({ status: 'ok', records: records }))
+           .createTextOutput(JSON.stringify({
+             status: 'ok',
+             records: records,
+             sections: sectionsMap
+           }))
            .setMimeType(ContentService.MimeType.JSON);
        }
 
        function doPost(e) {
-         var sheet = getOrCreateSheet();
+         var ss = SpreadsheetApp.getActiveSpreadsheet();
+         var recordsSheet = getRecordsSheet(ss);
          var payload = JSON.parse(e.postData.contents);
 
-         sheet.appendRow([
+         recordsSheet.appendRow([
            payload.id || ('sig_' + Date.now()),
            payload.nom || '',
-           payload.role || 'cs_captif',
+           payload.role || 'CS Captif',
            payload.section || '',
            payload.situation || '',
            payload.timestamp || Date.now()
@@ -806,24 +820,147 @@
          return ContentService
            .createTextOutput(JSON.stringify({ status: 'saved' }))
            .setMimeType(ContentService.MimeType.JSON);
-       }	
+       }
        --------------------- FIN DU SCRIPT GOOGLE APPS SCRIPT ---------------------
 
-       3. Clique sur Déployer > Nouveau déploiement > Type : Application Web.
-          - Exécuter en tant que : Moi
-          - Qui a accès : Tout le monde
-       4. Copie l'URL qui se termine par /exec et colle-la entre les guillemets :
+       2. Clique sur Déployer > Nouveau déploiement > Type : Application Web
+          (Exécuter en tant que : Moi / Qui a accès : Tout le monde).
+       3. Colle ton URL qui se termine par /exec entre les guillemets ci-dessous :
        ========================================================================== */
-    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbxZBYb6JrQ4Z6_0a-dNwu9m7MzT3QY4f_IBCiABf7KBjKrP4AQSyteznCetKbxc9wFvjg/exec";
+    const DATABASE_URL = "https://script.google.com/macros/s/AKfycby-OXhBzxPcrXEiWNXfITBsJ5y9VnCqIYgbu2G0GCAPiwEO1E2jiybfY-ODM22x1Ik/exec";
 
     /* --------------------------------------------------------------------------
-       1. ANIMATION SÉQUENTIELLE TRAIT PAR TRAIT DU "A" SCARIFIÉ
-          1) Premier trait diagonal (côté droit)
-          2) Trait horizontal transversal
-          3) Second trait diagonal (côté gauche) + flashs de glitch
+       1. CONFIGURATION DES 5 SECTIONS GOUVERNEMENTALES DE SABARON
        -------------------------------------------------------------------------- */
+    const SABARON_SECTIONS = [
+      { code: 'SEC-01', name: 'Médecine et psy' },
+      { code: 'SEC-02', name: 'Communication et renseignements' },
+      { code: 'SEC-03', name: 'Surveillance et espionnage' },
+      { code: 'SEC-04', name: 'Sécurité' },
+      { code: 'SEC-05', name: 'Scientifique' },
+    ];
+
+    let currentSectionPercentages = {
+      'Médecine et psy': 0,
+      'Communication et renseignements': 0,
+      'Surveillance et espionnage': 0,
+      'Sécurité': 0,
+      'Scientifique': 0,
+    };
+
+    const sectionsGridEl = document.getElementById('sections-grid');
+    const globalBreachBadgeEl = document.getElementById('global-breach-badge');
+    const globalBreachDotEl = document.getElementById('global-breach-dot');
+    const globalBreachValueEl = document.getElementById('global-breach-value');
+
+    function clampPercent(val) {
+      if (typeof val === 'number') {
+        return Math.max(0, Math.min(100, Math.round(val)));
+      }
+      const cleaned = String(val || '0').replace('%', '').replace(',', '.').trim();
+      const parsed = parseFloat(cleaned);
+      if (Number.isNaN(parsed)) return 0;
+      return Math.max(0, Math.min(100, Math.round(parsed)));
+    }
+
+    function getSectionStatusInfo(pct) {
+      if (pct >= 100) {
+        return {
+          label: 'BRÈCHE OUVERTE',
+          badgeClass: 'border-acidGreen/50 bg-acidGreen/10 text-acidGreen',
+          barClass: 'bg-acidGreen shadow-[0_0_10px_rgba(57,255,20,0.45)]',
+          pctClass: 'text-acidGreen',
+        };
+      }
+      if (pct > 0) {
+        return {
+          label: 'INFILTRATION EN COURS',
+          badgeClass: 'border-amberSignal/50 bg-amberSignal/10 text-amberSignal',
+          barClass: 'bg-crimson shadow-[0_0_8px_rgba(255,30,39,0.5)]',
+          pctClass: 'text-bone',
+        };
+      }
+      return {
+        label: 'BRÈCHE EN ATTENTE',
+        badgeClass: 'border-zinc-800 bg-void text-zinc-500',
+        barClass: 'bg-crimson',
+        pctClass: 'text-crimson',
+      };
+    }
+
+    function renderSections(sectionsMap = currentSectionPercentages) {
+      let total = 0;
+
+      const html = SABARON_SECTIONS.map((sec, index) => {
+        const rawVal = Object.prototype.hasOwnProperty.call(sectionsMap, sec.name)
+          ? sectionsMap[sec.name]
+          : 0;
+        const pct = clampPercent(rawVal);
+        currentSectionPercentages[sec.name] = pct;
+        total += pct;
+
+        const status = getSectionStatusInfo(pct);
+        const spanFull = index === SABARON_SECTIONS.length - 1 ? 'md:col-span-2' : '';
+
+        return `
+          <div class="border border-zinc-900 bg-panelDark p-4 space-y-3 ${spanFull}">
+            <div class="flex items-start justify-between gap-3">
+              <div class="space-y-0.5 min-w-0">
+                <span class="block text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+                  ${sec.code}
+                </span>
+                <h3 class="text-xs sm:text-sm font-mono font-bold text-bone break-words">
+                  ${sec.name}
+                </h3>
+              </div>
+              <span class="font-tech text-sm sm:text-base font-bold shrink-0 ${status.pctClass}">
+                ${pct}%
+              </span>
+            </div>
+
+            <div class="w-full h-1.5 bg-zinc-900 overflow-hidden">
+              <div
+                class="h-full transition-all duration-700 ease-out ${status.barClass}"
+                style="width: ${pct}%"
+              ></div>
+            </div>
+
+            <div class="flex items-center justify-between gap-2 pt-0.5">
+              <span class="inline-block px-2 py-0.5 border text-[10px] sm:text-[11px] font-tech tracking-widest uppercase ${status.badgeClass}">
+                ${status.label}
+              </span>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      sectionsGridEl.innerHTML = html;
+
+      const average = Math.round(total / SABARON_SECTIONS.length);
+      globalBreachValueEl.textContent = `${average}%`;
+
+      if (average >= 100) {
+        globalBreachBadgeEl.className =
+          'inline-flex items-center gap-2.5 px-3.5 py-2 border border-acidGreen/50 bg-acidGreen/10 text-acidGreen font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
+        globalBreachDotEl.className = 'w-2 h-2 bg-acidGreen animate-ping';
+      } else if (average > 0) {
+        globalBreachBadgeEl.className =
+          'inline-flex items-center gap-2.5 px-3.5 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
+        globalBreachDotEl.className = 'w-2 h-2 bg-amberSignal animate-pulse';
+      } else {
+        globalBreachBadgeEl.className =
+          'inline-flex items-center gap-2.5 px-3.5 py-2 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
+        globalBreachDotEl.className = 'w-2 h-2 bg-crimson animate-pulse';
+      }
+    }
+
+    /* --------------------------------------------------------------------------
+       2. INTRO PLEIN ÉCRAN (3 TRAITS DU "A") -> TRANSITION VERS LE MANIFESTE
+       -------------------------------------------------------------------------- */
+    const introSealScreen = document.getElementById('intro-seal-screen');
+    const manifestoScreen = document.getElementById('manifesto-screen');
+    const introStepIndicator = document.getElementById('intro-step-indicator');
     const scratchedStage = document.getElementById('scratched-a-stage');
-    const heroManifestoBlock = document.getElementById('hero-manifesto-block');
     const staticBurstLayer = document.getElementById('static-burst-layer');
     const allScratchPaths = Array.from(document.querySelectorAll('.scratch-line'));
 
@@ -844,7 +981,7 @@
       const bar = document.createElement('div');
       const top = Math.random() * 96;
       const height = 2 + Math.floor(Math.random() * 14);
-      const isCrimson = Math.random() > 0.45;
+      const isCrimson = Math.random() > 0.42;
 
       bar.style.position = 'absolute';
       bar.style.left = '0';
@@ -852,9 +989,9 @@
       bar.style.top = `${top}%`;
       bar.style.height = `${height}px`;
       bar.style.backgroundColor = isCrimson
-        ? 'rgba(255, 30, 39, 0.36)'
-        : 'rgba(236, 236, 236, 0.22)';
-      bar.style.transform = `translateX(${(Math.random() - 0.5) * 44}px)`;
+        ? 'rgba(255, 30, 39, 0.38)'
+        : 'rgba(236, 236, 236, 0.24)';
+      bar.style.transform = `translateX(${(Math.random() - 0.5) * 48}px)`;
 
       staticBurstLayer.appendChild(bar);
       setTimeout(() => {
@@ -864,9 +1001,9 @@
 
     function triggerGlitchFlash(durationMs = 280) {
       scratchedStage.classList.add('burst-mode');
-      const tearCount = Math.max(4, Math.floor(durationMs / 35));
+      const tearCount = Math.max(5, Math.floor(durationMs / 32));
       for (let i = 0; i < tearCount; i++) {
-        introTimeouts.push(setTimeout(spawnHorizontalTear, i * 32));
+        introTimeouts.push(setTimeout(spawnHorizontalTear, i * 30));
       }
       introTimeouts.push(
         setTimeout(() => {
@@ -875,13 +1012,28 @@
       );
     }
 
+    function revealManifestoScreen() {
+      clearIntroAnimation();
+      allScratchPaths.forEach((p) => {
+        p.style.strokeDashoffset = '0';
+      });
+      introSealScreen.classList.add('hidden');
+      manifestoScreen.classList.remove('hidden');
+      manifestoScreen.classList.add('flex');
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
+
     function runOpeningSequence() {
       clearIntroAnimation();
 
+      manifestoScreen.classList.add('hidden');
+      manifestoScreen.classList.remove('flex');
+      introSealScreen.classList.remove('hidden');
       scratchedStage.classList.remove('burst-mode', 'is-engraved');
-      heroManifestoBlock.classList.remove('is-visible');
+      introStepIndicator.textContent = '[ SIGNAL 01/03 ]';
 
-      let step3GlitchTriggered = false;
+      let step2FlashDone = false;
+      let step3FlashDone = false;
 
       const pathMeta = allScratchPaths.map((path, idx) => {
         const len = path.getTotalLength();
@@ -889,18 +1041,18 @@
         path.style.strokeDasharray = `${len}`;
         path.style.strokeDashoffset = `${len}`;
 
-        const jitter = (idx % 6) * 0.022;
+        const jitter = (idx % 5) * 0.02;
         let startSec = 0;
         let endSec = 0.85;
 
         if (step === 1) {
-          startSec = 0.0 + jitter;
+          startSec = 0.05 + jitter;
           endSec = 0.85;
         } else if (step === 2) {
-          startSec = 0.85 + jitter;
-          endSec = 1.6;
+          startSec = 0.9 + jitter;
+          endSec = 1.65;
         } else {
-          startSec = 1.6 + jitter;
+          startSec = 1.7 + jitter;
           endSec = 2.45;
         }
 
@@ -912,10 +1064,16 @@
       function tick(now) {
         const elapsedSec = (now - startTime) / 1000;
 
-        // Flash de glitch au moment où le 3e trait ferme le "A"
-        if (elapsedSec >= 1.72 && !step3GlitchTriggered) {
-          step3GlitchTriggered = true;
-          triggerGlitchFlash(180);
+        if (elapsedSec >= 0.88 && !step2FlashDone) {
+          step2FlashDone = true;
+          introStepIndicator.textContent = '[ SIGNAL 02/03 ]';
+          triggerGlitchFlash(120);
+        }
+
+        if (elapsedSec >= 1.68 && !step3FlashDone) {
+          step3FlashDone = true;
+          introStepIndicator.textContent = '[ SIGNAL 03/03 ]';
+          triggerGlitchFlash(170);
         }
 
         for (let i = 0; i < pathMeta.length; i++) {
@@ -931,60 +1089,42 @@
           }
         }
 
-        if (elapsedSec < 2.48) {
+        if (elapsedSec < 2.5) {
           introFrameId = requestAnimationFrame(tick);
         } else {
-          finishOpeningSequence(false);
+          introStepIndicator.textContent = '[ DÉCRYPTAGE FORCÉ ]';
+          scratchedStage.classList.add('is-engraved');
+          triggerGlitchFlash(340);
+          introTimeouts.push(setTimeout(revealManifestoScreen, 380));
         }
       }
 
       introFrameId = requestAnimationFrame(tick);
     }
 
-    function finishOpeningSequence(scrollAfter = false) {
-      clearIntroAnimation();
-      allScratchPaths.forEach((p) => {
-        p.style.strokeDashoffset = '0';
-      });
-
-      triggerGlitchFlash(290);
-
-      introTimeouts.push(
-        setTimeout(() => {
-          scratchedStage.classList.add('is-engraved');
-          heroManifestoBlock.classList.add('is-visible');
-          if (scrollAfter) {
-            const target = document.getElementById('breach-terminal');
-            if (target) {
-              target.scrollIntoView({ behavior: 'smooth' });
-            }
-          }
-        }, 260)
-      );
-    }
+    document.getElementById('btn-skip-intro').addEventListener('click', () => {
+      triggerGlitchFlash(200);
+      revealManifestoScreen();
+    });
 
     document.getElementById('btn-replay-intro').addEventListener('click', () => {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       runOpeningSequence();
     });
 
-    document.getElementById('btn-skip-intro').addEventListener('click', () => {
-      finishOpeningSequence(true);
-    });
-
     document.getElementById('btn-scroll-terminal').addEventListener('click', (e) => {
       e.preventDefault();
-      const target = document.getElementById('breach-terminal');
+      const target = document.getElementById('breach-section');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth' });
       }
     });
 
     /* --------------------------------------------------------------------------
-       2. SYNCHRONISATION GOOGLE SHEETS (DATABASE_URL) + SECOURS LOCALSTORAGE
+       3. SYNCHRONISATION GOOGLE SHEETS (SECTIONS + REGISTRE) & SECOURS LOCAL
        -------------------------------------------------------------------------- */
-    const LOCAL_STORAGE_KEY = 'sabaron_amelia_gsheets_fallback_v1';
-    const POLLING_INTERVAL_MS = 20000;
+    const LOCAL_STORAGE_KEY = 'sabaron_amelia_gsheets_records_v2';
+    const POLLING_INTERVAL_MS = 15000;
     const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@%&*';
 
     const syncBadgeEl = document.getElementById('sync-status-badge');
@@ -1002,19 +1142,19 @@
     const toastEl = document.getElementById('terminal-toast');
 
     const rolePanels = {
-      cs_captif: {
-        list: document.getElementById('list-cs_captif'),
-        count: document.getElementById('count-cs_captif'),
+      'CS Captif': {
+        list: document.getElementById('list-CS Captif'),
+        count: document.getElementById('count-CS Captif'),
         tagClass: 'border-crimson/50 bg-crimson/10 text-crimson',
       },
-      soutien: {
-        list: document.getElementById('list-soutien'),
-        count: document.getElementById('count-soutien'),
+      'Soutien': {
+        list: document.getElementById('list-Soutien'),
+        count: document.getElementById('count-Soutien'),
         tagClass: 'border-bone/40 bg-bone/10 text-bone',
       },
-      infiltre: {
-        list: document.getElementById('list-infiltre'),
-        count: document.getElementById('count-infiltre'),
+      'Infiltré': {
+        list: document.getElementById('list-Infiltré'),
+        count: document.getElementById('count-Infiltré'),
         tagClass: 'border-acidGreen/40 bg-acidGreen/10 text-acidGreen',
       },
     };
@@ -1031,17 +1171,17 @@
       if (mode === 'synced') {
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-acidGreen/50 bg-acidGreen/10 text-acidGreen font-tech text-[11px] sm:text-xs tracking-widest uppercase';
-        syncDotEl.className = 'w-2 h-2 rounded-full bg-acidGreen animate-pulse';
+        syncDotEl.className = 'w-2 h-2 bg-acidGreen animate-pulse';
         syncTextEl.textContent = 'LIAISON DISTANTE : SYNCHRONISÉE';
       } else if (mode === 'error') {
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-crimson/60 bg-crimson/10 text-crimson font-tech text-[11px] sm:text-xs tracking-widest uppercase';
-        syncDotEl.className = 'w-2 h-2 rounded-full bg-crimson';
+        syncDotEl.className = 'w-2 h-2 bg-crimson';
         syncTextEl.textContent = 'LIAISON DISTANTE : ERREUR RÉSEAU';
       } else {
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase';
-        syncDotEl.className = 'w-2 h-2 rounded-full bg-amberSignal';
+        syncDotEl.className = 'w-2 h-2 bg-amberSignal';
         syncTextEl.textContent = 'MODE LOCAL';
       }
     }
@@ -1090,18 +1230,21 @@
           clearInterval(interval);
           el.textContent = finalText;
         }
-      }, 25);
+      }, 24);
+    }
+
+    function normalizeRole(rawRole) {
+      const val = String(rawRole || '').trim().toLowerCase();
+      if (val.includes('soutien')) return 'Soutien';
+      if (val.includes('infiltr')) return 'Infiltré';
+      return 'CS Captif';
     }
 
     function normalizeRecord(raw, idx) {
-      let roleVal = String(raw && raw.role ? raw.role : 'cs_captif').toLowerCase().trim();
-      if (roleVal === 'captif') roleVal = 'cs_captif';
-      const validRole = rolePanels[roleVal] ? roleVal : 'cs_captif';
-
       return {
         id: String((raw && raw.id) || `sig_${idx}_${(raw && raw.timestamp) || Date.now()}`),
         nom: String((raw && (raw.nom || raw.name)) || '').trim(),
-        role: validRole,
+        role: normalizeRole(raw && raw.role),
         section: String((raw && raw.section) || 'Sécurité').trim(),
         situation: String((raw && raw.situation) || '').trim(),
         timestamp: Number((raw && (raw.timestamp || raw.createdAt)) || 0),
@@ -1115,9 +1258,9 @@
         .sort((a, b) => b.timestamp - a.timestamp);
 
       const grouped = {
-        cs_captif: [],
-        soutien: [],
-        infiltre: [],
+        'CS Captif': [],
+        'Soutien': [],
+        'Infiltré': [],
       };
 
       normalized.forEach((item) => {
@@ -1135,7 +1278,7 @@
       knownIds = new Set(normalized.map((item) => item.id));
       isFirstRender = false;
 
-      (['cs_captif', 'soutien', 'infiltre']).forEach((roleKey) => {
+      (['CS Captif', 'Soutien', 'Infiltré']).forEach((roleKey) => {
         const panel = rolePanels[roleKey];
         const items = grouped[roleKey];
         panel.count.textContent = String(items.length);
@@ -1164,7 +1307,7 @@
                   ${escapeHtml(item.section)}
                 </span>
               </div>
-              <p class="sig-situation text-xs text-zinc-300 font-mono leading-relaxed break-words">
+              <p class="sig-situation text-xs text-zinc-300 font-mono leading-relaxed whitespace-pre-line break-words">
                 ${escapeHtml(item.situation)}
               </p>
             </article>
@@ -1184,7 +1327,6 @@
       });
     }
 
-    /* Secours local (localStorage) lorsque DATABASE_URL est vide */
     function readLocalRecords() {
       try {
         const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
@@ -1202,12 +1344,13 @@
       } catch (err) {}
     }
 
-    /* Chargement depuis Google Sheets (doGet) ou mode local */
-    async function loadSignals(manualTrigger = false) {
+    /* Lecture en direct depuis Google Sheets (records + sections) */
+    async function syncFromDatabase(manualTrigger = false) {
       if (isFetching) return;
 
       if (!isDatabaseConfigured()) {
         updateSyncBadge('local');
+        renderSections(currentSectionPercentages);
         renderRegistry(readLocalRecords());
         if (manualTrigger) {
           showToast('FLUX LOCAL ACTUALISÉ');
@@ -1221,9 +1364,12 @@
       }
 
       try {
-        const response = await fetch(DATABASE_URL.trim(), {
+        // Requête GET standard sans en-tête personnalisé pour éviter tout preflight CORS
+        const url = DATABASE_URL.trim();
+        const separator = url.includes('?') ? '&' : '?';
+        const response = await fetch(`${url}${separator}_t=${Date.now()}`, {
           method: 'GET',
-          cache: 'no-store',
+          redirect: 'follow',
         });
 
         if (!response.ok) {
@@ -1231,7 +1377,15 @@
         }
 
         const data = await response.json();
-        const list = Array.isArray(data) ? data : (Array.isArray(data.records) ? data.records : []);
+        const list = Array.isArray(data)
+          ? data
+          : (Array.isArray(data.records) ? data.records : []);
+
+        if (data && typeof data.sections === 'object' && data.sections !== null) {
+          renderSections(data.sections);
+        } else {
+          renderSections(currentSectionPercentages);
+        }
 
         updateSyncBadge('synced');
         renderRegistry(list);
@@ -1250,7 +1404,7 @@
       }
     }
 
-    /* Envoi d'un personnage vers Google Sheets (doPost) */
+    /* Envoi d'une nouvelle inscription vers Google Sheets (doPost) */
     formEl.addEventListener('submit', async (e) => {
       e.preventDefault();
 
@@ -1260,7 +1414,7 @@
       const situation = situationInput.value.trim();
 
       if (!nom || !situation) {
-        formErrorEl.textContent = '> ERREUR : RENSEIGNE LE NOM / MATRICULE ET LA SITUATION ACTUELLE.';
+        formErrorEl.textContent = '> ERREUR : RENSEIGNE L\'IDENTITÉ DU SUJET ET SA SITUATION.';
         formErrorEl.classList.remove('hidden');
         return;
       }
@@ -1290,14 +1444,17 @@
       submitBtn.disabled = true;
       submitBtn.textContent = '[ TRANSMISSION EN COURS... ]';
 
+      const url = DATABASE_URL.trim();
+      const bodyPayload = JSON.stringify(newEntry);
+
       try {
-        // Envoi en text/plain pour éviter le blocage preflight OPTIONS sur Google Apps Script
-        const response = await fetch(DATABASE_URL.trim(), {
+        const response = await fetch(url, {
           method: 'POST',
+          redirect: 'follow',
           headers: {
             'Content-Type': 'text/plain;charset=utf-8',
           },
-          body: JSON.stringify(newEntry),
+          body: bodyPayload,
         });
 
         if (!response.ok) {
@@ -1308,11 +1465,30 @@
         situationInput.value = '';
         updateSyncBadge('synced');
         showToast('SIGNAL TRANSMIS AU RÉSEAU');
-        await loadSignals(false);
-      } catch (err) {
-        updateSyncBadge('error');
-        formErrorEl.textContent = '> ÉCHEC DE TRANSMISSION. VÉRIFIE L\'URL /EXEC DANS DATABASE_URL.';
-        formErrorEl.classList.remove('hidden');
+        await syncFromDatabase(false);
+      } catch (primaryErr) {
+        // Secours no-cors si la redirection cross-origin bloque la lecture de réponse
+        try {
+          await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {
+              'Content-Type': 'text/plain;charset=utf-8',
+            },
+            body: bodyPayload,
+          });
+
+          nomInput.value = '';
+          situationInput.value = '';
+          showToast('SIGNAL TRANSMIS AU RÉSEAU');
+          setTimeout(() => {
+            syncFromDatabase(false);
+          }, 1200);
+        } catch (fallbackErr) {
+          updateSyncBadge('error');
+          formErrorEl.textContent = '> ÉCHEC DE TRANSMISSION. VÉRIFIE L\'URL /EXEC DANS DATABASE_URL.';
+          formErrorEl.classList.remove('hidden');
+        }
       } finally {
         submitBtn.disabled = false;
         submitBtn.textContent = '[ TRANSMETTRE AU RÉSEAU ]';
@@ -1321,17 +1497,18 @@
 
     /* Bouton manuel [ ACTUALISER ] */
     refreshBtn.addEventListener('click', () => {
-      loadSignals(true);
+      syncFromDatabase(true);
     });
 
-    /* Synchronisation automatique toutes les 20 secondes */
+    /* Synchronisation automatique toutes les 15 secondes (sections + inscriptions) */
     setInterval(() => {
-      loadSignals(false);
+      syncFromDatabase(false);
     }, POLLING_INTERVAL_MS);
 
     /* Initialisation au chargement */
+    renderSections(currentSectionPercentages);
     runOpeningSequence();
-    loadSignals(false);
+    syncFromDatabase(false);
   </script>
 </body>
 </html>
