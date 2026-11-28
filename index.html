@@ -129,35 +129,39 @@
     /* ==========================================================================
        2. CALQUE FOND GIF EN BOUCLE DERRIÈRE LE "A" (APRES GRAVURE EN 3 TRAITS)
        ========================================================================== */
-    #hero-gif-layer {
+    #intro-bg-wrapper {
       position: absolute;
       inset: 0;
       z-index: 0;
       opacity: 0;
       pointer-events: none;
+      background-size: cover;
+      background-position: center 35%;
+      background-repeat: no-repeat;
       transition: opacity 1.1s ease-in-out;
       overflow: hidden;
     }
 
-    #hero-gif-layer.is-active {
-      opacity: 0.4;
+    #intro-bg-wrapper.is-active {
+      opacity: 0.65;
     }
 
-    #hero-gif-img {
+    #intro-bg-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 35%;
-      filter: grayscale(100%) contrast(142%) brightness(0.7);
-      transform: scale(1.03);
+      filter: grayscale(100%) contrast(125%) brightness(0.75);
     }
 
     .hero-gif-vignette {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at center, rgba(5, 5, 7, 0.24) 15%, rgba(5, 5, 7, 0.94) 92%),
-        linear-gradient(180deg, rgba(5, 5, 7, 0.76) 0%, rgba(5, 5, 7, 0.26) 45%, rgba(5, 5, 7, 0.97) 100%);
+      background: radial-gradient(
+        circle at center,
+        transparent 42%,
+        rgba(5, 5, 7, 0.72) 100%
+      );
     }
 
     .hero-gif-scanlines {
@@ -165,8 +169,8 @@
       inset: 0;
       background: repeating-linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.34) 0px,
-        rgba(0, 0, 0, 0.34) 1px,
+        rgba(0, 0, 0, 0.22) 0px,
+        rgba(0, 0, 0, 0.22) 1px,
         transparent 1px,
         transparent 3px
       );
@@ -523,19 +527,18 @@
       class="min-h-screen w-full border-b border-zinc-900 bg-void flex flex-col items-center justify-between px-4 py-6 sm:py-8 relative overflow-hidden"
     >
       <!-- Calque vidéo GIF en boucle derrière le "A" (s'active après le 3e trait) -->
-      <div id="hero-gif-layer" aria-hidden="true">
+      <div id="intro-bg-wrapper" aria-hidden="true">
         <img
-          id="hero-gif-img"
+          id="intro-bg-img"
           src=""
           alt=""
-          onerror="this.style.display='none';"
         />
-        <div class="hero-gif-vignette"></div>
         <div class="hero-gif-scanlines"></div>
+        <div class="hero-gif-vignette"></div>
       </div>
 
       <!-- Métadonnées TOR en haut du stage -->
-      <div class="relative z-10 w-full max-w-6xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-400">
+      <div class="relative z-[2] w-full max-w-6xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-400">
         <div class="flex items-center gap-2 min-w-0">
           <span class="w-2 h-2 rounded-full bg-crimson animate-pulse shrink-0"></span>
           <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-zinc-200">EMPREINTE_ACTIVE</span></span>
@@ -546,7 +549,7 @@
       </div>
 
       <!-- Centre : Sceau gouvernemental SABARON // AUTORITÉ FÉDÉRALE rayé par le "A" + Phrase tapée -->
-      <div class="relative z-10 my-auto w-full max-w-4xl flex flex-col items-center justify-center text-center py-4 gap-5 sm:gap-7">
+      <div class="relative z-[2] my-auto w-full max-w-4xl flex flex-col items-center justify-center text-center py-4 gap-5 sm:gap-7">
 
         <div id="scratched-a-stage" class="emblem-stage">
           <svg
@@ -657,7 +660,7 @@
       </div>
 
       <!-- Pied du stage héro : barre de gravure puis invite cliquable de défilement -->
-      <div class="relative z-10 w-full max-w-4xl pb-4">
+      <div class="relative z-[2] w-full max-w-4xl pb-4">
         <div id="hero-engraving-progress" class="space-y-1.5 transition-opacity duration-300">
           <div class="flex items-center justify-between text-[10px] sm:text-xs font-tech tracking-widest text-zinc-500 uppercase">
             <span>GRAVURE DU SIGNAL SUR LE RÉSEAU...</span>
@@ -674,7 +677,7 @@
             class="inline-block px-4 py-2 font-tech text-xs sm:text-sm tracking-[0.2em] text-acidGreen hover:text-white uppercase animate-pulse transition-colors"
             style="text-shadow: 0 2px 10px rgba(0,0,0,0.95);"
           >
-            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ / FAIRE DÉFILER ▼
+            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ // FAIRE DÉFILER ▼
           </a>
         </div>
       </div>
@@ -743,7 +746,7 @@
             class="inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0"
           >
             <span id="global-breach-dot" class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
-            <span id="global-breach-badge-text">INFILTRATION EN COURS : 0 %</span>
+            <span id="global-breach-badge-text">VERROUILLÉ : 0 %</span>
           </span>
         </div>
 
@@ -778,7 +781,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              INFILTRATION EN COURS
+              VERROUILLÉ
             </div>
           </div>
 
@@ -792,7 +795,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              INFILTRATION EN COURS
+              VERROUILLÉ
             </div>
           </div>
 
@@ -806,7 +809,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              INFILTRATION EN COURS
+              VERROUILLÉ
             </div>
           </div>
 
@@ -820,7 +823,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              INFILTRATION EN COURS
+              VERROUILLÉ
             </div>
           </div>
 
@@ -834,7 +837,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              INFILTRATION EN COURS
+              VERROUILLÉ
             </div>
           </div>
         </div>
@@ -864,7 +867,7 @@
                 class="inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase"
               >
                 <span id="sync-status-dot" class="w-2 h-2 rounded-full bg-amberSignal"></span>
-                <span id="sync-status-text">MODE LOCAL / HORS LIGNE</span>
+                <span id="sync-status-text">MODE APERÇU LOCAL</span>
               </div>
 
               <!-- Bouton de synchronisation manuelle -->
@@ -924,14 +927,14 @@
                   name="role"
                   class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone font-mono outline-none transition-colors cursor-pointer"
                 >
-                  <option value="cs_captif">CS Captifs</option>
-                  <option value="soutien">Forces de Soutien / Résistance</option>
-                  <option value="infiltre">Infiltrés</option>
-                  <option value="danger">Dangers à éviter</option>
+                  <option value="cs_captif">CS Captif</option>
+                  <option value="soutien">Forces de soutien</option>
+                  <option value="infiltre">Infiltré</option>
+                  <option value="danger">Danger à éviter</option>
                 </select>
               </div>
 
-              <!-- Section concernée (5 sections + Multi-sections) -->
+              <!-- Section concernée (5 sections + Extérieur / Toutes sections) -->
               <div>
                 <label for="select-section" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
                   Section concernée
@@ -946,15 +949,15 @@
                   <option value="Surveillance et espionnage">Surveillance et espionnage</option>
                   <option value="Sécurité">Sécurité</option>
                   <option value="Scientifique">Scientifique</option>
-                  <option value="Multi-sections">Multi-sections</option>
+                  <option value="Extérieur / Toutes sections">Extérieur / Toutes sections</option>
                 </select>
               </div>
             </div>
 
-            <!-- Notes / Capacités / Danger -->
+            <!-- Détails / Capacités / Niveau de menace -->
             <div>
               <label for="input-notes" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                Notes / Capacités / Danger
+                Détails / Capacités / Niveau de menace
               </label>
               <textarea
                 id="input-notes"
@@ -962,7 +965,7 @@
                 rows="2"
                 required
                 maxlength="240"
-                placeholder="Cellule, capacités surnaturelles, accès infiltré ou dangerosité du chasseur / chef de section..."
+                placeholder="Cellule, capacités surnaturelles, accès infiltré ou niveau de menace du chasseur / chef de section..."
                 class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors resize-y"
               ></textarea>
             </div>
@@ -988,12 +991,12 @@
              ==================================================================== -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
-          <!-- BLOC 1 : CS Captifs -->
+          <!-- BLOC 1 : CS Captif -->
           <div class="border border-zinc-800 border-t-2 border-t-crimson bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <div>
                 <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-crimson uppercase">
-                  CS Captifs
+                  CS Captif
                 </h3>
                 <p class="text-[11px] font-tech text-zinc-500">
                   Créatures Surnaturelles enfermées à libérer
@@ -1011,12 +1014,12 @@
             </div>
           </div>
 
-          <!-- BLOC 2 : Forces de Soutien / Résistance -->
+          <!-- BLOC 2 : Forces de soutien -->
           <div class="border border-zinc-800 border-t-2 border-t-cyanGlitch bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <div>
                 <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-cyanGlitch uppercase">
-                  Forces de Soutien / Résistance
+                  Forces de soutien
                 </h3>
                 <p class="text-[11px] font-tech text-zinc-500">
                   Alliés agissant de l'extérieur
@@ -1034,12 +1037,12 @@
             </div>
           </div>
 
-          <!-- BLOC 3 : Infiltrés -->
+          <!-- BLOC 3 : Infiltré -->
           <div class="border border-zinc-800 border-t-2 border-t-acidGreen bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <div>
                 <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-acidGreen uppercase">
-                  Infiltrés
+                  Infiltré
                 </h3>
                 <p class="text-[11px] font-tech text-zinc-500">
                   Agents doubles sous uniforme gouvernemental
@@ -1071,7 +1074,7 @@
               ! HOSTILE !
             </span>
             <p class="glitchable-text font-tech text-xs sm:text-sm tracking-wider text-amberSignal font-bold uppercase leading-snug">
-              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION ET AGENTS DU GOUVERNEMENT. CONTOURNER OU NEUTRALISER AVEC PRUDENCE.
+              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION & AGENTS DU GOUVERNEMENT. CONTOURNER OU NEUTRALISER AVEC PRUDENCE.
             </p>
           </div>
 
@@ -1082,7 +1085,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping shrink-0"></span>
                 <div>
                   <h3 class="glitchable-text text-xs sm:text-sm md:text-base font-extrabold tracking-wider text-crimson uppercase">
-                    Dangers à éviter
+                    Dangers à éviter // Menaces actives
                   </h3>
                   <p class="text-[11px] font-tech text-zinc-500">
                     Chasseurs, Chefs de section et menaces actives du gouvernement
@@ -1127,17 +1130,15 @@
        SCRIPT PRINCIPAL : CONFIG RAPIDE, GRAVURE DU A + GIF, INTERCEPTION PLEIN ÉCRAN & SHEETS
        ========================================================================== -->
   <script>
-    /* ==========================================================================
-       CONFIGURATION RAPIDE (A MODIFIER DIRECTEMENT SUR GITHUB)
-       ========================================================================== */
-    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbxR-KqAZeHP9bPEaatBAKQ4dB3S3EBP8c-lNQSXl9-6zppWHxu5LN0jbi-W7rWP9zExTA/exec"; // Coller ici l'URL /exec du déploiement Google Apps Script
-    const INTRO_BG_GIF = "outlast.gif"; // Nom du fichier GIF en arrière-plan (dans le même dossier sur GitHub)
+    // === CONFIGURATION RAPIDE ===
+    const DATABASE_URL = "";
+    const INTRO_BG_GIF = "outlast.gif";
     const INTRO_PHRASE = "Leurs micros sont coupés, mais ma voix passe partout. Regardez bien ce symbole. Les murs de Sabaron vont tomber et nous venons chercher les nôtres.";
 
     /* Garantie de positionnement tout en haut de la page */
     function forceScrollTop() {
       try {
-        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       } catch (e) {
         window.scrollTo(0, 0);
       }
@@ -1437,8 +1438,8 @@
     /* --------------------------------------------------------------------------
        3. GRAVURE DU "A" EN 3 TRAITS PUIS APPARITION DU GIF + TYPING GLITCHÉ
        -------------------------------------------------------------------------- */
-    const heroGifLayer = document.getElementById('hero-gif-layer');
-    const heroGifImg = document.getElementById('hero-gif-img');
+    const introBgWrapper = document.getElementById('intro-bg-wrapper');
+    const introBgImg = document.getElementById('intro-bg-img');
     const scratchedStage = document.getElementById('scratched-a-stage');
     const introTextReveal = document.getElementById('intro-text-reveal');
     const heroTypedOutput = document.getElementById('hero-typed-output');
@@ -1450,11 +1451,20 @@
     const introBootPercent = document.getElementById('intro-boot-percent');
     const allScratchPaths = Array.from(document.querySelectorAll('.scratch-line'));
 
-    // Lier la source du GIF configurée tout en haut du script
-    if (heroGifImg && typeof INTRO_BG_GIF === 'string' && INTRO_BG_GIF.trim().length > 0) {
-      heroGifImg.src = INTRO_BG_GIF.trim();
-    } else if (heroGifImg) {
-      heroGifImg.style.display = 'none';
+    // Lier la source du GIF configurée tout en haut du script + fallback backgroundImage
+    if (typeof INTRO_BG_GIF === 'string' && INTRO_BG_GIF.trim().length > 0) {
+      const cleanGifPath = INTRO_BG_GIF.trim();
+      if (introBgImg) {
+        introBgImg.src = cleanGifPath;
+        introBgImg.onerror = () => {
+          introBgImg.style.display = 'none';
+        };
+      }
+      if (introBgWrapper) {
+        introBgWrapper.style.backgroundImage = `url('${cleanGifPath}')`;
+      }
+    } else if (introBgImg) {
+      introBgImg.style.display = 'none';
     }
 
     let introFrameId = null;
@@ -1532,8 +1542,8 @@
       clearIntroTimers();
       forceScrollTop();
 
-      if (heroGifLayer) {
-        heroGifLayer.classList.remove('is-active');
+      if (introBgWrapper) {
+        introBgWrapper.classList.remove('is-active');
       }
       if (scratchedStage) {
         scratchedStage.classList.remove('burst-mode', 'is-engraved');
@@ -1614,7 +1624,7 @@
           // 3e trait terminé : le "A" reste permanent, le GIF apparaît en boucle et la phrase s'écrit
           triggerEmblemGlitchFlash(260);
           if (scratchedStage) scratchedStage.classList.add('is-engraved');
-          if (heroGifLayer) heroGifLayer.classList.add('is-active');
+          if (introBgWrapper) introBgWrapper.classList.add('is-active');
 
           if (introTextReveal) {
             introTextReveal.classList.remove('opacity-0', 'translate-y-2');
@@ -1664,8 +1674,8 @@
       el.dataset.isGlitching = '1';
       el.classList.add('text-corrupt-flash');
 
-      // Durée strictement entre 350ms et 750ms (< 1 seconde)
-      const glitchDurationMs = 350 + Math.floor(Math.random() * 400);
+      // Durée strictement entre 350ms et 700ms (< 1 seconde)
+      const glitchDurationMs = 350 + Math.floor(Math.random() * 350);
       const chars = original.split('');
 
       const validIndices = [];
@@ -1813,7 +1823,7 @@
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase';
         syncDotEl.className = 'w-2 h-2 rounded-full bg-amberSignal';
-        syncTextEl.textContent = 'MODE LOCAL / HORS LIGNE';
+        syncTextEl.textContent = 'MODE APERÇU LOCAL';
       }
     }
 
@@ -1908,9 +1918,9 @@
           if (barEl) barEl.className = 'section-bar h-full breach-fill-gradient transition-all duration-700';
           if (statusEl) {
             statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase';
-            statusEl.dataset.origText = 'INFILTRATION EN COURS';
+            statusEl.dataset.origText = 'VERROUILLÉ';
             if (statusEl.dataset.isGlitching !== '1') {
-              statusEl.textContent = 'INFILTRATION EN COURS';
+              statusEl.textContent = 'VERROUILLÉ';
             }
           }
         }
@@ -1938,7 +1948,7 @@
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-crimson animate-pulse';
-        globalBreachBadgeText.textContent = 'INFILTRATION EN COURS : 0 %';
+        globalBreachBadgeText.textContent = 'VERROUILLÉ : 0 %';
         globalBreachPercent.className = 'font-tech text-crimson font-bold text-sm sm:text-base';
         globalBreachBar.className = 'h-full breach-fill-gradient transition-all duration-700';
       }
@@ -1947,7 +1957,7 @@
     function normalizeRecord(raw, idx) {
       let roleVal = String(raw && raw.role ? raw.role : 'cs_captif').toLowerCase().trim();
       if (roleVal === 'captif' || roleVal === 'cs captif' || roleVal === 'cs captifs') roleVal = 'cs_captif';
-      if (roleVal === 'force de soutien' || roleVal === 'soutien / résistance' || roleVal === 'forces de soutien / résistance') roleVal = 'soutien';
+      if (roleVal === 'force de soutien' || roleVal === 'forces de soutien' || roleVal === 'soutien / résistance' || roleVal === 'forces de soutien / résistance') roleVal = 'soutien';
       if (roleVal === 'infiltré' || roleVal === 'infiltrés') roleVal = 'infiltre';
       if (roleVal === 'danger à éviter' || roleVal === 'dangers à éviter' || roleVal === 'menace') roleVal = 'danger';
       const validRole = rolePanels[roleVal] ? roleVal : 'cs_captif';
@@ -2242,110 +2252,117 @@
     startAmbientTextGlitchLoop();
     loadTerminalData(false);
   </script>
-
-  <!-- ==========================================================================
-       RÉFÉRENCE GOOGLE APPS SCRIPT (A COLLER DANS EXTENSIONS > APPS SCRIPT)
-       --------------------------------------------------------------------------
-       DÉBUT DU SCRIPT GOOGLE APPS SCRIPT
-
-       var SECTION_NAMES = [
-         'Médecine et psy',
-         'Communication et renseignements',
-         'Surveillance et espionnage',
-         'Sécurité',
-         'Scientifique'
-       ];
-
-       function getOrCreateRegistrySheet() {
-         var ss = SpreadsheetApp.getActiveSpreadsheet();
-         var sheet = ss.getSheets()[0];
-         if (sheet.getLastRow() === 0) {
-           sheet.appendRow(['Nom', 'Joueur', 'Role', 'Section', 'Notes', 'Timestamp']);
-         }
-         return sheet;
-       }
-
-       function getOrCreateSectionsSheet() {
-         var ss = SpreadsheetApp.getActiveSpreadsheet();
-         var secSheet = ss.getSheetByName('Sections');
-         if (!secSheet) {
-           secSheet = ss.insertSheet('Sections');
-           secSheet.appendRow(['Section', 'Pourcentage']);
-           for (var i = 0; i < SECTION_NAMES.length; i++) {
-             secSheet.appendRow([SECTION_NAMES[i], 0]);
-           }
-         }
-         return secSheet;
-       }
-
-       function doGet(e) {
-         var regSheet = getOrCreateRegistrySheet();
-         var secSheet = getOrCreateSectionsSheet();
-
-         var regData = regSheet.getDataRange().getValues();
-         var records = [];
-         for (var i = 1; i < regData.length; i++) {
-           if (!regData[i][0]) continue;
-           var hasJoueurCol = regData[0].length >= 6;
-           if (hasJoueurCol) {
-             records.push({
-               id: 'row_' + i + '_' + (regData[i][5] || i),
-               nom: String(regData[i][0] || ''),
-               joueur: String(regData[i][1] || ''),
-               role: String(regData[i][2] || 'cs_captif'),
-               section: String(regData[i][3] || ''),
-               notes: String(regData[i][4] || ''),
-               timestamp: Number(regData[i][5] || i)
-             });
-           } else {
-             records.push({
-               id: 'row_' + i + '_' + (regData[i][4] || i),
-               nom: String(regData[i][0] || ''),
-               joueur: '',
-               role: String(regData[i][1] || 'cs_captif'),
-               section: String(regData[i][2] || ''),
-               notes: String(regData[i][3] || ''),
-               timestamp: Number(regData[i][4] || i)
-             });
-           }
-         }
-
-         var secData = secSheet.getDataRange().getValues();
-         var sections = {};
-         for (var j = 1; j < secData.length; j++) {
-           var sName = String(secData[j][0] || '').trim();
-           if (!sName) continue;
-           var pct = Number(secData[j][1]);
-           if (isNaN(pct)) pct = 0;
-           pct = Math.max(0, Math.min(100, Math.round(pct)));
-           sections[sName] = pct;
-         }
-
-         return ContentService
-           .createTextOutput(JSON.stringify({ status: 'ok', records: records, sections: sections }))
-           .setMimeType(ContentService.MimeType.JSON);
-       }
-
-       function doPost(e) {
-         var regSheet = getOrCreateRegistrySheet();
-         getOrCreateSectionsSheet();
-         var payload = JSON.parse(e.postData.contents);
-
-         regSheet.appendRow([
-           payload.nom || '',
-           payload.joueur || '',
-           payload.role || 'cs_captif',
-           payload.section || '',
-           payload.notes || '',
-           payload.timestamp || Date.now()
-         ]);
-
-         return ContentService
-           .createTextOutput(JSON.stringify({ status: 'saved' }))
-           .setMimeType(ContentService.MimeType.JSON);
-       }
-
-       FIN DU SCRIPT GOOGLE APPS SCRIPT
-       ========================================================================== -->
 </body>
 </html>
+
+<!--
+DÉBUT DU SCRIPT GOOGLE APPS SCRIPT
+
+var SECTION_NAMES = [
+  'Médecine et psy',
+  'Communication et renseignements',
+  'Surveillance et espionnage',
+  'Sécurité',
+  'Scientifique'
+];
+
+function getOrCreateRegistreSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var regSheet = ss.getSheetByName('Registre');
+  if (!regSheet) {
+    var firstSheet = ss.getSheets()[0];
+    if (firstSheet && firstSheet.getName() !== 'Sections') {
+      firstSheet.setName('Registre');
+      regSheet = firstSheet;
+    } else {
+      regSheet = ss.insertSheet('Registre');
+    }
+  }
+  if (regSheet.getLastRow() === 0) {
+    regSheet.appendRow(['Nom', 'Joueur', 'Role', 'Section', 'Notes', 'Timestamp']);
+  }
+  return regSheet;
+}
+
+function getOrCreateSectionsSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var secSheet = ss.getSheetByName('Sections');
+  if (!secSheet) {
+    secSheet = ss.insertSheet('Sections');
+    secSheet.appendRow(['Section', 'Pourcentage']);
+    for (var i = 0; i < SECTION_NAMES.length; i++) {
+      secSheet.appendRow([SECTION_NAMES[i], 0]);
+    }
+  }
+  return secSheet;
+}
+
+function doGet(e) {
+  var regSheet = getOrCreateRegistreSheet();
+  var secSheet = getOrCreateSectionsSheet();
+
+  var regData = regSheet.getDataRange().getValues();
+  var records = [];
+  for (var i = 1; i < regData.length; i++) {
+    if (!regData[i][0]) continue;
+    var hasJoueurCol = regData[0].length >= 6;
+    if (hasJoueurCol) {
+      records.push({
+        id: 'row_' + i + '_' + (regData[i][5] || i),
+        nom: String(regData[i][0] || ''),
+        joueur: String(regData[i][1] || ''),
+        role: String(regData[i][2] || 'cs_captif'),
+        section: String(regData[i][3] || ''),
+        notes: String(regData[i][4] || ''),
+        timestamp: Number(regData[i][5] || i)
+      });
+    } else {
+      records.push({
+        id: 'row_' + i + '_' + (regData[i][4] || i),
+        nom: String(regData[i][0] || ''),
+        joueur: '',
+        role: String(regData[i][1] || 'cs_captif'),
+        section: String(regData[i][2] || ''),
+        notes: String(regData[i][3] || ''),
+        timestamp: Number(regData[i][4] || i)
+      });
+    }
+  }
+
+  var secData = secSheet.getDataRange().getValues();
+  var sections = {};
+  for (var j = 1; j < secData.length; j++) {
+    var sName = String(secData[j][0] || '').trim();
+    if (!sName) continue;
+    var pct = Number(secData[j][1]);
+    if (isNaN(pct)) pct = 0;
+    pct = Math.max(0, Math.min(100, Math.round(pct)));
+    sections[sName] = pct;
+  }
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'ok', records: records, sections: sections }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+function doPost(e) {
+  var regSheet = getOrCreateRegistreSheet();
+  getOrCreateSectionsSheet();
+  var payload = JSON.parse(e.postData.contents);
+
+  regSheet.appendRow([
+    payload.nom || '',
+    payload.joueur || '',
+    payload.role || 'cs_captif',
+    payload.section || '',
+    payload.notes || '',
+    payload.timestamp || Date.now()
+  ]);
+
+  return ContentService
+    .createTextOutput(JSON.stringify({ status: 'saved' }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
+FIN DU SCRIPT GOOGLE APPS SCRIPT
+-->
