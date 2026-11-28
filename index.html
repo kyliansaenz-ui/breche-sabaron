@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TOR://sabaron7x9amelia2427.onion // [A̷]</title>
 
+  <!-- Forcer le retour tout en haut dès le chargement initial -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.scrollTo(0, 0);
+  </script>
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
@@ -91,7 +99,7 @@
       height: 200%;
       pointer-events: none;
       z-index: 69;
-      opacity: 0.045;
+      opacity: 0.048;
       background-image: radial-gradient(#ffffff 1px, transparent 0);
       background-size: 3px 3px;
       animation: noiseShift 0.2s steps(2) infinite;
@@ -119,7 +127,7 @@
     }
 
     /* ==========================================================================
-       2. CALQUE FOND GIF EN BOUCLE DERRIÈRE LE "A" (APRES GRAVURE)
+       2. CALQUE FOND GIF EN BOUCLE DERRIÈRE LE "A" (APRES GRAVURE EN 3 TRAITS)
        ========================================================================== */
     #hero-gif-layer {
       position: absolute;
@@ -132,7 +140,7 @@
     }
 
     #hero-gif-layer.is-active {
-      opacity: 0.38;
+      opacity: 0.4;
     }
 
     #hero-gif-img {
@@ -140,17 +148,16 @@
       height: 100%;
       object-fit: cover;
       object-position: center 35%;
-      filter: grayscale(100%) contrast(138%) brightness(0.72);
+      filter: grayscale(100%) contrast(142%) brightness(0.7);
       transform: scale(1.03);
     }
 
-    /* Vignette sombre + scanlines dédiées sur le GIF pour une lisibilité parfaite */
     .hero-gif-vignette {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at center, rgba(5, 5, 7, 0.25) 15%, rgba(5, 5, 7, 0.92) 92%),
-        linear-gradient(180deg, rgba(5, 5, 7, 0.72) 0%, rgba(5, 5, 7, 0.28) 45%, rgba(5, 5, 7, 0.96) 100%);
+        radial-gradient(circle at center, rgba(5, 5, 7, 0.24) 15%, rgba(5, 5, 7, 0.94) 92%),
+        linear-gradient(180deg, rgba(5, 5, 7, 0.76) 0%, rgba(5, 5, 7, 0.26) 45%, rgba(5, 5, 7, 0.97) 100%);
     }
 
     .hero-gif-scanlines {
@@ -158,15 +165,15 @@
       inset: 0;
       background: repeating-linear-gradient(
         0deg,
-        rgba(0, 0, 0, 0.32) 0px,
-        rgba(0, 0, 0, 0.32) 1px,
+        rgba(0, 0, 0, 0.34) 0px,
+        rgba(0, 0, 0, 0.34) 1px,
         transparent 1px,
         transparent 3px
       );
     }
 
     /* ==========================================================================
-       3. EMBLEME "A" SCARIFIÉ & ABERRATION CHROMATIQUE RGB
+       3. EMBLEME "A" SCARIFIÉ PERMANENT & ABERRATION CHROMATIQUE RGB
        ========================================================================== */
     .emblem-stage {
       position: relative;
@@ -190,7 +197,7 @@
       }
       45% {
         transform: translate(0, 0);
-        filter: drop-shadow(0 0 28px rgba(255, 30, 39, 0.9)) drop-shadow(0 0 7px rgba(0, 240, 255, 0.5));
+        filter: drop-shadow(0 0 28px rgba(255, 30, 39, 0.92)) drop-shadow(0 0 7px rgba(0, 240, 255, 0.5));
       }
       88% {
         transform: translate(-5px, 1px) skew(-2.5deg);
@@ -233,7 +240,7 @@
     }
 
     /* ==========================================================================
-       4. TEXTE D'OUVERTURE SUR LE GIF (LISIBILITÉ MAXIMALE SANS BOÎTE OPAQUE)
+       4. TEXTE D'OUVERTURE SUR LE GIF
        ========================================================================== */
     .hero-typed-phrase {
       font-family: 'Share Tech Mono', 'Courier New', monospace;
@@ -264,18 +271,93 @@
     }
 
     /* ==========================================================================
-       5. TITRE GLITCH CRASH OVERLAY
+       5. OVERLAY PLEIN ÉCRAN D'INTERCEPTION & REBOOT (100VW X 100VH, Z-9999)
        ========================================================================== */
+    #freq-intercept-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 9999;
+      background-color: #050507;
+      overflow-y: auto;
+    }
+
+    .overlay-crt-scanlines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(
+        rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.48) 50%
+      );
+      background-size: 100% 3px;
+    }
+
+    .overlay-crt-noise {
+      position: fixed;
+      inset: -50%;
+      width: 200%;
+      height: 200%;
+      pointer-events: none;
+      opacity: 0.06;
+      background-image: radial-gradient(#ffffff 1px, transparent 0);
+      background-size: 3px 3px;
+      animation: noiseShift 0.16s steps(2) infinite;
+    }
+
+    .crash-static-bars {
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 30, 39, 0.16) 0px,
+        rgba(255, 30, 39, 0.16) 2px,
+        rgba(0, 240, 255, 0.13) 2px,
+        rgba(0, 240, 255, 0.13) 4px,
+        rgba(5, 5, 7, 0.88) 4px,
+        rgba(5, 5, 7, 0.88) 8px
+      );
+      animation: crashBarsScroll 0.14s linear infinite;
+    }
+
+    @keyframes crashBarsScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 32px; }
+    }
+
+    .overlay-screen-shake {
+      animation: screenCrashShake 0.08s infinite steps(2);
+    }
+
+    @keyframes screenCrashShake {
+      0% { transform: translate(-5px, 3px) skew(-1.2deg); }
+      25% { transform: translate(6px, -3px) skew(1.6deg); }
+      50% { transform: translate(-4px, -2px) skew(-0.8deg); }
+      75% { transform: translate(4px, 3px) skew(1.2deg); }
+      100% { transform: translate(0, 0); }
+    }
+
     .glitch-headline {
       position: relative;
       font-family: 'Share Tech Mono', 'Courier New', monospace;
-      line-height: 1.22;
-      letter-spacing: 0.05em;
+      line-height: 1.25;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
       color: #ececec;
       text-shadow:
-        2px 0 rgba(255, 30, 39, 0.88),
-        -2px 0 rgba(0, 240, 255, 0.72);
+        2px 0 rgba(255, 30, 39, 0.9),
+        -2px 0 rgba(0, 240, 255, 0.78);
+    }
+
+    .fullscreen-signal-quote {
+      font-family: 'Share Tech Mono', 'Courier New', monospace;
+      font-size: clamp(1.3rem, 3.2vw, 2.4rem);
+      line-height: 1.45;
+      letter-spacing: 0.03em;
+      color: #f5f5f7;
+      text-shadow:
+        0 2px 18px rgba(0, 0, 0, 0.98),
+        1.5px 0 rgba(255, 30, 39, 0.72),
+        -1.5px 0 rgba(0, 240, 255, 0.55);
     }
 
     /* ==========================================================================
@@ -294,40 +376,6 @@
       0% { transform: translate(-1.5px, 0.5px) skew(-3deg); }
       50% { transform: translate(2px, -0.5px) skew(3deg); }
       100% { transform: translate(-1px, 0) skew(-1.5deg); }
-    }
-
-    /* ==========================================================================
-       7. CRASH / REBOOT PLEIN ÉCRAN LORS DU CHANGEMENT DE FRÉQUENCE
-       ========================================================================== */
-    body.body-freq-crash {
-      animation: screenCrashShake 0.08s infinite steps(2);
-      filter: contrast(1.45) saturate(1.6);
-    }
-
-    @keyframes screenCrashShake {
-      0% { transform: translate(-6px, 3px) skew(-1.5deg); }
-      25% { transform: translate(7px, -4px) skew(2deg); }
-      50% { transform: translate(-4px, -2px) skew(-1deg); }
-      75% { transform: translate(5px, 4px) skew(1.5deg); }
-      100% { transform: translate(0, 0); }
-    }
-
-    .crash-static-bars {
-      background: repeating-linear-gradient(
-        0deg,
-        rgba(255, 30, 39, 0.14) 0px,
-        rgba(255, 30, 39, 0.14) 2px,
-        rgba(0, 240, 255, 0.12) 2px,
-        rgba(0, 240, 255, 0.12) 4px,
-        rgba(5, 5, 7, 0.85) 4px,
-        rgba(5, 5, 7, 0.85) 8px
-      );
-      animation: crashBarsScroll 0.15s linear infinite;
-    }
-
-    @keyframes crashBarsScroll {
-      0% { background-position: 0 0; }
-      100% { background-position: 0 32px; }
     }
 
     /* Jauge de progression dégradée rouge sang vers pointe cyan */
@@ -362,25 +410,76 @@
   <div id="static-burst-layer" class="fixed inset-0 pointer-events-none z-[65] overflow-hidden" aria-hidden="true"></div>
 
   <!-- ==========================================================================
-       OVERLAY DE CRASH / REBOOT PLEIN ÉCRAN (INTERCEPTION DE NOUVELLE FRÉQUENCE)
+       OVERLAY PLEIN ÉCRAN D'INTERCEPTION DE FRÉQUENCE & REBOOT (100VW X 100VH)
        ========================================================================== -->
   <div
-    id="freq-crash-overlay"
-    class="fixed inset-0 z-[60] hidden bg-void/95 crash-static-bars flex flex-col items-center justify-center px-6 text-center select-none"
-    role="alert"
+    id="freq-intercept-overlay"
+    class="hidden flex-col items-center justify-between px-5 py-8 sm:px-10 sm:py-10 text-center select-none cursor-pointer"
+    role="dialog"
+    aria-modal="true"
     aria-live="assertive"
+    aria-label="Interception d'une nouvelle transmission d'Amelia"
   >
-    <div class="border-2 border-crimson bg-void/95 px-6 py-8 sm:px-10 sm:py-10 max-w-xl w-full shadow-[0_0_40px_rgba(255,30,39,0.45)] space-y-4">
-      <div class="flex items-center justify-center gap-2 text-xs font-tech tracking-[0.25em] text-cyanGlitch uppercase">
-        <span class="w-2.5 h-2.5 bg-crimson animate-ping"></span>
-        <span>RUPTURE DE PORTEUSE // SYNCHRONISATION</span>
+    <div class="overlay-crt-scanlines" aria-hidden="true"></div>
+    <div class="overlay-crt-noise" aria-hidden="true"></div>
+    <div id="overlay-chrom-flash" class="fixed inset-0 pointer-events-none opacity-0 transition-opacity duration-150 bg-crimson/20" aria-hidden="true"></div>
+
+    <!-- Bandeau supérieur de l'overlay -->
+    <div class="relative z-10 w-full max-w-5xl flex items-center justify-between gap-3 text-xs sm:text-sm font-tech tracking-widest uppercase text-zinc-400 border-b border-zinc-800/90 pb-3">
+      <div class="flex items-center gap-2.5">
+        <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping"></span>
+        <span>CANAL PIRATÉ // AMELIA [A̷]</span>
       </div>
-      <p class="glitch-headline text-xl sm:text-3xl font-extrabold text-crimson tracking-widest">
-        INTERCEPTION EN COURS // REBOOT SYSTÈME...
-      </p>
-      <p class="font-mono text-xs sm:text-sm text-zinc-400 tracking-wider">
-        BASCULEMENT SUR UNE FRÉQUENCE CLANDESTINE NON TRACÉE . RECHARGEMENT DU TERMINAL...
-      </p>
+      <span id="overlay-top-status" class="text-cyanGlitch font-bold">
+        SYNCHRONISATION
+      </span>
+    </div>
+
+    <!-- Zone centrale : Phase A (Crash/Reboot) puis Phase B (Signal en très grand format) -->
+    <div class="relative z-10 my-auto w-full max-w-4xl py-8 flex flex-col items-center justify-center">
+
+      <!-- Phase A : Crash / parasitage pendant ~650 ms -->
+      <div id="overlay-phase-crash" class="w-full border-2 border-crimson bg-void/95 px-6 py-10 sm:px-12 sm:py-14 shadow-[0_0_50px_rgba(255,30,39,0.5)] space-y-4">
+        <div class="flex items-center justify-center gap-2 text-xs sm:text-sm font-tech tracking-[0.25em] text-cyanGlitch uppercase">
+          <span class="w-2.5 h-2.5 bg-crimson animate-ping"></span>
+          <span>RUPTURE DE PORTEUSE // SABARON</span>
+        </div>
+        <p class="glitch-headline text-xl sm:text-3xl md:text-4xl font-extrabold text-crimson">
+          INTERCEPTION DE FRÉQUENCE EN COURS // REBOOT DU TERMINAL...
+        </p>
+        <p class="font-mono text-xs sm:text-sm text-zinc-400 tracking-wider">
+          BASCULEMENT SUR UN CANAL NON TRACÉ ET RÉINITIALISATION DE L'AFFICHAGE...
+        </p>
+      </div>
+
+      <!-- Phase B : Nouvelle transmission décodée en plein écran -->
+      <div id="overlay-phase-signal" class="hidden w-full space-y-6 sm:space-y-8">
+        <div class="inline-flex items-center gap-3 px-4 py-1.5 border border-crimson bg-crimson/15 text-crimson font-tech text-sm sm:text-base md:text-lg font-bold tracking-[0.22em] uppercase">
+          <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-pulse"></span>
+          <span id="overlay-signal-header">SIGNAL #02 INTERCEPTÉ</span>
+        </div>
+
+        <blockquote
+          id="overlay-signal-quote"
+          class="fullscreen-signal-quote font-bold px-2 sm:px-6 min-h-[7rem] flex items-center justify-center"
+        >
+        </blockquote>
+
+        <p class="font-tech text-xs sm:text-sm md:text-base tracking-[0.2em] text-acidGreen uppercase animate-pulse pt-2">
+          [ CLIQUER N'IMPORTE OÙ POUR ACCÉDER AU TERMINAL ]
+        </p>
+      </div>
+    </div>
+
+    <!-- Barre de progression de reboot en bas de l'écran -->
+    <div class="relative z-10 w-full max-w-4xl space-y-2">
+      <div class="flex items-center justify-between text-[11px] sm:text-xs font-tech tracking-widest text-zinc-400 uppercase">
+        <span id="overlay-reboot-label">REBOOT DU TERMINAL EN COURS...</span>
+        <span id="overlay-reboot-pct" class="text-crimson font-bold">0 %</span>
+      </div>
+      <div class="w-full h-1.5 bg-zinc-900 border border-zinc-800 overflow-hidden">
+        <div id="overlay-reboot-bar" class="h-full breach-fill-gradient transition-all duration-100" style="width: 0%"></div>
+      </div>
     </div>
   </div>
 
@@ -415,12 +514,13 @@
     </header>
 
     <!-- ========================================================================
-         1. STAGE HÉRO PLEIN ÉCRAN : GRAVURE DU "A" PUIS GIF EN BOUCLE + PHRASE
+         1. STAGE HÉRO PLEIN ÉCRAN (MIN-HEIGHT: 100VH) :
+            GRAVURE DU "A" EN 3 TRAITS PUIS GIF EN BOUCLE + PHRASE D'OUVERTURE
          ======================================================================== -->
     <section
       id="hero-emblem-stage"
       aria-label="Emblème piraté d'Amelia"
-      class="min-h-[85vh] w-full border-b border-zinc-900 bg-void flex flex-col items-center justify-between px-4 py-6 sm:py-8 relative overflow-hidden"
+      class="min-h-screen w-full border-b border-zinc-900 bg-void flex flex-col items-center justify-between px-4 py-6 sm:py-8 relative overflow-hidden"
     >
       <!-- Calque vidéo GIF en boucle derrière le "A" (s'active après le 3e trait) -->
       <div id="hero-gif-layer" aria-hidden="true">
@@ -445,7 +545,7 @@
         </span>
       </div>
 
-      <!-- Centre : Sceau gouvernemental de Sabaron rayé par le "A" + Phrase tapée sur le GIF -->
+      <!-- Centre : Sceau gouvernemental SABARON // AUTORITÉ FÉDÉRALE rayé par le "A" + Phrase tapée -->
       <div class="relative z-10 my-auto w-full max-w-4xl flex flex-col items-center justify-center text-center py-4 gap-5 sm:gap-7">
 
         <div id="scratched-a-stage" class="emblem-stage">
@@ -469,7 +569,7 @@
             </defs>
 
             <!-- Sceau gouvernemental circulaire fissuré en arrière-plan -->
-            <g id="government-seal" opacity="0.22" stroke="#d4d4d8" fill="none">
+            <g id="government-seal" opacity="0.24" stroke="#d4d4d8" fill="none">
               <circle cx="180" cy="160" r="94" stroke-width="1.3" stroke-dasharray="14 3 4 2" />
               <circle cx="180" cy="160" r="88" stroke-width="0.7" stroke-dasharray="3 4" />
               <circle cx="180" cy="160" r="65" stroke-width="1.1" />
@@ -477,14 +577,14 @@
               <polygon points="180,192 149,138 211,138" stroke-width="0.85" />
               <line x1="180" y1="112" x2="180" y2="212" stroke-width="0.8" />
               <line x1="130" y1="160" x2="230" y2="160" stroke-width="0.8" />
-              <text fill="#e4e4e7" stroke="none" font-size="8.2" font-family="'Share Tech Mono', monospace" letter-spacing="2.8">
+              <text fill="#e4e4e7" stroke="none" font-size="7.8" font-family="'Share Tech Mono', monospace" letter-spacing="2.2">
                 <textPath href="#seal-arc-top" startOffset="50%" text-anchor="middle">
-                  GOUVERNEMENT DE SABARON
+                  SABARON // AUTORITÉ FÉDÉRALE
                 </textPath>
               </text>
-              <text fill="#e4e4e7" stroke="none" font-size="7.4" font-family="'Share Tech Mono', monospace" letter-spacing="2.2">
+              <text fill="#e4e4e7" stroke="none" font-size="7.2" font-family="'Share Tech Mono', monospace" letter-spacing="2.2">
                 <textPath href="#seal-arc-bottom" startOffset="50%" text-anchor="middle">
-                  DIVISION DE CONFINEMENT
+                  COMPLEXES CARCÉRAUX
                 </textPath>
               </text>
             </g>
@@ -556,8 +656,8 @@
         </div>
       </div>
 
-      <!-- Pied du stage héro : barre de gravure puis invite de défilement -->
-      <div class="relative z-10 w-full max-w-4xl">
+      <!-- Pied du stage héro : barre de gravure puis invite cliquable de défilement -->
+      <div class="relative z-10 w-full max-w-4xl pb-4">
         <div id="hero-engraving-progress" class="space-y-1.5 transition-opacity duration-300">
           <div class="flex items-center justify-between text-[10px] sm:text-xs font-tech tracking-widest text-zinc-500 uppercase">
             <span>GRAVURE DU SIGNAL SUR LE RÉSEAU...</span>
@@ -571,10 +671,10 @@
         <div id="hero-scroll-unlock" class="hidden text-center pt-1">
           <a
             href="#terminal-unlocked-content"
-            class="inline-block font-tech text-xs sm:text-sm tracking-[0.2em] text-acidGreen hover:text-white uppercase animate-pulse transition-colors"
+            class="inline-block px-4 py-2 font-tech text-xs sm:text-sm tracking-[0.2em] text-acidGreen hover:text-white uppercase animate-pulse transition-colors"
             style="text-shadow: 0 2px 10px rgba(0,0,0,0.95);"
           >
-            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ . FAIRE DÉFILER ▼
+            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ / FAIRE DÉFILER ▼
           </a>
         </div>
       </div>
@@ -589,7 +689,7 @@
     >
 
       <!-- ======================================================================
-           BOÎTE CRT DE TRANSMISSION INTERCEPTÉE (7 SIGNALS + BOUTON REBOOT)
+           BOÎTE CRT DE TRANSMISSION INTERCEPTÉE (7 SIGNALS + BOUTON PLEIN ÉCRAN)
            ====================================================================== -->
       <section aria-label="Transmission interceptée d'Amelia" class="border border-crimson/60 bg-panel p-5 sm:p-7 relative overflow-hidden space-y-5">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-zinc-800 pb-4">
@@ -605,7 +705,7 @@
           <button
             id="btn-intercept-freq"
             type="button"
-            class="px-4 py-2.5 bg-crimson/15 hover:bg-crimson/30 active:bg-crimson/40 border border-crimson text-crimson hover:text-white font-tech text-xs tracking-widest uppercase transition-colors cursor-pointer self-start md:self-auto"
+            class="px-4 py-3 bg-crimson/15 hover:bg-crimson/30 active:bg-crimson/40 border border-crimson text-crimson hover:text-white font-tech text-xs tracking-widest uppercase transition-colors cursor-pointer self-start md:self-auto"
           >
             [ INTERCEPTER AUTRE FRÉQUENCE ]
           </button>
@@ -643,7 +743,7 @@
             class="inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0"
           >
             <span id="global-breach-dot" class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
-            <span id="global-breach-badge-text">VERROUILLAGE ACTIF : 0 %</span>
+            <span id="global-breach-badge-text">INFILTRATION EN COURS : 0 %</span>
           </span>
         </div>
 
@@ -651,7 +751,7 @@
         <div class="border border-zinc-800/90 bg-void p-4 space-y-2.5">
           <div class="flex items-center justify-between gap-2 text-xs sm:text-sm font-mono">
             <span class="glitchable-text text-zinc-300 font-bold uppercase tracking-wider">
-              PROGRESSION GLOBALE DE LA BRÈCHE
+              MOYENNE GLOBALE D'INFILTRATION
             </span>
             <span id="global-breach-percent" class="font-tech text-crimson font-bold text-sm sm:text-base">
               0 %
@@ -678,7 +778,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              VERROUILLÉ
+              INFILTRATION EN COURS
             </div>
           </div>
 
@@ -692,7 +792,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              VERROUILLÉ
+              INFILTRATION EN COURS
             </div>
           </div>
 
@@ -706,7 +806,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              VERROUILLÉ
+              INFILTRATION EN COURS
             </div>
           </div>
 
@@ -720,7 +820,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              VERROUILLÉ
+              INFILTRATION EN COURS
             </div>
           </div>
 
@@ -734,7 +834,7 @@
               <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
             <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
-              VERROUILLÉ
+              INFILTRATION EN COURS
             </div>
           </div>
         </div>
@@ -764,7 +864,7 @@
                 class="inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase"
               >
                 <span id="sync-status-dot" class="w-2 h-2 rounded-full bg-amberSignal"></span>
-                <span id="sync-status-text">MODE LOCAL : EN ATTENTE DU LIEN /EXEC</span>
+                <span id="sync-status-text">MODE LOCAL / HORS LIGNE</span>
               </div>
 
               <!-- Bouton de synchronisation manuelle -->
@@ -814,7 +914,7 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Rôle dans l'opération (4 options) -->
+              <!-- Rôle dans l'opération (4 catégories) -->
               <div>
                 <label for="select-role" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
                   Rôle dans l'opération
@@ -824,14 +924,14 @@
                   name="role"
                   class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone font-mono outline-none transition-colors cursor-pointer"
                 >
-                  <option value="cs_captif">CS Captif</option>
-                  <option value="soutien">Soutien / Résistance</option>
-                  <option value="infiltre">Infiltré</option>
-                  <option value="danger">Danger à éviter</option>
+                  <option value="cs_captif">CS Captifs</option>
+                  <option value="soutien">Forces de Soutien / Résistance</option>
+                  <option value="infiltre">Infiltrés</option>
+                  <option value="danger">Dangers à éviter</option>
                 </select>
               </div>
 
-              <!-- Section concernée (5 sections + Toutes sections / Mobile) -->
+              <!-- Section concernée (5 sections + Multi-sections) -->
               <div>
                 <label for="select-section" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
                   Section concernée
@@ -846,15 +946,15 @@
                   <option value="Surveillance et espionnage">Surveillance et espionnage</option>
                   <option value="Sécurité">Sécurité</option>
                   <option value="Scientifique">Scientifique</option>
-                  <option value="Toutes sections / Mobile">Toutes sections / Mobile</option>
+                  <option value="Multi-sections">Multi-sections</option>
                 </select>
               </div>
             </div>
 
-            <!-- Détails RP / Capacités / Niveau de menace -->
+            <!-- Notes / Capacités / Danger -->
             <div>
               <label for="input-notes" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                Détails RP / Capacités / Niveau de menace
+                Notes / Capacités / Danger
               </label>
               <textarea
                 id="input-notes"
@@ -888,12 +988,17 @@
              ==================================================================== -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
-          <!-- BLOC 1 : CS Captifs . Cibles à libérer -->
+          <!-- BLOC 1 : CS Captifs -->
           <div class="border border-zinc-800 border-t-2 border-t-crimson bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
-              <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-crimson uppercase">
-                CS Captifs . Cibles à libérer
-              </h3>
+              <div>
+                <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-crimson uppercase">
+                  CS Captifs
+                </h3>
+                <p class="text-[11px] font-tech text-zinc-500">
+                  Créatures Surnaturelles enfermées à libérer
+                </p>
+              </div>
               <span id="count-cs_captif" class="px-2 py-0.5 border border-crimson/40 bg-crimson/10 text-crimson font-tech text-xs shrink-0">
                 0
               </span>
@@ -906,12 +1011,17 @@
             </div>
           </div>
 
-          <!-- BLOC 2 : Soutien & Résistance . Forces extérieures -->
+          <!-- BLOC 2 : Forces de Soutien / Résistance -->
           <div class="border border-zinc-800 border-t-2 border-t-cyanGlitch bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
-              <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-cyanGlitch uppercase">
-                Soutien &amp; Résistance . Forces extérieures
-              </h3>
+              <div>
+                <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-cyanGlitch uppercase">
+                  Forces de Soutien / Résistance
+                </h3>
+                <p class="text-[11px] font-tech text-zinc-500">
+                  Alliés agissant de l'extérieur
+                </p>
+              </div>
               <span id="count-soutien" class="px-2 py-0.5 border border-cyanGlitch/40 bg-cyanGlitch/10 text-cyanGlitch font-tech text-xs shrink-0">
                 0
               </span>
@@ -924,12 +1034,17 @@
             </div>
           </div>
 
-          <!-- BLOC 3 : Infiltrés . Agents doubles -->
+          <!-- BLOC 3 : Infiltrés -->
           <div class="border border-zinc-800 border-t-2 border-t-acidGreen bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
-              <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-acidGreen uppercase">
-                Infiltrés . Agents doubles
-              </h3>
+              <div>
+                <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-acidGreen uppercase">
+                  Infiltrés
+                </h3>
+                <p class="text-[11px] font-tech text-zinc-500">
+                  Agents doubles sous uniforme gouvernemental
+                </p>
+              </div>
               <span id="count-infiltre" class="px-2 py-0.5 border border-acidGreen/40 bg-acidGreen/10 text-acidGreen font-tech text-xs shrink-0">
                 0
               </span>
@@ -944,7 +1059,7 @@
         </div>
 
         <!-- ====================================================================
-             BLOC 4 : Dangers à éviter . Menaces actives + BANDEAU D'ALERTE HOSTILE
+             BLOC 4 : Dangers à éviter + BANDEAU D'ALERTE HOSTILE ROUGE/AMBRE
              ==================================================================== -->
         <div class="space-y-4 pt-2">
           <!-- Bandeau d'alerte hostile rouge / ambre -->
@@ -956,7 +1071,7 @@
               ! HOSTILE !
             </span>
             <p class="glitchable-text font-tech text-xs sm:text-sm tracking-wider text-amberSignal font-bold uppercase leading-snug">
-              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION &amp; AGENTS DU GOUVERNEMENT . CONTOURNER OU NEUTRALISER AVEC PRUDENCE
+              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION ET AGENTS DU GOUVERNEMENT. CONTOURNER OU NEUTRALISER AVEC PRUDENCE.
             </p>
           </div>
 
@@ -965,9 +1080,14 @@
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <div class="flex items-center gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping shrink-0"></span>
-                <h3 class="glitchable-text text-xs sm:text-sm md:text-base font-extrabold tracking-wider text-crimson uppercase">
-                  Dangers à éviter . Menaces actives
-                </h3>
+                <div>
+                  <h3 class="glitchable-text text-xs sm:text-sm md:text-base font-extrabold tracking-wider text-crimson uppercase">
+                    Dangers à éviter
+                  </h3>
+                  <p class="text-[11px] font-tech text-zinc-500">
+                    Chasseurs, Chefs de section et menaces actives du gouvernement
+                  </p>
+                </div>
               </div>
               <span id="count-danger" class="px-2.5 py-0.5 border border-amberSignal/50 bg-amberSignal/15 text-amberSignal font-tech text-xs font-bold shrink-0">
                 0
@@ -1004,15 +1124,29 @@
   </div>
 
   <!-- ==========================================================================
-       SCRIPT PRINCIPAL : CONFIG RAPIDE, GRAVURE DU A + GIF, 7 SIGNALS & SHEETS
+       SCRIPT PRINCIPAL : CONFIG RAPIDE, GRAVURE DU A + GIF, INTERCEPTION PLEIN ÉCRAN & SHEETS
        ========================================================================== -->
   <script>
     /* ==========================================================================
        CONFIGURATION RAPIDE (A MODIFIER DIRECTEMENT SUR GITHUB)
        ========================================================================== */
-    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbzN9ZcE9RUX3QBoiDR5-OWx_GBQZHFKt9-l3Y435t43fur9uqtSXzUfq7Udzx82E0CoWg/exec"; // Coller ici l'URL Google Apps Script se terminant par /exec
-    const INTRO_BG_GIF = "amelia.gif"; // Nom du fichier GIF place a cote de index.html sur GitHub (ou lien direct .gif)
-    const INTRO_PHRASE = "Leurs micros sont coupés, mais nos voix passent partout. Cherchez bien ce symbole. Les murs de Sabaron vont tomber et nous venons chercher les nôtres.";
+    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbxR-KqAZeHP9bPEaatBAKQ4dB3S3EBP8c-lNQSXl9-6zppWHxu5LN0jbi-W7rWP9zExTA/exec"; // Coller ici l'URL /exec du déploiement Google Apps Script
+    const INTRO_BG_GIF = "outlast.gif"; // Nom du fichier GIF en arrière-plan (dans le même dossier sur GitHub)
+    const INTRO_PHRASE = "Leurs micros sont coupés, mais ma voix passe partout. Regardez bien ce symbole. Les murs de Sabaron vont tomber et nous venons chercher les nôtres.";
+
+    /* Garantie de positionnement tout en haut de la page */
+    function forceScrollTop() {
+      try {
+        window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      } catch (e) {
+        window.scrollTo(0, 0);
+      }
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+
+    window.addEventListener('beforeunload', forceScrollTop);
+    window.addEventListener('load', forceScrollTop);
 
     /* --------------------------------------------------------------------------
        1. LES 7 TRANSMISSIONS ALÉATOIRES D'AMELIA ('SIGNAL #01' à 'SIGNAL #07')
@@ -1027,39 +1161,36 @@
       "Ouvrez les yeux. Brisez vos chaînes. Le gouvernement ne tombera pas tout seul, mais il tombera. A̷"
     ];
 
-    const FORCED_SIGNAL_KEY = 'amelia_forced_signal';
-    const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&/$*X∆▓░';
+    const SCRAMBLE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#%&/$*X∆▓█░';
 
-    function selectInitialSignalIndex() {
-      try {
-        const forcedRaw = sessionStorage.getItem(FORCED_SIGNAL_KEY);
-        if (forcedRaw !== null) {
-          sessionStorage.removeItem(FORCED_SIGNAL_KEY);
-          const parsed = parseInt(forcedRaw, 10);
-          if (!isNaN(parsed) && parsed >= 0 && parsed < AMELIA_SIGNALS.length) {
-            return parsed;
-          }
-        }
-      } catch (e) {}
-      return Math.floor(Math.random() * AMELIA_SIGNALS.length);
+    let currentSignalIndex = Math.floor(Math.random() * AMELIA_SIGNALS.length);
+
+    function formatSignalCode(idx) {
+      return `SIGNAL #0${idx + 1}`;
     }
-
-    const currentSignalIndex = selectInitialSignalIndex();
-    const currentSignalCode = `SIGNAL #0${currentSignalIndex + 1}`;
-    const currentSignalMessage = AMELIA_SIGNALS[currentSignalIndex];
 
     const introSignalTagEl = document.getElementById('intro-signal-tag');
     const bannerSignalCodeEl = document.getElementById('banner-signal-code');
     const bannerSignalMsgEl = document.getElementById('banner-signal-message');
 
-    if (introSignalTagEl) introSignalTagEl.textContent = currentSignalCode;
-    if (bannerSignalCodeEl) bannerSignalCodeEl.textContent = currentSignalCode;
+    function syncSignalLabels(idx) {
+      const code = formatSignalCode(idx);
+      if (introSignalTagEl) introSignalTagEl.textContent = code;
+      if (bannerSignalCodeEl) bannerSignalCodeEl.textContent = code;
+    }
 
-    /* Décodage progressif style terminal sur la citation interceptée */
-    function decodeSignalText(targetEl, finalText, durationMs = 1050) {
-      if (!targetEl) return;
+    syncSignalLabels(currentSignalIndex);
+
+    /* Décodage progressif style terminal sur un élément texte donné */
+    function decodeSignalText(targetEl, finalText, durationMs = 1050, onComplete = null) {
+      if (!targetEl) {
+        if (typeof onComplete === 'function') onComplete();
+        return null;
+      }
+
       const totalLength = finalText.length;
       const startTime = performance.now();
+      let animId = null;
 
       function step(now) {
         const progress = Math.min(1, (now - startTime) / durationMs);
@@ -1081,21 +1212,51 @@
 
         targetEl.textContent = output;
         if (progress < 1) {
-          requestAnimationFrame(step);
+          animId = requestAnimationFrame(step);
         } else {
           targetEl.textContent = finalText;
+          if (typeof onComplete === 'function') onComplete();
         }
       }
 
-      requestAnimationFrame(step);
+      animId = requestAnimationFrame(step);
+      return () => {
+        if (animId) cancelAnimationFrame(animId);
+      };
     }
 
     /* --------------------------------------------------------------------------
-       2. BOUTON [ INTERCEPTER AUTRE FRÉQUENCE ] : CRASH PLEIN ÉCRAN + RELOAD
+       2. INTERCEPTION DE FRÉQUENCE PLEIN ÉCRAN + REBOOT TOUT EN HAUT
        -------------------------------------------------------------------------- */
     const staticBurstLayer = document.getElementById('static-burst-layer');
-    const freqCrashOverlay = document.getElementById('freq-crash-overlay');
     const btnInterceptFreq = document.getElementById('btn-intercept-freq');
+
+    const freqInterceptOverlay = document.getElementById('freq-intercept-overlay');
+    const overlayChromFlash = document.getElementById('overlay-chrom-flash');
+    const overlayTopStatus = document.getElementById('overlay-top-status');
+    const overlayPhaseCrash = document.getElementById('overlay-phase-crash');
+    const overlayPhaseSignal = document.getElementById('overlay-phase-signal');
+    const overlaySignalHeader = document.getElementById('overlay-signal-header');
+    const overlaySignalQuote = document.getElementById('overlay-signal-quote');
+    const overlayRebootLabel = document.getElementById('overlay-reboot-label');
+    const overlayRebootPct = document.getElementById('overlay-reboot-pct');
+    const overlayRebootBar = document.getElementById('overlay-reboot-bar');
+
+    let isIntercepting = false;
+    let interceptTimers = [];
+    let cancelOverlayDecode = null;
+
+    function clearInterceptTimers() {
+      interceptTimers.forEach((id) => {
+        clearTimeout(id);
+        clearInterval(id);
+      });
+      interceptTimers = [];
+      if (typeof cancelOverlayDecode === 'function') {
+        cancelOverlayDecode();
+        cancelOverlayDecode = null;
+      }
+    }
 
     function spawnHorizontalTear() {
       if (!staticBurstLayer) return;
@@ -1110,8 +1271,8 @@
       bar.style.top = `${top}%`;
       bar.style.height = `${height}px`;
       bar.style.backgroundColor = isCrimson
-        ? 'rgba(255, 30, 39, 0.42)'
-        : 'rgba(0, 240, 255, 0.32)';
+        ? 'rgba(255, 30, 39, 0.45)'
+        : 'rgba(0, 240, 255, 0.35)';
       bar.style.transform = `translateX(${(Math.random() - 0.5) * 56}px)`;
 
       staticBurstLayer.appendChild(bar);
@@ -1120,37 +1281,158 @@
       }, 95);
     }
 
-    if (btnInterceptFreq) {
-      btnInterceptFreq.addEventListener('click', () => {
+    function closeFullScreenInterception() {
+      if (!isIntercepting) return;
+      clearInterceptTimers();
+
+      // Dernier micro-glitch chromatique avant fermeture
+      if (overlayChromFlash) {
+        overlayChromFlash.style.opacity = '1';
+      }
+      if (freqInterceptOverlay) {
+        freqInterceptOverlay.classList.add('overlay-screen-shake');
+      }
+      spawnHorizontalTear();
+      spawnHorizontalTear();
+
+      // Garantir que la page est tout en haut face au grand "A" permanent
+      forceScrollTop();
+
+      const closeDelay = setTimeout(() => {
+        if (overlayChromFlash) {
+          overlayChromFlash.style.opacity = '0';
+        }
+        if (freqInterceptOverlay) {
+          freqInterceptOverlay.classList.remove('overlay-screen-shake', 'crash-static-bars', 'flex');
+          freqInterceptOverlay.classList.add('hidden');
+        }
+        document.body.style.overflow = '';
+        forceScrollTop();
+        triggerEmblemGlitchFlash(240);
+
+        isIntercepting = false;
+        if (btnInterceptFreq) {
+          btnInterceptFreq.disabled = false;
+        }
+      }, 150);
+
+      interceptTimers.push(closeDelay);
+    }
+
+    function launchFullScreenInterception() {
+      if (isIntercepting) return;
+      isIntercepting = true;
+      clearInterceptTimers();
+
+      if (btnInterceptFreq) {
         btnInterceptFreq.disabled = true;
+      }
 
-        let nextIdx = currentSignalIndex;
-        if (AMELIA_SIGNALS.length > 1) {
-          while (nextIdx === currentSignalIndex) {
-            nextIdx = Math.floor(Math.random() * AMELIA_SIGNALS.length);
-          }
+      // Tirer au sort une nouvelle transmission garantie différente de la précédente
+      let nextIdx = currentSignalIndex;
+      if (AMELIA_SIGNALS.length > 1) {
+        while (nextIdx === currentSignalIndex) {
+          nextIdx = Math.floor(Math.random() * AMELIA_SIGNALS.length);
         }
+      }
+      currentSignalIndex = nextIdx;
+      const nextCode = formatSignalCode(nextIdx);
+      const nextMessage = AMELIA_SIGNALS[nextIdx];
 
-        try {
-          sessionStorage.setItem(FORCED_SIGNAL_KEY, String(nextIdx));
-        } catch (e) {}
+      // Mettre à jour immédiatement les libellés et le panneau du terminal en arrière-plan
+      syncSignalLabels(nextIdx);
+      if (bannerSignalMsgEl) {
+        bannerSignalMsgEl.textContent = nextMessage;
+      }
 
-        document.body.classList.add('body-freq-crash');
-        if (freqCrashOverlay) {
-          freqCrashOverlay.classList.remove('hidden');
+      // Replacer immédiatement l'arrière-plan tout en haut
+      forceScrollTop();
+
+      // Préparer l'overlay plein écran (Phase A : crash/parasitage ~650 ms)
+      document.body.style.overflow = 'hidden';
+      if (overlayTopStatus) overlayTopStatus.textContent = 'INTERCEPTION ACTIVE';
+      if (overlayRebootLabel) overlayRebootLabel.textContent = 'REBOOT DU TERMINAL EN COURS...';
+      if (overlayRebootPct) overlayRebootPct.textContent = '0 %';
+      if (overlayRebootBar) overlayRebootBar.style.width = '0%';
+
+      if (overlayPhaseCrash) overlayPhaseCrash.classList.remove('hidden');
+      if (overlayPhaseSignal) overlayPhaseSignal.classList.add('hidden');
+      if (overlaySignalHeader) overlaySignalHeader.textContent = `${nextCode} INTERCEPTÉ`;
+      if (overlaySignalQuote) overlaySignalQuote.textContent = '';
+
+      if (freqInterceptOverlay) {
+        freqInterceptOverlay.classList.remove('hidden');
+        freqInterceptOverlay.classList.add('flex', 'crash-static-bars', 'overlay-screen-shake');
+      }
+
+      const crashDurationMs = 650;
+      const decodeDurationMs = Math.min(1500, Math.max(950, nextMessage.length * 10));
+      const readingHoldMs = 3500;
+      const totalSequenceMs = crashDurationMs + decodeDurationMs + readingHoldMs;
+      const sequenceStart = performance.now();
+
+      // Barre de progression fluide sur toute la durée de l'interception/reboot
+      const progressTimer = setInterval(() => {
+        const elapsed = performance.now() - sequenceStart;
+        const pct = Math.min(100, Math.round((elapsed / totalSequenceMs) * 100));
+        if (overlayRebootPct) overlayRebootPct.textContent = `${pct} %`;
+        if (overlayRebootBar) overlayRebootBar.style.width = `${pct}%`;
+      }, 45);
+      interceptTimers.push(progressTimer);
+
+      // Flashs chromatiques pendant les 650 ms de crash
+      const flashTimer = setInterval(() => {
+        if (overlayChromFlash) {
+          overlayChromFlash.style.opacity = Math.random() > 0.5 ? '0.65' : '0';
         }
+      }, 75);
+      interceptTimers.push(flashTimer);
 
-        const tearInterval = setInterval(() => {
-          spawnHorizontalTear();
-          spawnHorizontalTear();
-        }, 45);
+      // Fin de la Phase A (650 ms) -> Passage à la Phase B (Signal en grand format plein écran)
+      const phaseBTimeout = setTimeout(() => {
+        clearInterval(flashTimer);
+        if (overlayChromFlash) overlayChromFlash.style.opacity = '0';
 
-        setTimeout(() => {
-          clearInterval(tearInterval);
-          window.location.reload();
-        }, 750);
+        // Double vérification que la page derrière est bien tout en haut
+        forceScrollTop();
+
+        if (freqInterceptOverlay) {
+          freqInterceptOverlay.classList.remove('crash-static-bars', 'overlay-screen-shake');
+        }
+        if (overlayTopStatus) overlayTopStatus.textContent = `${nextCode} // FRÉQUENCE VERROUILLÉE`;
+        if (overlayRebootLabel) overlayRebootLabel.textContent = 'LECTURE DE LA TRANSMISSION INTERCEPTÉE...';
+
+        if (overlayPhaseCrash) overlayPhaseCrash.classList.add('hidden');
+        if (overlayPhaseSignal) overlayPhaseSignal.classList.remove('hidden');
+
+        cancelOverlayDecode = decodeSignalText(overlaySignalQuote, nextMessage, decodeDurationMs, () => {
+          // Après la fin du décodage, laisser 3,5 secondes de lecture confortable avant fermeture
+          const autoCloseTimeout = setTimeout(() => {
+            closeFullScreenInterception();
+          }, readingHoldMs);
+          interceptTimers.push(autoCloseTimeout);
+        });
+      }, crashDurationMs);
+
+      interceptTimers.push(phaseBTimeout);
+    }
+
+    if (btnInterceptFreq) {
+      btnInterceptFreq.addEventListener('click', launchFullScreenInterception);
+    }
+
+    if (freqInterceptOverlay) {
+      freqInterceptOverlay.addEventListener('click', () => {
+        closeFullScreenInterception();
       });
     }
+
+    document.addEventListener('keydown', (e) => {
+      if (isIntercepting && (e.key === 'Escape' || e.key === 'Enter' || e.key === ' ')) {
+        e.preventDefault();
+        closeFullScreenInterception();
+      }
+    });
 
     /* --------------------------------------------------------------------------
        3. GRAVURE DU "A" EN 3 TRAITS PUIS APPARITION DU GIF + TYPING GLITCHÉ
@@ -1217,14 +1499,12 @@
 
       typingIntervalId = setInterval(() => {
         tick++;
-        // Avancer d'un caractère tous les 2 ticks (~36ms par lettre)
         if (tick % 2 === 0 && lockedCount < totalLen) {
           lockedCount++;
         }
 
         let display = phrase.slice(0, lockedCount);
 
-        // Ajouter 1 ou 2 caractères parasites fugaces en bout de frappe
         if (lockedCount < totalLen) {
           const remaining = totalLen - lockedCount;
           const scrambleCount = Math.min(2, remaining);
@@ -1250,6 +1530,7 @@
 
     function runIntroSequence() {
       clearIntroTimers();
+      forceScrollTop();
 
       if (heroGifLayer) {
         heroGifLayer.classList.remove('is-active');
@@ -1274,7 +1555,7 @@
       if (introBootPercent) introBootPercent.textContent = '0 %';
 
       let step3FlashDone = false;
-      const totalEngraveMs = 1850; // ~1.85 seconde pour tracer les 3 traits du A
+      const totalEngraveMs = 1850;
 
       const pathMeta = allScratchPaths.map((path, idx) => {
         const len = path.getTotalLength();
@@ -1350,7 +1631,7 @@
             terminalUnlockedContent.classList.add('opacity-100', 'pointer-events-auto');
           }
 
-          decodeSignalText(bannerSignalMsgEl, currentSignalMessage, 1050);
+          decodeSignalText(bannerSignalMsgEl, AMELIA_SIGNALS[currentSignalIndex], 1050);
         }
       }
 
@@ -1360,7 +1641,7 @@
     const btnReplayIntro = document.getElementById('btn-replay-intro');
     if (btnReplayIntro) {
       btnReplayIntro.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        forceScrollTop();
         runIntroSequence();
       });
     }
@@ -1368,7 +1649,7 @@
     /* --------------------------------------------------------------------------
        4. MICRO-GLITCHS AMBIANTS DE TEXTE (< 1 SECONDE) À DIFFÉRENTS ENDROITS
        -------------------------------------------------------------------------- */
-    const GLITCH_SYMBOLS = '@#%&/\\$*01X∆▓░';
+    const GLITCH_SYMBOLS = '#%/▓█@';
 
     function corruptTextBriefly(el) {
       if (!el || el.dataset.isGlitching === '1') return;
@@ -1383,11 +1664,10 @@
       el.dataset.isGlitching = '1';
       el.classList.add('text-corrupt-flash');
 
-      // Durée strictement entre 350ms et 700ms (< 1 seconde)
-      const glitchDurationMs = 350 + Math.floor(Math.random() * 350);
+      // Durée strictement entre 350ms et 750ms (< 1 seconde)
+      const glitchDurationMs = 350 + Math.floor(Math.random() * 400);
       const chars = original.split('');
 
-      // Sélectionner 2 à 4 positions de caractères non-espaces à altérer temporairement
       const validIndices = [];
       for (let i = 0; i < chars.length; i++) {
         if (chars[i] !== ' ' && chars[i] !== '\n' && chars[i] !== '\t') {
@@ -1415,7 +1695,7 @@
 
       setTimeout(() => {
         clearInterval(scrambleTimer);
-        el.textContent = original;
+        el.textContent = el.dataset.origText || original;
         el.classList.remove('text-corrupt-flash');
         delete el.dataset.isGlitching;
       }, glitchDurationMs);
@@ -1423,7 +1703,7 @@
 
     function startAmbientTextGlitchLoop() {
       function scheduleNext() {
-        const delayMs = 2500 + Math.floor(Math.random() * 2000); // 2.5s à 4.5s
+        const delayMs = 2500 + Math.floor(Math.random() * 2000);
         setTimeout(() => {
           const candidates = Array.from(document.querySelectorAll('.glitchable-text')).filter(
             (el) => el.offsetParent !== null && el.dataset.isGlitching !== '1'
@@ -1455,9 +1735,9 @@
     /* --------------------------------------------------------------------------
        5. SYNCHRONISATION GOOGLE SHEETS (5 SECTIONS + REGISTRE 4 RÔLES)
        -------------------------------------------------------------------------- */
-    const LOCAL_RECORDS_KEY = 'sabaron_amelia_records_v5';
-    const LOCAL_SECTIONS_KEY = 'sabaron_amelia_sections_v5';
-    const POLLING_INTERVAL_MS = 15000;
+    const LOCAL_RECORDS_KEY = 'sabaron_amelia_records_v6';
+    const LOCAL_SECTIONS_KEY = 'sabaron_amelia_sections_v6';
+    const POLLING_INTERVAL_MS = 20000; // Actualisation automatique toutes les 20 secondes
 
     const SECTION_LIST = [
       'Médecine et psy',
@@ -1529,16 +1809,11 @@
           'inline-flex items-center gap-2 px-3 py-2 border border-acidGreen/50 bg-acidGreen/10 text-acidGreen font-tech text-[11px] sm:text-xs tracking-widest uppercase';
         syncDotEl.className = 'w-2 h-2 rounded-full bg-acidGreen animate-pulse';
         syncTextEl.textContent = 'LIAISON DISTANTE : SYNCHRONISÉE';
-      } else if (mode === 'error') {
-        syncBadgeEl.className =
-          'inline-flex items-center gap-2 px-3 py-2 border border-crimson/60 bg-crimson/10 text-crimson font-tech text-[11px] sm:text-xs tracking-widest uppercase';
-        syncDotEl.className = 'w-2 h-2 rounded-full bg-crimson';
-        syncTextEl.textContent = 'LIAISON DISTANTE : ERREUR RÉSEAU';
       } else {
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase';
         syncDotEl.className = 'w-2 h-2 rounded-full bg-amberSignal';
-        syncTextEl.textContent = 'MODE LOCAL : EN ATTENTE DU LIEN /EXEC';
+        syncTextEl.textContent = 'MODE LOCAL / HORS LIGNE';
       }
     }
 
@@ -1613,24 +1888,30 @@
           if (barEl) barEl.className = 'section-bar h-full bg-acidGreen transition-all duration-700';
           if (statusEl) {
             statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-acidGreen uppercase';
-            statusEl.textContent = 'BRÈCHE OUVERTE';
             statusEl.dataset.origText = 'BRÈCHE OUVERTE';
+            if (statusEl.dataset.isGlitching !== '1') {
+              statusEl.textContent = 'BRÈCHE OUVERTE';
+            }
           }
         } else if (pct > 0) {
           if (pctEl) pctEl.className = 'section-pct font-tech text-amberSignal font-bold shrink-0';
           if (barEl) barEl.className = 'section-bar h-full breach-fill-gradient transition-all duration-700';
           if (statusEl) {
             statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-amberSignal uppercase';
-            statusEl.textContent = 'INFILTRATION EN COURS';
             statusEl.dataset.origText = 'INFILTRATION EN COURS';
+            if (statusEl.dataset.isGlitching !== '1') {
+              statusEl.textContent = 'INFILTRATION EN COURS';
+            }
           }
         } else {
           if (pctEl) pctEl.className = 'section-pct font-tech text-crimson font-bold shrink-0';
           if (barEl) barEl.className = 'section-bar h-full breach-fill-gradient transition-all duration-700';
           if (statusEl) {
             statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase';
-            statusEl.textContent = 'VERROUILLÉ';
-            statusEl.dataset.origText = 'VERROUILLÉ';
+            statusEl.dataset.origText = 'INFILTRATION EN COURS';
+            if (statusEl.dataset.isGlitching !== '1') {
+              statusEl.textContent = 'INFILTRATION EN COURS';
+            }
           }
         }
       });
@@ -1643,21 +1924,21 @@
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-acidGreen/50 bg-acidGreen/10 text-acidGreen font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-acidGreen animate-pulse';
-        globalBreachBadgeText.textContent = `BRÈCHE TOTALE : ${avg} %`;
+        globalBreachBadgeText.textContent = `BRÈCHE OUVERTE : ${avg} %`;
         globalBreachPercent.className = 'font-tech text-acidGreen font-bold text-sm sm:text-base';
         globalBreachBar.className = 'h-full bg-acidGreen transition-all duration-700';
       } else if (avg > 0) {
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-amberSignal animate-pulse';
-        globalBreachBadgeText.textContent = `INFILTRATION ACTIVE : ${avg} %`;
+        globalBreachBadgeText.textContent = `INFILTRATION EN COURS : ${avg} %`;
         globalBreachPercent.className = 'font-tech text-amberSignal font-bold text-sm sm:text-base';
         globalBreachBar.className = 'h-full breach-fill-gradient transition-all duration-700';
       } else {
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-crimson animate-pulse';
-        globalBreachBadgeText.textContent = 'VERROUILLAGE ACTIF : 0 %';
+        globalBreachBadgeText.textContent = 'INFILTRATION EN COURS : 0 %';
         globalBreachPercent.className = 'font-tech text-crimson font-bold text-sm sm:text-base';
         globalBreachBar.className = 'h-full breach-fill-gradient transition-all duration-700';
       }
@@ -1665,10 +1946,10 @@
 
     function normalizeRecord(raw, idx) {
       let roleVal = String(raw && raw.role ? raw.role : 'cs_captif').toLowerCase().trim();
-      if (roleVal === 'captif' || roleVal === 'cs captif') roleVal = 'cs_captif';
-      if (roleVal === 'force de soutien' || roleVal === 'soutien / résistance') roleVal = 'soutien';
-      if (roleVal === 'infiltré') roleVal = 'infiltre';
-      if (roleVal === 'danger à éviter' || roleVal === 'menace') roleVal = 'danger';
+      if (roleVal === 'captif' || roleVal === 'cs captif' || roleVal === 'cs captifs') roleVal = 'cs_captif';
+      if (roleVal === 'force de soutien' || roleVal === 'soutien / résistance' || roleVal === 'forces de soutien / résistance') roleVal = 'soutien';
+      if (roleVal === 'infiltré' || roleVal === 'infiltrés') roleVal = 'infiltre';
+      if (roleVal === 'danger à éviter' || roleVal === 'dangers à éviter' || roleVal === 'menace') roleVal = 'danger';
       const validRole = rolePanels[roleVal] ? roleVal : 'cs_captif';
 
       return {
@@ -1734,7 +2015,7 @@
 
             const dangerHeader = isDanger
               ? `<div class="flex items-center justify-between gap-2 text-[10px] font-tech tracking-widest text-crimson uppercase border-b border-crimson/25 pb-1.5">
-                   <span>⚠ CIBLE HOSTILE IDENTIFIÉE</span>
+                   <span>! CIBLE HOSTILE IDENTIFIÉE</span>
                    <span class="text-amberSignal">MENACE ACTIVE</span>
                  </div>`
               : '';
@@ -1858,14 +2139,14 @@
         renderRegistry(list);
 
         if (manualTrigger) {
-          showToast('FLUX & SECTIONS SYNCHRONISÉS');
+          showToast('FLUX ET SECTIONS SYNCHRONISÉS');
         }
       } catch (err) {
-        updateSyncBadge('error');
+        updateSyncBadge('local');
         renderSections(readLocalSections());
         renderRegistry(readLocalRecords());
         if (manualTrigger) {
-          showToast('ERREUR DE LIAISON DISTANTE');
+          showToast('MODE HORS LIGNE ACTIF');
         }
       } finally {
         isFetching = false;
@@ -1937,9 +2218,9 @@
         showToast('SIGNAL TRANSMIS AU RÉSEAU');
         await loadTerminalData(false);
       } catch (err) {
-        updateSyncBadge('error');
+        updateSyncBadge('local');
         formErrorEl.textContent =
-          "> ÉCHEC DE TRANSMISSION. VÉRIFIE L'URL /EXEC DANS DATABASE_URL.";
+          "> ÉCHEC DE TRANSMISSION DISTANTE. VÉRIFIE L'URL /EXEC DANS DATABASE_URL.";
         formErrorEl.classList.remove('hidden');
       } finally {
         submitBtn.disabled = false;
@@ -1956,6 +2237,7 @@
     }, POLLING_INTERVAL_MS);
 
     /* Démarrage initial */
+    forceScrollTop();
     runIntroSequence();
     startAmbientTextGlitchLoop();
     loadTerminalData(false);
@@ -2004,15 +2286,28 @@
          var records = [];
          for (var i = 1; i < regData.length; i++) {
            if (!regData[i][0]) continue;
-           records.push({
-             id: 'row_' + i + '_' + (regData[i][5] || i),
-             nom: String(regData[i][0] || ''),
-             joueur: String(regData[i][1] || ''),
-             role: String(regData[i][2] || 'cs_captif'),
-             section: String(regData[i][3] || ''),
-             notes: String(regData[i][4] || ''),
-             timestamp: Number(regData[i][5] || i)
-           });
+           var hasJoueurCol = regData[0].length >= 6;
+           if (hasJoueurCol) {
+             records.push({
+               id: 'row_' + i + '_' + (regData[i][5] || i),
+               nom: String(regData[i][0] || ''),
+               joueur: String(regData[i][1] || ''),
+               role: String(regData[i][2] || 'cs_captif'),
+               section: String(regData[i][3] || ''),
+               notes: String(regData[i][4] || ''),
+               timestamp: Number(regData[i][5] || i)
+             });
+           } else {
+             records.push({
+               id: 'row_' + i + '_' + (regData[i][4] || i),
+               nom: String(regData[i][0] || ''),
+               joueur: '',
+               role: String(regData[i][1] || 'cs_captif'),
+               section: String(regData[i][2] || ''),
+               notes: String(regData[i][3] || ''),
+               timestamp: Number(regData[i][4] || i)
+             });
+           }
          }
 
          var secData = secSheet.getDataRange().getValues();
