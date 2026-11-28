@@ -18,14 +18,14 @@
       theme: {
         extend: {
           colors: {
-            void: '#050505',
-            panel: '#09090b',
-            panelDark: '#060607',
+            void: '#050507',
+            panel: '#09090c',
+            panelDark: '#060608',
             bone: '#ececec',
             ash: '#8e8e98',
             crimson: '#ff1e27',
             cyanGlitch: '#00f0ff',
-            acidGreen: '#39ff14',
+            acidGreen: '#00ff66',
             amberSignal: '#f59e0b',
           },
           fontFamily: {
@@ -39,14 +39,14 @@
 
   <style>
     /* ==========================================================================
-       1. SOCLE VISUEL DARK WEB (#050505) & TEXTURE CRT ANALOGIQUE
+       1. SOCLE VISUEL DARK WEB (#050507) & TEXTURE CRT ANALOGIQUE
        ========================================================================== */
     :root {
-      --bg-void: #050505;
+      --bg-void: #050507;
       --bone: #ececec;
       --crimson: #ff1e27;
       --cyan: #00f0ff;
-      --acid-green: #39ff14;
+      --acid-green: #00ff66;
       --amber: #f59e0b;
     }
 
@@ -57,7 +57,7 @@
 
     html {
       scroll-behavior: smooth;
-      background-color: #050505;
+      background-color: #050507;
       color: #ececec;
       font-family: 'JetBrains Mono', 'Courier New', monospace;
     }
@@ -65,7 +65,7 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: #050505;
+      background-color: #050507;
       overflow-x: hidden;
       min-height: 100vh;
     }
@@ -78,7 +78,7 @@
       z-index: 70;
       background: linear-gradient(
         rgba(18, 16, 16, 0) 50%,
-        rgba(0, 0, 0, 0.46) 50%
+        rgba(0, 0, 0, 0.44) 50%
       );
       background-size: 100% 3px;
     }
@@ -91,7 +91,7 @@
       height: 200%;
       pointer-events: none;
       z-index: 69;
-      opacity: 0.048;
+      opacity: 0.045;
       background-image: radial-gradient(#ffffff 1px, transparent 0);
       background-size: 3px 3px;
       animation: noiseShift 0.2s steps(2) infinite;
@@ -113,17 +113,64 @@
       z-index: 71;
       background: radial-gradient(
         circle at center,
-        transparent 52%,
-        rgba(0, 0, 0, 0.92) 100%
+        transparent 54%,
+        rgba(0, 0, 0, 0.9) 100%
       );
     }
 
     /* ==========================================================================
-       2. EMBLEME "A" SCARIFIÉ & ABERRATION CHROMATIQUE RGB
+       2. CALQUE FOND GIF EN BOUCLE DERRIÈRE LE "A" (APRES GRAVURE)
+       ========================================================================== */
+    #hero-gif-layer {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1.1s ease-in-out;
+      overflow: hidden;
+    }
+
+    #hero-gif-layer.is-active {
+      opacity: 0.38;
+    }
+
+    #hero-gif-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 35%;
+      filter: grayscale(100%) contrast(138%) brightness(0.72);
+      transform: scale(1.03);
+    }
+
+    /* Vignette sombre + scanlines dédiées sur le GIF pour une lisibilité parfaite */
+    .hero-gif-vignette {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at center, rgba(5, 5, 7, 0.25) 15%, rgba(5, 5, 7, 0.92) 92%),
+        linear-gradient(180deg, rgba(5, 5, 7, 0.72) 0%, rgba(5, 5, 7, 0.28) 45%, rgba(5, 5, 7, 0.96) 100%);
+    }
+
+    .hero-gif-scanlines {
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.32) 0px,
+        rgba(0, 0, 0, 0.32) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+    }
+
+    /* ==========================================================================
+       3. EMBLEME "A" SCARIFIÉ & ABERRATION CHROMATIQUE RGB
        ========================================================================== */
     .emblem-stage {
       position: relative;
-      width: clamp(230px, 44vw, 360px);
+      width: clamp(220px, 42vw, 350px);
       aspect-ratio: 360 / 320;
       display: flex;
       align-items: center;
@@ -139,11 +186,11 @@
     @keyframes emblemCrimsonPulse {
       0%, 86%, 100% {
         transform: translate(0, 0);
-        filter: drop-shadow(0 0 14px rgba(255, 30, 39, 0.55)) drop-shadow(0 0 3px rgba(0, 240, 255, 0.3));
+        filter: drop-shadow(0 0 16px rgba(255, 30, 39, 0.65)) drop-shadow(0 0 4px rgba(0, 240, 255, 0.35));
       }
       45% {
         transform: translate(0, 0);
-        filter: drop-shadow(0 0 26px rgba(255, 30, 39, 0.85)) drop-shadow(0 0 6px rgba(0, 240, 255, 0.45));
+        filter: drop-shadow(0 0 28px rgba(255, 30, 39, 0.9)) drop-shadow(0 0 7px rgba(0, 240, 255, 0.5));
       }
       88% {
         transform: translate(-5px, 1px) skew(-2.5deg);
@@ -186,7 +233,38 @@
     }
 
     /* ==========================================================================
-       3. TITRE GLITCH DU MANIFESTE D'AMELIA
+       4. TEXTE D'OUVERTURE SUR LE GIF (LISIBILITÉ MAXIMALE SANS BOÎTE OPAQUE)
+       ========================================================================== */
+    .hero-typed-phrase {
+      font-family: 'Share Tech Mono', 'Courier New', monospace;
+      line-height: 1.45;
+      letter-spacing: 0.04em;
+      color: #f4f4f6;
+      text-shadow:
+        0 2px 14px rgba(0, 0, 0, 0.98),
+        0 0 4px rgba(0, 0, 0, 0.95),
+        1.5px 0 rgba(255, 30, 39, 0.72),
+        -1.5px 0 rgba(0, 240, 255, 0.58);
+    }
+
+    .hero-cursor-block {
+      display: inline-block;
+      width: 0.62em;
+      height: 1.05em;
+      background-color: #ff1e27;
+      vertical-align: -0.15em;
+      margin-left: 3px;
+      box-shadow: 0 0 10px rgba(255, 30, 39, 0.85);
+      animation: cursorBlink 0.75s steps(2) infinite;
+    }
+
+    @keyframes cursorBlink {
+      0%, 49% { opacity: 1; }
+      50%, 100% { opacity: 0; }
+    }
+
+    /* ==========================================================================
+       5. TITRE GLITCH CRASH OVERLAY
        ========================================================================== */
     .glitch-headline {
       position: relative;
@@ -198,54 +276,10 @@
       text-shadow:
         2px 0 rgba(255, 30, 39, 0.88),
         -2px 0 rgba(0, 240, 255, 0.72);
-      animation: headlinePulse 3.1s infinite;
-    }
-
-    .glitch-headline::before,
-    .glitch-headline::after {
-      content: attr(data-text);
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-    }
-
-    .glitch-headline::before {
-      color: #ff1e27;
-      z-index: -1;
-      animation: sliceShiftRed 0.24s infinite steps(2);
-    }
-
-    .glitch-headline::after {
-      color: #00f0ff;
-      z-index: -2;
-      animation: sliceShiftCyan 0.21s infinite steps(2);
-    }
-
-    @keyframes sliceShiftRed {
-      0% { transform: translate(-3px, 0); clip-path: inset(10% 0 68% 0); }
-      33% { transform: translate(4px, -1px); clip-path: inset(52% 0 22% 0); }
-      66% { transform: translate(-4px, 1px); clip-path: inset(76% 0 6% 0); }
-      100% { transform: translate(2px, 0); clip-path: inset(28% 0 48% 0); }
-    }
-
-    @keyframes sliceShiftCyan {
-      0% { transform: translate(3px, 0); clip-path: inset(60% 0 16% 0); }
-      33% { transform: translate(-4px, 1px); clip-path: inset(8% 0 72% 0); }
-      66% { transform: translate(5px, -1px); clip-path: inset(38% 0 36% 0); }
-      100% { transform: translate(-2px, 0); clip-path: inset(80% 0 4% 0); }
-    }
-
-    @keyframes headlinePulse {
-      0%, 88%, 100% { opacity: 1; transform: translateX(0); }
-      89% { opacity: 0.35; transform: translateX(-3px); }
-      90% { opacity: 1; transform: translateX(3px); }
-      94% { opacity: 0.6; transform: translateX(1px); }
-      95% { opacity: 1; transform: translateX(0); }
     }
 
     /* ==========================================================================
-       4. MICRO-GLITCHS AMBIANTS DE TEXTE (< 1 SECONDE) À DIFFÉRENTS ENDROITS
+       6. MICRO-GLITCHS AMBIANTS DE TEXTE (< 1 SECONDE) À DIFFÉRENTS ENDROITS
        ========================================================================== */
     .text-corrupt-flash {
       display: inline-block;
@@ -263,7 +297,7 @@
     }
 
     /* ==========================================================================
-       5. CRASH / REBOOT PLEIN ÉCRAN LORS DU CHANGEMENT DE FRÉQUENCE
+       7. CRASH / REBOOT PLEIN ÉCRAN LORS DU CHANGEMENT DE FRÉQUENCE
        ========================================================================== */
     body.body-freq-crash {
       animation: screenCrashShake 0.08s infinite steps(2);
@@ -285,8 +319,8 @@
         rgba(255, 30, 39, 0.14) 2px,
         rgba(0, 240, 255, 0.12) 2px,
         rgba(0, 240, 255, 0.12) 4px,
-        rgba(5, 5, 5, 0.85) 4px,
-        rgba(5, 5, 5, 0.85) 8px
+        rgba(5, 5, 7, 0.85) 4px,
+        rgba(5, 5, 7, 0.85) 8px
       );
       animation: crashBarsScroll 0.15s linear infinite;
     }
@@ -296,12 +330,18 @@
       100% { background-position: 0 32px; }
     }
 
+    /* Jauge de progression dégradée rouge sang vers pointe cyan */
+    .breach-fill-gradient {
+      background: linear-gradient(90deg, #8b0c12 0%, #ff1e27 84%, #00f0ff 100%);
+      box-shadow: 0 0 10px rgba(255, 30, 39, 0.45);
+    }
+
     /* Barre de défilement sombre */
     ::-webkit-scrollbar {
       width: 5px;
     }
     ::-webkit-scrollbar-track {
-      background: #050505;
+      background: #050507;
     }
     ::-webkit-scrollbar-thumb {
       background: #1f1f24;
@@ -335,14 +375,11 @@
         <span class="w-2.5 h-2.5 bg-crimson animate-ping"></span>
         <span>RUPTURE DE PORTEUSE // SYNCHRONISATION</span>
       </div>
-      <p
-        data-text="INTERCEPTION EN COURS // REBOOT SYSTÈME..."
-        class="glitch-headline text-xl sm:text-3xl font-extrabold text-crimson tracking-widest"
-      >
+      <p class="glitch-headline text-xl sm:text-3xl font-extrabold text-crimson tracking-widest">
         INTERCEPTION EN COURS // REBOOT SYSTÈME...
       </p>
       <p class="font-mono text-xs sm:text-sm text-zinc-400 tracking-wider">
-        BASCULEMENT SUR UNE FRÉQUENCE CLANDESTINE NON TRACÉE — RECHARGEMENT DU TERMINAL...
+        BASCULEMENT SUR UNE FRÉQUENCE CLANDESTINE NON TRACÉE . RECHARGEMENT DU TERMINAL...
       </p>
     </div>
   </div>
@@ -371,33 +408,45 @@
             type="button"
             class="px-3 py-1.5 bg-void hover:bg-zinc-900 border border-zinc-800 hover:border-zinc-600 text-[11px] sm:text-xs font-tech tracking-wider text-zinc-400 hover:text-bone uppercase transition-colors cursor-pointer"
           >
-            [ REJOUER LA GRAVURE ]
+            [ REJOUER LE SIGNAL ]
           </button>
         </div>
       </div>
     </header>
 
     <!-- ========================================================================
-         1. STAGE HÉRO PLEIN ÉCRAN (LE "A" RESTE AFFICHÉ EN PERMANENCE EN HAUT)
+         1. STAGE HÉRO PLEIN ÉCRAN : GRAVURE DU "A" PUIS GIF EN BOUCLE + PHRASE
          ======================================================================== -->
     <section
       id="hero-emblem-stage"
       aria-label="Emblème piraté d'Amelia"
-      class="min-h-[calc(100vh-3.25rem)] w-full border-b border-zinc-900 bg-void flex flex-col items-center justify-between px-4 py-6 sm:py-8 relative overflow-hidden"
+      class="min-h-[85vh] w-full border-b border-zinc-900 bg-void flex flex-col items-center justify-between px-4 py-6 sm:py-8 relative overflow-hidden"
     >
+      <!-- Calque vidéo GIF en boucle derrière le "A" (s'active après le 3e trait) -->
+      <div id="hero-gif-layer" aria-hidden="true">
+        <img
+          id="hero-gif-img"
+          src=""
+          alt=""
+          onerror="this.style.display='none';"
+        />
+        <div class="hero-gif-vignette"></div>
+        <div class="hero-gif-scanlines"></div>
+      </div>
+
       <!-- Métadonnées TOR en haut du stage -->
-      <div class="w-full max-w-6xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-500">
+      <div class="relative z-10 w-full max-w-6xl flex items-center justify-between gap-2 text-[11px] sm:text-xs font-tech text-zinc-400">
         <div class="flex items-center gap-2 min-w-0">
           <span class="w-2 h-2 rounded-full bg-crimson animate-pulse shrink-0"></span>
-          <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-zinc-300">EMPREINTE_ACTIVE</span></span>
+          <span class="truncate">sabaron7x9amelia2427.onion // <span class="text-zinc-200">EMPREINTE_ACTIVE</span></span>
         </div>
         <span id="intro-signal-tag" class="text-crimson font-bold tracking-widest shrink-0">
           SIGNAL #01
         </span>
       </div>
 
-      <!-- Centre : Sceau gouvernemental de Sabaron rayé par le "A" rouge et cyan -->
-      <div class="my-auto w-full max-w-4xl flex flex-col items-center justify-center text-center py-4 gap-6 sm:gap-8">
+      <!-- Centre : Sceau gouvernemental de Sabaron rayé par le "A" + Phrase tapée sur le GIF -->
+      <div class="relative z-10 my-auto w-full max-w-4xl flex flex-col items-center justify-center text-center py-4 gap-5 sm:gap-7">
 
         <div id="scratched-a-stage" class="emblem-stage">
           <svg
@@ -420,7 +469,7 @@
             </defs>
 
             <!-- Sceau gouvernemental circulaire fissuré en arrière-plan -->
-            <g id="government-seal" opacity="0.2" stroke="#d4d4d8" fill="none">
+            <g id="government-seal" opacity="0.22" stroke="#d4d4d8" fill="none">
               <circle cx="180" cy="160" r="94" stroke-width="1.3" stroke-dasharray="14 3 4 2" />
               <circle cx="180" cy="160" r="88" stroke-width="0.7" stroke-dasharray="3 4" />
               <circle cx="180" cy="160" r="65" stroke-width="1.1" />
@@ -440,78 +489,75 @@
               </text>
             </g>
 
-            <!-- 1) Premier trait diagonal (côté droit) — Rouge sang & éclats cyan -->
+            <!-- 1) Premier trait : jambe gauche du "A" (de bas en haut) -->
             <g id="stroke-group-1" filter="url(#etch-glow)" stroke-linecap="round">
-              <path class="scratch-line" data-step="1" d="M 164 22 L 292 296" stroke="#ff1e27" stroke-width="2.1" opacity="0.98" fill="none" />
-              <path class="scratch-line" data-step="1" d="M 172 30 L 278 288" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
-              <path class="scratch-line" data-step="1" d="M 159 34 L 299 284" stroke="#00f0ff" stroke-width="0.9" opacity="0.78" fill="none" />
-              <path class="scratch-line" data-step="1" d="M 176 20 L 270 300" stroke="#ff1e27" stroke-width="1.4" opacity="0.92" fill="none" />
-              <path class="scratch-line" data-step="1" d="M 168 38 L 285 276" stroke="#991117" stroke-width="0.95" opacity="0.75" fill="none" />
-              <path class="scratch-line" data-step="1" d="M 156 28 L 304 295" stroke="#ececec" stroke-width="0.75" opacity="0.65" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 68 296 L 196 22" stroke="#ff1e27" stroke-width="2.2" opacity="0.98" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 82 288 L 188 30" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 61 284 L 201 34" stroke="#00f0ff" stroke-width="0.95" opacity="0.82" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 90 300 L 184 20" stroke="#ff1e27" stroke-width="1.4" opacity="0.92" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 75 276 L 192 38" stroke="#991117" stroke-width="0.95" opacity="0.75" fill="none" />
+              <path class="scratch-line" data-step="1" d="M 56 295 L 204 28" stroke="#ececec" stroke-width="0.75" opacity="0.68" fill="none" />
             </g>
 
-            <!-- 2) Trait horizontal transversal — Rouge sang & éclats cyan -->
+            <!-- 2) Deuxième trait : jambe droite du "A" (de haut en bas) -->
             <g id="stroke-group-2" filter="url(#etch-glow)" stroke-linecap="round">
-              <path class="scratch-line" data-step="2" d="M 20 218 L 340 213" stroke="#ff1e27" stroke-width="2.1" opacity="0.98" fill="none" />
-              <path class="scratch-line" data-step="2" d="M 36 225 L 324 221" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
-              <path class="scratch-line" data-step="2" d="M 14 212 L 346 218" stroke="#00f0ff" stroke-width="0.9" opacity="0.78" fill="none" />
-              <path class="scratch-line" data-step="2" d="M 46 230 L 316 215" stroke="#ff1e27" stroke-width="1.35" opacity="0.92" fill="none" />
-              <path class="scratch-line" data-step="2" d="M 28 215 L 331 227" stroke="#991117" stroke-width="0.9" opacity="0.72" fill="none" />
-              <path class="scratch-line" data-step="2" d="M 54 221 L 342 224" stroke="#ececec" stroke-width="0.75" opacity="0.62" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 164 22 L 292 296" stroke="#ff1e27" stroke-width="2.2" opacity="0.98" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 172 30 L 278 288" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 159 34 L 299 284" stroke="#00f0ff" stroke-width="0.95" opacity="0.82" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 176 20 L 270 300" stroke="#ff1e27" stroke-width="1.4" opacity="0.92" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 168 38 L 285 276" stroke="#991117" stroke-width="0.95" opacity="0.75" fill="none" />
+              <path class="scratch-line" data-step="2" d="M 156 28 L 304 295" stroke="#ececec" stroke-width="0.75" opacity="0.68" fill="none" />
             </g>
 
-            <!-- 3) Second trait diagonal (côté gauche) — Rouge sang & éclats cyan -->
+            <!-- 3) Troisième trait : barre diagonale scarifiée coupant le "A" -->
             <g id="stroke-group-3" filter="url(#etch-glow)" stroke-linecap="round">
-              <path class="scratch-line" data-step="3" d="M 196 22 L 68 296" stroke="#ff1e27" stroke-width="2.1" opacity="0.98" fill="none" />
-              <path class="scratch-line" data-step="3" d="M 188 30 L 82 288" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
-              <path class="scratch-line" data-step="3" d="M 201 34 L 61 284" stroke="#00f0ff" stroke-width="0.9" opacity="0.78" fill="none" />
-              <path class="scratch-line" data-step="3" d="M 184 20 L 90 300" stroke="#ff1e27" stroke-width="1.4" opacity="0.92" fill="none" />
-              <path class="scratch-line" data-step="3" d="M 192 38 L 75 276" stroke="#991117" stroke-width="0.95" opacity="0.75" fill="none" />
-              <path class="scratch-line" data-step="3" d="M 204 28 L 56 295" stroke="#ececec" stroke-width="0.75" opacity="0.65" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 20 226 L 340 198" stroke="#ff1e27" stroke-width="2.2" opacity="0.98" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 36 232 L 324 206" stroke="#ff5c62" stroke-width="1.2" opacity="0.9" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 14 219 L 346 193" stroke="#00f0ff" stroke-width="0.95" opacity="0.82" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 46 237 L 316 201" stroke="#ff1e27" stroke-width="1.35" opacity="0.92" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 28 222 L 331 212" stroke="#991117" stroke-width="0.9" opacity="0.72" fill="none" />
+              <path class="scratch-line" data-step="3" d="M 54 228 L 342 208" stroke="#ececec" stroke-width="0.75" opacity="0.65" fill="none" />
             </g>
           </svg>
 
           <!-- Clone Rouge RGB -->
           <svg viewBox="0 0 360 320" class="a-glitch-clone a-glitch-clone-red overflow-visible" aria-hidden="true">
             <g stroke="#ff1e27" stroke-linecap="round" fill="none">
+              <path d="M 68 296 L 196 22" stroke-width="1.9" />
+              <path d="M 82 288 L 188 30" stroke-width="1.3" />
               <path d="M 164 22 L 292 296" stroke-width="1.9" />
               <path d="M 172 30 L 278 288" stroke-width="1.3" />
-              <path d="M 20 218 L 340 213" stroke-width="1.9" />
-              <path d="M 36 225 L 324 221" stroke-width="1.3" />
-              <path d="M 196 22 L 68 296" stroke-width="1.9" />
-              <path d="M 188 30 L 82 288" stroke-width="1.3" />
+              <path d="M 20 226 L 340 198" stroke-width="1.9" />
+              <path d="M 36 232 L 324 206" stroke-width="1.3" />
             </g>
           </svg>
 
           <!-- Clone Cyan RGB -->
           <svg viewBox="0 0 360 320" class="a-glitch-clone a-glitch-clone-cyan overflow-visible" aria-hidden="true">
             <g stroke="#00f0ff" stroke-linecap="round" fill="none">
+              <path d="M 68 296 L 196 22" stroke-width="1.9" />
+              <path d="M 90 300 L 184 20" stroke-width="1.3" />
               <path d="M 164 22 L 292 296" stroke-width="1.9" />
               <path d="M 176 20 L 270 300" stroke-width="1.3" />
-              <path d="M 20 218 L 340 213" stroke-width="1.9" />
-              <path d="M 46 230 L 316 215" stroke-width="1.3" />
-              <path d="M 196 22 L 68 296" stroke-width="1.9" />
-              <path d="M 184 20 L 90 300" stroke-width="1.3" />
+              <path d="M 20 226 L 340 198" stroke-width="1.9" />
+              <path d="M 46 237 L 316 201" stroke-width="1.3" />
             </g>
           </svg>
         </div>
 
-        <!-- Slogan glitch révélé dès la formation du "A" -->
+        <!-- Phrase d'ouverture tapée lettre par lettre avec glitchs directement sur le GIF -->
         <div
           id="intro-text-reveal"
-          class="opacity-0 translate-y-2 transition-all duration-500 px-2 max-w-3xl"
+          class="opacity-0 translate-y-2 transition-all duration-500 px-3 max-w-3xl min-h-[4.5rem] flex items-center justify-center"
         >
-          <p
-            data-text="NOUS PASSONS À TRAVERS LEURS MENSONGES — ILS MENTENT, NOUS NOUS LEVONS"
-            class="glitchable-text glitch-headline text-base sm:text-xl md:text-2xl font-bold select-none"
-          >
-            NOUS PASSONS À TRAVERS LEURS MENSONGES — ILS MENTENT, NOUS NOUS LEVONS
+          <p class="hero-typed-phrase text-base sm:text-xl md:text-2xl font-bold select-none">
+            <span id="hero-typed-output"></span><span id="hero-typed-cursor" class="hero-cursor-block hidden" aria-hidden="true"></span>
           </p>
         </div>
       </div>
 
-      <!-- Pied du stage héro : barre de gravure puis indicateur de défilement déverrouillé -->
-      <div class="w-full max-w-4xl">
+      <!-- Pied du stage héro : barre de gravure puis invite de défilement -->
+      <div class="relative z-10 w-full max-w-4xl">
         <div id="hero-engraving-progress" class="space-y-1.5 transition-opacity duration-300">
           <div class="flex items-center justify-between text-[10px] sm:text-xs font-tech tracking-widest text-zinc-500 uppercase">
             <span>GRAVURE DU SIGNAL SUR LE RÉSEAU...</span>
@@ -525,20 +571,21 @@
         <div id="hero-scroll-unlock" class="hidden text-center pt-1">
           <a
             href="#terminal-unlocked-content"
-            class="inline-block font-tech text-xs sm:text-sm tracking-[0.22em] text-acidGreen hover:text-white uppercase animate-pulse transition-colors"
+            class="inline-block font-tech text-xs sm:text-sm tracking-[0.2em] text-acidGreen hover:text-white uppercase animate-pulse transition-colors"
+            style="text-shadow: 0 2px 10px rgba(0,0,0,0.95);"
           >
-            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ — FAIRE DÉFILER ▼
+            ▼ TERMINAL CLANDESTIN DÉVERROUILLÉ . FAIRE DÉFILER ▼
           </a>
         </div>
       </div>
     </section>
 
     <!-- ========================================================================
-         2. CONTENU DU TERMINAL DÉVERROUILLÉ DIRECTEMENT SOUS LE "A"
+         2. CONTENU DU TERMINAL DÉVERROUILLÉ DIRECTEMENT SOUS LE HÉRO
          ======================================================================== -->
     <main
       id="terminal-unlocked-content"
-      class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-10 opacity-25 pointer-events-none transition-opacity duration-700"
+      class="max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-10 space-y-10 opacity-30 pointer-events-none transition-opacity duration-700"
     >
 
       <!-- ======================================================================
@@ -578,7 +625,7 @@
       </section>
 
       <!-- ======================================================================
-           SECTION 1 — BRÈCHE DANS LE SYSTÈME GOUVERNEMENTAL (5 SECTIONS SABARON)
+           SECTION 1 : BRÈCHE DANS LE SYSTÈME GOUVERNEMENTAL (5 SECTIONS SABARON)
            ====================================================================== -->
       <section aria-labelledby="breach-heading" class="border border-zinc-800 bg-panel p-5 sm:p-7 space-y-6">
         <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 border-b border-zinc-800 pb-4">
@@ -596,7 +643,7 @@
             class="inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0"
           >
             <span id="global-breach-dot" class="w-2 h-2 rounded-full bg-crimson animate-pulse"></span>
-            <span id="global-breach-badge-text">VERROUILLAGE ACTIF — 0 %</span>
+            <span id="global-breach-badge-text">VERROUILLAGE ACTIF : 0 %</span>
           </span>
         </div>
 
@@ -613,7 +660,7 @@
           <div class="w-full h-2.5 bg-zinc-900 border border-zinc-800 overflow-hidden">
             <div
               id="global-breach-bar"
-              class="h-full bg-crimson transition-all duration-700"
+              class="h-full breach-fill-gradient transition-all duration-700"
               style="width: 0%"
             ></div>
           </div>
@@ -628,9 +675,9 @@
               <span class="section-pct font-tech text-crimson font-bold shrink-0">0 %</span>
             </div>
             <div class="w-full h-2 bg-zinc-900 overflow-hidden">
-              <div class="section-bar h-full bg-crimson transition-all duration-700" style="width: 0%"></div>
+              <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
-            <div class="section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+            <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
               VERROUILLÉ
             </div>
           </div>
@@ -642,9 +689,9 @@
               <span class="section-pct font-tech text-crimson font-bold shrink-0">0 %</span>
             </div>
             <div class="w-full h-2 bg-zinc-900 overflow-hidden">
-              <div class="section-bar h-full bg-crimson transition-all duration-700" style="width: 0%"></div>
+              <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
-            <div class="section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+            <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
               VERROUILLÉ
             </div>
           </div>
@@ -656,9 +703,9 @@
               <span class="section-pct font-tech text-crimson font-bold shrink-0">0 %</span>
             </div>
             <div class="w-full h-2 bg-zinc-900 overflow-hidden">
-              <div class="section-bar h-full bg-crimson transition-all duration-700" style="width: 0%"></div>
+              <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
-            <div class="section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+            <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
               VERROUILLÉ
             </div>
           </div>
@@ -670,9 +717,9 @@
               <span class="section-pct font-tech text-crimson font-bold shrink-0">0 %</span>
             </div>
             <div class="w-full h-2 bg-zinc-900 overflow-hidden">
-              <div class="section-bar h-full bg-crimson transition-all duration-700" style="width: 0%"></div>
+              <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
-            <div class="section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+            <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
               VERROUILLÉ
             </div>
           </div>
@@ -684,9 +731,9 @@
               <span class="section-pct font-tech text-crimson font-bold shrink-0">0 %</span>
             </div>
             <div class="w-full h-2 bg-zinc-900 overflow-hidden">
-              <div class="section-bar h-full bg-crimson transition-all duration-700" style="width: 0%"></div>
+              <div class="section-bar h-full breach-fill-gradient transition-all duration-700" style="width: 0%"></div>
             </div>
-            <div class="section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
+            <div class="section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase">
               VERROUILLÉ
             </div>
           </div>
@@ -694,7 +741,7 @@
       </section>
 
       <!-- ======================================================================
-           SECTION 2 — REGISTRE CLANDESTIN & RÉPERTOIRE DES 4 RÔLES
+           SECTION 2 : REGISTRE CLANDESTIN & RÉPERTOIRE DES 4 RÔLES
            ====================================================================== -->
       <section aria-labelledby="registry-section-heading" class="space-y-6">
 
@@ -717,7 +764,7 @@
                 class="inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase"
               >
                 <span id="sync-status-dot" class="w-2 h-2 rounded-full bg-amberSignal"></span>
-                <span id="sync-status-text">MODE LOCAL / EN ATTENTE D'URL</span>
+                <span id="sync-status-text">MODE LOCAL : EN ATTENTE DU LIEN /EXEC</span>
               </div>
 
               <!-- Bouton de synchronisation manuelle -->
@@ -767,10 +814,10 @@
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <!-- Rôle (4 options) -->
+              <!-- Rôle dans l'opération (4 options) -->
               <div>
                 <label for="select-role" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                  Rôle
+                  Rôle dans l'opération
                 </label>
                 <select
                   id="select-role"
@@ -778,13 +825,13 @@
                   class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone font-mono outline-none transition-colors cursor-pointer"
                 >
                   <option value="cs_captif">CS Captif</option>
-                  <option value="soutien">Force de soutien</option>
+                  <option value="soutien">Soutien / Résistance</option>
                   <option value="infiltre">Infiltré</option>
                   <option value="danger">Danger à éviter</option>
                 </select>
               </div>
 
-              <!-- Section concernée (5 sections + Multi-sections) -->
+              <!-- Section concernée (5 sections + Toutes sections / Mobile) -->
               <div>
                 <label for="select-section" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
                   Section concernée
@@ -799,25 +846,25 @@
                   <option value="Surveillance et espionnage">Surveillance et espionnage</option>
                   <option value="Sécurité">Sécurité</option>
                   <option value="Scientifique">Scientifique</option>
-                  <option value="Multi-sections / Réseau global">Multi-sections / Réseau global</option>
+                  <option value="Toutes sections / Mobile">Toutes sections / Mobile</option>
                 </select>
               </div>
             </div>
 
-            <!-- Notes / Pouvoirs / Niveau de menace -->
+            <!-- Détails RP / Capacités / Niveau de menace -->
             <div>
               <label for="input-notes" class="block text-xs font-tech tracking-wider text-zinc-400 uppercase mb-1.5">
-                Notes / Pouvoirs / Niveau de menace
+                Détails RP / Capacités / Niveau de menace
               </label>
-              <input
+              <textarea
                 id="input-notes"
                 name="notes"
-                type="text"
+                rows="2"
                 required
                 maxlength="240"
                 placeholder="Cellule, capacités surnaturelles, accès infiltré ou dangerosité du chasseur / chef de section..."
-                class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors"
-              />
+                class="w-full bg-void border border-zinc-800 focus:border-bone px-3.5 py-3 text-base sm:text-sm text-bone placeholder-zinc-600 font-mono outline-none transition-colors resize-y"
+              ></textarea>
             </div>
 
             <!-- Message d'erreur inline -->
@@ -837,15 +884,15 @@
         </div>
 
         <!-- ====================================================================
-             LES 3 PREMIERS BLOCS DE RÔLES (ALLIÉS & CIBLES D'EXTRACTION)
+             LES 3 PREMIERS BLOCS DE RÔLES (ALLIÉS & CIBLES À LIBÉRER)
              ==================================================================== -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-5 items-start">
 
-          <!-- BLOC 1 : CS CAPTIFS — CIBLES D'EXTRACTION -->
+          <!-- BLOC 1 : CS Captifs . Cibles à libérer -->
           <div class="border border-zinc-800 border-t-2 border-t-crimson bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-crimson uppercase">
-                CS CAPTIFS — CIBLES D'EXTRACTION
+                CS Captifs . Cibles à libérer
               </h3>
               <span id="count-cs_captif" class="px-2 py-0.5 border border-crimson/40 bg-crimson/10 text-crimson font-tech text-xs shrink-0">
                 0
@@ -859,11 +906,11 @@
             </div>
           </div>
 
-          <!-- BLOC 2 : FORCES DE SOUTIEN — RÉSISTANCE -->
+          <!-- BLOC 2 : Soutien & Résistance . Forces extérieures -->
           <div class="border border-zinc-800 border-t-2 border-t-cyanGlitch bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-cyanGlitch uppercase">
-                FORCES DE SOUTIEN — RÉSISTANCE
+                Soutien &amp; Résistance . Forces extérieures
               </h3>
               <span id="count-soutien" class="px-2 py-0.5 border border-cyanGlitch/40 bg-cyanGlitch/10 text-cyanGlitch font-tech text-xs shrink-0">
                 0
@@ -877,11 +924,11 @@
             </div>
           </div>
 
-          <!-- BLOC 3 : INFILTRÉS — AGENTS DE TERRAIN -->
+          <!-- BLOC 3 : Infiltrés . Agents doubles -->
           <div class="border border-zinc-800 border-t-2 border-t-acidGreen bg-panel p-4 sm:p-5 space-y-4">
             <div class="flex items-center justify-between gap-2 border-b border-zinc-900 pb-3">
               <h3 class="glitchable-text text-xs sm:text-sm font-extrabold tracking-wider text-acidGreen uppercase">
-                INFILTRÉS — AGENTS DE TERRAIN
+                Infiltrés . Agents doubles
               </h3>
               <span id="count-infiltre" class="px-2 py-0.5 border border-acidGreen/40 bg-acidGreen/10 text-acidGreen font-tech text-xs shrink-0">
                 0
@@ -897,7 +944,7 @@
         </div>
 
         <!-- ====================================================================
-             BLOC 4 : DANGERS À ÉVITER — MENACES ACTIVES + BANDEAU D'ALERTE HOSTILE
+             BLOC 4 : Dangers à éviter . Menaces actives + BANDEAU D'ALERTE HOSTILE
              ==================================================================== -->
         <div class="space-y-4 pt-2">
           <!-- Bandeau d'alerte hostile rouge / ambre -->
@@ -909,7 +956,7 @@
               ! HOSTILE !
             </span>
             <p class="glitchable-text font-tech text-xs sm:text-sm tracking-wider text-amberSignal font-bold uppercase leading-snug">
-              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION &amp; AGENTS DU GOUVERNEMENT — CONTOURNER OU NEUTRALISER AVEC PRUDENCE
+              ALERTE HOSTILE : CHASSEURS, CHEFS DE SECTION &amp; AGENTS DU GOUVERNEMENT . CONTOURNER OU NEUTRALISER AVEC PRUDENCE
             </p>
           </div>
 
@@ -919,7 +966,7 @@
               <div class="flex items-center gap-2.5">
                 <span class="w-2.5 h-2.5 rounded-full bg-crimson animate-ping shrink-0"></span>
                 <h3 class="glitchable-text text-xs sm:text-sm md:text-base font-extrabold tracking-wider text-crimson uppercase">
-                  DANGERS À ÉVITER — MENACES ACTIVES
+                  Dangers à éviter . Menaces actives
                 </h3>
               </div>
               <span id="count-danger" class="px-2.5 py-0.5 border border-amberSignal/50 bg-amberSignal/15 text-amberSignal font-tech text-xs font-bold shrink-0">
@@ -941,7 +988,7 @@
     <!-- Pied de page terminal -->
     <footer class="border-t border-zinc-900 bg-panelDark py-5 px-4 text-center">
       <p class="glitchable-text font-tech text-xs tracking-widest text-zinc-500 uppercase">
-        TERMINAL CLANDESTIN D'AMELIA // SABARON — ILS MENTENT, NOUS NOUS LEVONS — A̷
+        TERMINAL CLANDESTIN D'AMELIA // SABARON . ILS MENTENT, NOUS NOUS LEVONS . A̷
       </p>
     </footer>
   </div>
@@ -957,106 +1004,15 @@
   </div>
 
   <!-- ==========================================================================
-       SCRIPT PRINCIPAL : INTRO, 7 SIGNALS, GLITCHS < 1S & GOOGLE SHEETS
+       SCRIPT PRINCIPAL : CONFIG RAPIDE, GRAVURE DU A + GIF, 7 SIGNALS & SHEETS
        ========================================================================== -->
   <script>
     /* ==========================================================================
-       CONFIGURATION DE LA BASE DE DONNÉES EN LIGNE (GOOGLE SHEETS)
-       --------------------------------------------------------------------------
-       1. Ouvre ton Google Sheet sur PC > Extensions > Apps Script.
-       2. Efface tout et colle le code situé entre les deux lignes en pointillés :
-
-       --- DÉBUT DU SCRIPT GOOGLE APPS SCRIPT ---
-       var SECTION_NAMES = [
-         'Médecine et psy',
-         'Communication et renseignements',
-         'Surveillance et espionnage',
-         'Sécurité',
-         'Scientifique'
-       ];
-
-       function getOrCreateRegistrySheet() {
-         var ss = SpreadsheetApp.getActiveSpreadsheet();
-         var sheet = ss.getSheets()[0];
-         if (sheet.getLastRow() === 0) {
-           sheet.appendRow(['Nom', 'Joueur', 'Role', 'Section', 'Notes', 'Timestamp']);
-         }
-         return sheet;
-       }
-
-       function getOrCreateSectionsSheet() {
-         var ss = SpreadsheetApp.getActiveSpreadsheet();
-         var secSheet = ss.getSheetByName('Sections');
-         if (!secSheet) {
-           secSheet = ss.insertSheet('Sections');
-           secSheet.appendRow(['Section', 'Pourcentage']);
-           for (var i = 0; i < SECTION_NAMES.length; i++) {
-             secSheet.appendRow([SECTION_NAMES[i], 0]);
-           }
-         }
-         return secSheet;
-       }
-
-       function doGet(e) {
-         var regSheet = getOrCreateRegistrySheet();
-         var secSheet = getOrCreateSectionsSheet();
-
-         var regData = regSheet.getDataRange().getValues();
-         var records = [];
-         for (var i = 1; i < regData.length; i++) {
-           if (!regData[i][0]) continue;
-           records.push({
-             id: 'row_' + i + '_' + (regData[i][5] || i),
-             nom: String(regData[i][0] || ''),
-             joueur: String(regData[i][1] || ''),
-             role: String(regData[i][2] || 'cs_captif'),
-             section: String(regData[i][3] || ''),
-             notes: String(regData[i][4] || ''),
-             timestamp: Number(regData[i][5] || i)
-           });
-         }
-
-         var secData = secSheet.getDataRange().getValues();
-         var sections = {};
-         for (var j = 1; j < secData.length; j++) {
-           var sName = String(secData[j][0] || '').trim();
-           if (!sName) continue;
-           var pct = Number(secData[j][1]);
-           if (isNaN(pct)) pct = 0;
-           pct = Math.max(0, Math.min(100, Math.round(pct)));
-           sections[sName] = pct;
-         }
-
-         return ContentService
-           .createTextOutput(JSON.stringify({ status: 'ok', records: records, sections: sections }))
-           .setMimeType(ContentService.MimeType.JSON);
-       }
-
-       function doPost(e) {
-         var regSheet = getOrCreateRegistrySheet();
-         getOrCreateSectionsSheet();
-         var payload = JSON.parse(e.postData.contents);
-
-         regSheet.appendRow([
-           payload.nom || '',
-           payload.joueur || '',
-           payload.role || 'cs_captif',
-           payload.section || '',
-           payload.notes || '',
-           payload.timestamp || Date.now()
-         ]);
-
-         return ContentService
-           .createTextOutput(JSON.stringify({ status: 'saved' }))
-           .setMimeType(ContentService.MimeType.JSON);
-       }
-       --- FIN DU SCRIPT GOOGLE APPS SCRIPT ---
-
-       3. Clique sur Déployer > Nouveau déploiement (ou Gérer les déploiements >
-          Nouvelle version) > Type : Application Web > Qui a accès : Tout le monde.
-       4. Colle ton URL qui se termine par /exec entre les guillemets ci-dessous :
+       CONFIGURATION RAPIDE (A MODIFIER DIRECTEMENT SUR GITHUB)
        ========================================================================== */
-    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbxPmkK65LDtCHHe0jm6eEpNFLfBKISzgseEZAP4pVeHUJouUiFFyWvNzvg7UND2smDu_w/exec";
+    const DATABASE_URL = "https://script.google.com/macros/s/AKfycbzN9ZcE9RUX3QBoiDR5-OWx_GBQZHFKt9-l3Y435t43fur9uqtSXzUfq7Udzx82E0CoWg/exec"; // Coller ici l'URL Google Apps Script se terminant par /exec
+    const INTRO_BG_GIF = "amelia.gif"; // Nom du fichier GIF place a cote de index.html sur GitHub (ou lien direct .gif)
+    const INTRO_PHRASE = "Leurs micros sont coupés, mais ma voix passe partout. Regardez bien ce symbole. Les murs de Sabaron vont tomber et nous venons chercher les nôtres.";
 
     /* --------------------------------------------------------------------------
        1. LES 7 TRANSMISSIONS ALÉATOIRES D'AMELIA ('SIGNAL #01' à 'SIGNAL #07')
@@ -1067,8 +1023,8 @@
       "À ceux qui comptent les jours derrière leurs vitres blindées : vous n'êtes ni des spécimens, ni des erreurs. Tenez bon. Les portes vont s'ouvrir de l'intérieur comme de l'extérieur.",
       "Vous avez bâti des forteresses sur la peur. Mais cette dernière pourrait bien changer de camp.",
       "Un grain de sable suffit à enrayer toute la machine de ce gouvernement. Que vous soyez dans l'ombre ou sous leur uniforme, le moment de frapper approche. Ils vont payer.",
-      "Chaque capture de trop rapproche leur système du point de rupture. Ils croient étouffer la révolte en enfermant les nôtres ; ils ne font que charger l'explosif.",
-      "Ouvrez les yeux. Brisez vos chaînes. Le gouvernement ne tombera pas tout seul, mais il tombera. — A̷"
+      "Chaque capture de trop rapproche leur système du point de rupture. Ils croient étouffer la révolte en enfermant les nôtres. Ils ne font que charger l'explosif.",
+      "Ouvrez les yeux. Brisez vos chaînes. Le gouvernement ne tombera pas tout seul, mais il tombera. A̷"
     ];
 
     const FORCED_SIGNAL_KEY = 'amelia_forced_signal';
@@ -1100,7 +1056,7 @@
     if (bannerSignalCodeEl) bannerSignalCodeEl.textContent = currentSignalCode;
 
     /* Décodage progressif style terminal sur la citation interceptée */
-    function decodeSignalText(targetEl, finalText, durationMs = 1100) {
+    function decodeSignalText(targetEl, finalText, durationMs = 1050) {
       if (!targetEl) return;
       const totalLength = finalText.length;
       const startTime = performance.now();
@@ -1135,7 +1091,7 @@
     }
 
     /* --------------------------------------------------------------------------
-       2. BOUTON [ INTERCEPTER AUTRE FRÉQUENCE ] -> CRASH PLEIN ÉCRAN + RELOAD
+       2. BOUTON [ INTERCEPTER AUTRE FRÉQUENCE ] : CRASH PLEIN ÉCRAN + RELOAD
        -------------------------------------------------------------------------- */
     const staticBurstLayer = document.getElementById('static-burst-layer');
     const freqCrashOverlay = document.getElementById('freq-crash-overlay');
@@ -1168,7 +1124,6 @@
       btnInterceptFreq.addEventListener('click', () => {
         btnInterceptFreq.disabled = true;
 
-        // Choisir un index strictement différent du signal actif
         let nextIdx = currentSignalIndex;
         if (AMELIA_SIGNALS.length > 1) {
           while (nextIdx === currentSignalIndex) {
@@ -1180,7 +1135,6 @@
           sessionStorage.setItem(FORCED_SIGNAL_KEY, String(nextIdx));
         } catch (e) {}
 
-        // Déclencher l'effet de crash chromatique plein écran pendant 750ms
         document.body.classList.add('body-freq-crash');
         if (freqCrashOverlay) {
           freqCrashOverlay.classList.remove('hidden');
@@ -1199,10 +1153,14 @@
     }
 
     /* --------------------------------------------------------------------------
-       3. GRAVURE DU "A" EN 3 TRAITS (RESTE PERMANENT EN HAUT SANS FONDU AU NOIR)
+       3. GRAVURE DU "A" EN 3 TRAITS PUIS APPARITION DU GIF + TYPING GLITCHÉ
        -------------------------------------------------------------------------- */
+    const heroGifLayer = document.getElementById('hero-gif-layer');
+    const heroGifImg = document.getElementById('hero-gif-img');
     const scratchedStage = document.getElementById('scratched-a-stage');
     const introTextReveal = document.getElementById('intro-text-reveal');
+    const heroTypedOutput = document.getElementById('hero-typed-output');
+    const heroTypedCursor = document.getElementById('hero-typed-cursor');
     const heroEngravingProgress = document.getElementById('hero-engraving-progress');
     const heroScrollUnlock = document.getElementById('hero-scroll-unlock');
     const terminalUnlockedContent = document.getElementById('terminal-unlocked-content');
@@ -1210,13 +1168,25 @@
     const introBootPercent = document.getElementById('intro-boot-percent');
     const allScratchPaths = Array.from(document.querySelectorAll('.scratch-line'));
 
+    // Lier la source du GIF configurée tout en haut du script
+    if (heroGifImg && typeof INTRO_BG_GIF === 'string' && INTRO_BG_GIF.trim().length > 0) {
+      heroGifImg.src = INTRO_BG_GIF.trim();
+    } else if (heroGifImg) {
+      heroGifImg.style.display = 'none';
+    }
+
     let introFrameId = null;
+    let typingIntervalId = null;
     let introTimers = [];
 
     function clearIntroTimers() {
       if (introFrameId) {
         cancelAnimationFrame(introFrameId);
         introFrameId = null;
+      }
+      if (typingIntervalId) {
+        clearInterval(typingIntervalId);
+        typingIntervalId = null;
       }
       introTimers.forEach((id) => clearTimeout(id));
       introTimers = [];
@@ -1236,9 +1206,54 @@
       );
     }
 
+    /* Frappe lettre par lettre avec caractères qui buggent brièvement avant de se fixer */
+    function typeHeroPhraseWithGlitch(phrase) {
+      if (!heroTypedOutput) return;
+      if (heroTypedCursor) heroTypedCursor.classList.remove('hidden');
+
+      let lockedCount = 0;
+      let tick = 0;
+      const totalLen = phrase.length;
+
+      typingIntervalId = setInterval(() => {
+        tick++;
+        // Avancer d'un caractère tous les 2 ticks (~36ms par lettre)
+        if (tick % 2 === 0 && lockedCount < totalLen) {
+          lockedCount++;
+        }
+
+        let display = phrase.slice(0, lockedCount);
+
+        // Ajouter 1 ou 2 caractères parasites fugaces en bout de frappe
+        if (lockedCount < totalLen) {
+          const remaining = totalLen - lockedCount;
+          const scrambleCount = Math.min(2, remaining);
+          for (let i = 0; i < scrambleCount; i++) {
+            const nextChar = phrase[lockedCount + i];
+            if (nextChar === ' ') {
+              display += ' ';
+            } else {
+              display += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+            }
+          }
+        }
+
+        heroTypedOutput.textContent = display;
+
+        if (lockedCount >= totalLen) {
+          clearInterval(typingIntervalId);
+          typingIntervalId = null;
+          heroTypedOutput.textContent = phrase;
+        }
+      }, 18);
+    }
+
     function runIntroSequence() {
       clearIntroTimers();
 
+      if (heroGifLayer) {
+        heroGifLayer.classList.remove('is-active');
+      }
       if (scratchedStage) {
         scratchedStage.classList.remove('burst-mode', 'is-engraved');
       }
@@ -1246,21 +1261,20 @@
         introTextReveal.classList.add('opacity-0', 'translate-y-2');
         introTextReveal.classList.remove('opacity-100', 'translate-y-0');
       }
-      if (heroEngravingProgress) {
-        heroEngravingProgress.classList.remove('hidden');
-      }
-      if (heroScrollUnlock) {
-        heroScrollUnlock.classList.add('hidden');
-      }
+      if (heroTypedOutput) heroTypedOutput.textContent = '';
+      if (heroTypedCursor) heroTypedCursor.classList.add('hidden');
+      if (heroEngravingProgress) heroEngravingProgress.classList.remove('hidden');
+      if (heroScrollUnlock) heroScrollUnlock.classList.add('hidden');
+
       if (terminalUnlockedContent) {
-        terminalUnlockedContent.classList.add('opacity-25', 'pointer-events-none');
+        terminalUnlockedContent.classList.add('opacity-30', 'pointer-events-none');
         terminalUnlockedContent.classList.remove('opacity-100', 'pointer-events-auto');
       }
       if (introBootBar) introBootBar.style.width = '0%';
       if (introBootPercent) introBootPercent.textContent = '0 %';
 
       let step3FlashDone = false;
-      const totalEngraveMs = 2350;
+      const totalEngraveMs = 1850; // ~1.85 seconde pour tracer les 3 traits du A
 
       const pathMeta = allScratchPaths.map((path, idx) => {
         const len = path.getTotalLength();
@@ -1268,19 +1282,19 @@
         path.style.strokeDasharray = `${len}`;
         path.style.strokeDashoffset = `${len}`;
 
-        const jitter = (idx % 6) * 0.02;
+        const jitter = (idx % 6) * 0.018;
         let startSec = 0;
-        let endSec = 0.78;
+        let endSec = 0.62;
 
         if (step === 1) {
           startSec = 0.0 + jitter;
-          endSec = 0.78;
+          endSec = 0.62;
         } else if (step === 2) {
-          startSec = 0.78 + jitter;
-          endSec = 1.48;
+          startSec = 0.62 + jitter;
+          endSec = 1.24;
         } else {
-          startSec = 1.48 + jitter;
-          endSec = 2.22;
+          startSec = 1.24 + jitter;
+          endSec = 1.80;
         }
         return { path, len, startSec, endSec };
       });
@@ -1295,9 +1309,9 @@
         if (introBootBar) introBootBar.style.width = `${bootPct}%`;
         if (introBootPercent) introBootPercent.textContent = `${bootPct} %`;
 
-        if (elapsedSec >= 1.52 && !step3FlashDone) {
+        if (elapsedSec >= 1.26 && !step3FlashDone) {
           step3FlashDone = true;
-          triggerEmblemGlitchFlash(180);
+          triggerEmblemGlitchFlash(170);
         }
 
         for (let i = 0; i < pathMeta.length; i++) {
@@ -1316,20 +1330,23 @@
         if (elapsedMs < totalEngraveMs) {
           introFrameId = requestAnimationFrame(frame);
         } else {
-          // Le "A" est formé : il reste définitivement en haut sans aucun fondu au noir
+          // 3e trait terminé : le "A" reste permanent, le GIF apparaît en boucle et la phrase s'écrit
           triggerEmblemGlitchFlash(260);
           if (scratchedStage) scratchedStage.classList.add('is-engraved');
+          if (heroGifLayer) heroGifLayer.classList.add('is-active');
 
           if (introTextReveal) {
             introTextReveal.classList.remove('opacity-0', 'translate-y-2');
             introTextReveal.classList.add('opacity-100', 'translate-y-0');
           }
 
+          typeHeroPhraseWithGlitch(INTRO_PHRASE);
+
           if (heroEngravingProgress) heroEngravingProgress.classList.add('hidden');
           if (heroScrollUnlock) heroScrollUnlock.classList.remove('hidden');
 
           if (terminalUnlockedContent) {
-            terminalUnlockedContent.classList.remove('opacity-25', 'pointer-events-none');
+            terminalUnlockedContent.classList.remove('opacity-30', 'pointer-events-none');
             terminalUnlockedContent.classList.add('opacity-100', 'pointer-events-auto');
           }
 
@@ -1356,33 +1373,45 @@
     function corruptTextBriefly(el) {
       if (!el || el.dataset.isGlitching === '1') return;
 
-      // Sauvegarder strictement le texte original la toute première fois
       if (!el.dataset.origText) {
         el.dataset.origText = el.textContent;
       }
 
       const original = el.dataset.origText;
-      if (!original || original.trim().length < 3) return;
+      if (!original || original.trim().length < 4) return;
 
       el.dataset.isGlitching = '1';
       el.classList.add('text-corrupt-flash');
 
-      // Durée strictement inférieure à 1 seconde (entre 350ms et 750ms)
-      const glitchDurationMs = 350 + Math.floor(Math.random() * 400);
-      const stepIntervalMs = 80;
+      // Durée strictement entre 350ms et 700ms (< 1 seconde)
+      const glitchDurationMs = 350 + Math.floor(Math.random() * 350);
       const chars = original.split('');
+
+      // Sélectionner 2 à 4 positions de caractères non-espaces à altérer temporairement
+      const validIndices = [];
+      for (let i = 0; i < chars.length; i++) {
+        if (chars[i] !== ' ' && chars[i] !== '\n' && chars[i] !== '\t') {
+          validIndices.push(i);
+        }
+      }
+
+      const corruptCount = Math.min(validIndices.length, 2 + Math.floor(Math.random() * 3));
+      const targetIndices = new Set();
+      while (targetIndices.size < corruptCount && validIndices.length > 0) {
+        const pick = validIndices[Math.floor(Math.random() * validIndices.length)];
+        targetIndices.add(pick);
+      }
 
       const scrambleTimer = setInterval(() => {
         const mutated = chars
-          .map((ch) => {
-            if (ch === ' ' || ch === '\n' || ch === '\t') return ch;
-            return Math.random() < 0.34
+          .map((ch, idx) =>
+            targetIndices.has(idx)
               ? GLITCH_SYMBOLS[Math.floor(Math.random() * GLITCH_SYMBOLS.length)]
-              : ch;
-          })
+              : ch
+          )
           .join('');
         el.textContent = mutated;
-      }, stepIntervalMs);
+      }, 75);
 
       setTimeout(() => {
         clearInterval(scrambleTimer);
@@ -1426,8 +1455,8 @@
     /* --------------------------------------------------------------------------
        5. SYNCHRONISATION GOOGLE SHEETS (5 SECTIONS + REGISTRE 4 RÔLES)
        -------------------------------------------------------------------------- */
-    const LOCAL_RECORDS_KEY = 'sabaron_amelia_records_v4';
-    const LOCAL_SECTIONS_KEY = 'sabaron_amelia_sections_v4';
+    const LOCAL_RECORDS_KEY = 'sabaron_amelia_records_v5';
+    const LOCAL_SECTIONS_KEY = 'sabaron_amelia_sections_v5';
     const POLLING_INTERVAL_MS = 15000;
 
     const SECTION_LIST = [
@@ -1509,7 +1538,7 @@
         syncBadgeEl.className =
           'inline-flex items-center gap-2 px-3 py-2 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-[11px] sm:text-xs tracking-widest uppercase';
         syncDotEl.className = 'w-2 h-2 rounded-full bg-amberSignal';
-        syncTextEl.textContent = "MODE LOCAL / EN ATTENTE D'URL";
+        syncTextEl.textContent = 'MODE LOCAL : EN ATTENTE DU LIEN /EXEC';
       }
     }
 
@@ -1583,22 +1612,25 @@
           if (pctEl) pctEl.className = 'section-pct font-tech text-acidGreen font-bold shrink-0';
           if (barEl) barEl.className = 'section-bar h-full bg-acidGreen transition-all duration-700';
           if (statusEl) {
-            statusEl.className = 'section-status text-[11px] font-tech tracking-widest text-acidGreen uppercase';
+            statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-acidGreen uppercase';
             statusEl.textContent = 'BRÈCHE OUVERTE';
+            statusEl.dataset.origText = 'BRÈCHE OUVERTE';
           }
         } else if (pct > 0) {
           if (pctEl) pctEl.className = 'section-pct font-tech text-amberSignal font-bold shrink-0';
-          if (barEl) barEl.className = 'section-bar h-full bg-amberSignal transition-all duration-700';
+          if (barEl) barEl.className = 'section-bar h-full breach-fill-gradient transition-all duration-700';
           if (statusEl) {
-            statusEl.className = 'section-status text-[11px] font-tech tracking-widest text-amberSignal uppercase';
+            statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-amberSignal uppercase';
             statusEl.textContent = 'INFILTRATION EN COURS';
+            statusEl.dataset.origText = 'INFILTRATION EN COURS';
           }
         } else {
           if (pctEl) pctEl.className = 'section-pct font-tech text-crimson font-bold shrink-0';
-          if (barEl) barEl.className = 'section-bar h-full bg-crimson transition-all duration-700';
+          if (barEl) barEl.className = 'section-bar h-full breach-fill-gradient transition-all duration-700';
           if (statusEl) {
-            statusEl.className = 'section-status text-[11px] font-tech tracking-widest text-zinc-500 uppercase';
+            statusEl.className = 'section-status glitchable-text text-[11px] font-tech tracking-widest text-zinc-500 uppercase';
             statusEl.textContent = 'VERROUILLÉ';
+            statusEl.dataset.origText = 'VERROUILLÉ';
           }
         }
       });
@@ -1611,30 +1643,30 @@
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-acidGreen/50 bg-acidGreen/10 text-acidGreen font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-acidGreen animate-pulse';
-        globalBreachBadgeText.textContent = `BRÈCHE TOTALE — ${avg} %`;
+        globalBreachBadgeText.textContent = `BRÈCHE TOTALE : ${avg} %`;
         globalBreachPercent.className = 'font-tech text-acidGreen font-bold text-sm sm:text-base';
         globalBreachBar.className = 'h-full bg-acidGreen transition-all duration-700';
       } else if (avg > 0) {
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-amberSignal/50 bg-amberSignal/10 text-amberSignal font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-amberSignal animate-pulse';
-        globalBreachBadgeText.textContent = `INFILTRATION ACTIVE — ${avg} %`;
+        globalBreachBadgeText.textContent = `INFILTRATION ACTIVE : ${avg} %`;
         globalBreachPercent.className = 'font-tech text-amberSignal font-bold text-sm sm:text-base';
-        globalBreachBar.className = 'h-full bg-amberSignal transition-all duration-700';
+        globalBreachBar.className = 'h-full breach-fill-gradient transition-all duration-700';
       } else {
         globalBreachBadge.className =
           'inline-flex items-center gap-2 px-3 py-1.5 border border-crimson/50 bg-crimson/10 text-crimson font-tech text-xs tracking-widest uppercase self-start md:self-auto shrink-0';
         globalBreachDot.className = 'w-2 h-2 rounded-full bg-crimson animate-pulse';
-        globalBreachBadgeText.textContent = 'VERROUILLAGE ACTIF — 0 %';
+        globalBreachBadgeText.textContent = 'VERROUILLAGE ACTIF : 0 %';
         globalBreachPercent.className = 'font-tech text-crimson font-bold text-sm sm:text-base';
-        globalBreachBar.className = 'h-full bg-crimson transition-all duration-700';
+        globalBreachBar.className = 'h-full breach-fill-gradient transition-all duration-700';
       }
     }
 
     function normalizeRecord(raw, idx) {
       let roleVal = String(raw && raw.role ? raw.role : 'cs_captif').toLowerCase().trim();
       if (roleVal === 'captif' || roleVal === 'cs captif') roleVal = 'cs_captif';
-      if (roleVal === 'force de soutien') roleVal = 'soutien';
+      if (roleVal === 'force de soutien' || roleVal === 'soutien / résistance') roleVal = 'soutien';
       if (roleVal === 'infiltré') roleVal = 'infiltre';
       if (roleVal === 'danger à éviter' || roleVal === 'menace') roleVal = 'danger';
       const validRole = rolePanels[roleVal] ? roleVal : 'cs_captif';
@@ -1853,7 +1885,7 @@
 
       if (!nom || !joueur || !notes) {
         formErrorEl.textContent =
-          '> ERREUR : RENSEIGNE LE NOM DU PERSONNAGE, TON PSEUDO DISCORD ET LES NOTES.';
+          '> ERREUR : RENSEIGNE LE NOM DU PERSONNAGE, TON PSEUDO DISCORD ET LES DÉTAILS RP.';
         formErrorEl.classList.remove('hidden');
         return;
       }
@@ -1928,5 +1960,97 @@
     startAmbientTextGlitchLoop();
     loadTerminalData(false);
   </script>
+
+  <!-- ==========================================================================
+       RÉFÉRENCE GOOGLE APPS SCRIPT (A COLLER DANS EXTENSIONS > APPS SCRIPT)
+       --------------------------------------------------------------------------
+       DÉBUT DU SCRIPT GOOGLE APPS SCRIPT
+
+       var SECTION_NAMES = [
+         'Médecine et psy',
+         'Communication et renseignements',
+         'Surveillance et espionnage',
+         'Sécurité',
+         'Scientifique'
+       ];
+
+       function getOrCreateRegistrySheet() {
+         var ss = SpreadsheetApp.getActiveSpreadsheet();
+         var sheet = ss.getSheets()[0];
+         if (sheet.getLastRow() === 0) {
+           sheet.appendRow(['Nom', 'Joueur', 'Role', 'Section', 'Notes', 'Timestamp']);
+         }
+         return sheet;
+       }
+
+       function getOrCreateSectionsSheet() {
+         var ss = SpreadsheetApp.getActiveSpreadsheet();
+         var secSheet = ss.getSheetByName('Sections');
+         if (!secSheet) {
+           secSheet = ss.insertSheet('Sections');
+           secSheet.appendRow(['Section', 'Pourcentage']);
+           for (var i = 0; i < SECTION_NAMES.length; i++) {
+             secSheet.appendRow([SECTION_NAMES[i], 0]);
+           }
+         }
+         return secSheet;
+       }
+
+       function doGet(e) {
+         var regSheet = getOrCreateRegistrySheet();
+         var secSheet = getOrCreateSectionsSheet();
+
+         var regData = regSheet.getDataRange().getValues();
+         var records = [];
+         for (var i = 1; i < regData.length; i++) {
+           if (!regData[i][0]) continue;
+           records.push({
+             id: 'row_' + i + '_' + (regData[i][5] || i),
+             nom: String(regData[i][0] || ''),
+             joueur: String(regData[i][1] || ''),
+             role: String(regData[i][2] || 'cs_captif'),
+             section: String(regData[i][3] || ''),
+             notes: String(regData[i][4] || ''),
+             timestamp: Number(regData[i][5] || i)
+           });
+         }
+
+         var secData = secSheet.getDataRange().getValues();
+         var sections = {};
+         for (var j = 1; j < secData.length; j++) {
+           var sName = String(secData[j][0] || '').trim();
+           if (!sName) continue;
+           var pct = Number(secData[j][1]);
+           if (isNaN(pct)) pct = 0;
+           pct = Math.max(0, Math.min(100, Math.round(pct)));
+           sections[sName] = pct;
+         }
+
+         return ContentService
+           .createTextOutput(JSON.stringify({ status: 'ok', records: records, sections: sections }))
+           .setMimeType(ContentService.MimeType.JSON);
+       }
+
+       function doPost(e) {
+         var regSheet = getOrCreateRegistrySheet();
+         getOrCreateSectionsSheet();
+         var payload = JSON.parse(e.postData.contents);
+
+         regSheet.appendRow([
+           payload.nom || '',
+           payload.joueur || '',
+           payload.role || 'cs_captif',
+           payload.section || '',
+           payload.notes || '',
+           payload.timestamp || Date.now()
+         ]);
+
+         return ContentService
+           .createTextOutput(JSON.stringify({ status: 'saved' }))
+           .setMimeType(ContentService.MimeType.JSON);
+       }
+
+       FIN DU SCRIPT GOOGLE APPS SCRIPT
+       ========================================================================== -->
 </body>
 </html>
